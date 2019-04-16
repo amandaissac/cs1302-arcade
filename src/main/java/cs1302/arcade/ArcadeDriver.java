@@ -13,7 +13,14 @@ public class ArcadeDriver {
      */
     public static void main(String[] args) {
         try {
-            Application.launch(ArcadeApp.class, args);
+	    // Application.launch(ArcadeApp.class, args);
+	    ArcadeApp g= new ArcadeApp(); //change back to game
+	    g.print(); //need to put in the other methods
+
+	    for(int x=0;x<7;x++){
+		g.addNewRandom();
+		g.print();
+	    }
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
             System.err.println("If this is a DISPLAY problem, then your X server connection");
