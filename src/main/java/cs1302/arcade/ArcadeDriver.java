@@ -1,7 +1,7 @@
 package cs1302.arcade;
 
 import javafx.application.Application;
-
+import cs1302.arcade.App2048;
 /** 
  * Driver for the {@code ArcadeApp} class.
  */
@@ -14,7 +14,7 @@ public class ArcadeDriver {
     public static void main(String[] args) {
         try {
 	    // Application.launch(ArcadeApp.class, args);
-	    ArcadeApp g= new ArcadeApp(); //change back to game
+	    App2048 g= new App2048(); //change back to game
 	    g.print(); //need to put in the other methods
 
 	    for(int x=0;x<7;x++){
