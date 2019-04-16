@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 
 public class ArcadeApp{
 //extends Application {
-
+/*
     //Group group = new Group();           // main container
     Random rgn = new Random();           // random number generator
     //Rectangle r = new Rectangle(20, 20); // some rectangle
@@ -25,6 +25,7 @@ public class ArcadeApp{
     /**
      *This is the constructor that sets the board to size 4X4
      */
+    /*
     public ArcadeApp(){
 	//this is initializing a board every time a new game is being created
         board=new int[4][4];
@@ -34,6 +35,7 @@ public class ArcadeApp{
      *This method is used to print the 2D array that we create. It just shows the 
      *internal part of the game
      */
+    /*
     public void print(){
         for(int[] x: board){
             //setting the format for printing the board
@@ -41,11 +43,13 @@ public class ArcadeApp{
         }
 	System.out.println(); //adding empty line below for formating
     }
-
+*/
+    /*
     /**
      *This method is used when beginning a new game. It places randomly the number 2 into
      *the board. 
      */
+    /*
     public void addNewRandom(){
 	//creating a new ArrayList that holds all of the blank empty spaces
 	ArrayList<Integer> blankSpacesX= new ArrayList<Integer>(); //creating to hold X
@@ -65,7 +69,7 @@ public class ArcadeApp{
 	int changingX=blankSpacesX.get(choice); //getting the x coordinate of the random spot
 	int changingY=blankSpacesY.get(choice); //getting the y coordinate of the random spot
 	board[changingX][changingY]=2; //setting that random location with a 2
-    }
+    }*/
     /*
     /**
      * Return a mouse event handler that moves to the rectangle to a random
