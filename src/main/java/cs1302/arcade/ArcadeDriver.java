@@ -1,7 +1,7 @@
 package cs1302.arcade;
 
 import javafx.application.Application;
-import cs1302.arcade.App2048;
+
 /** 
  * Driver for the {@code ArcadeApp} class.
  */
@@ -14,13 +14,37 @@ public class ArcadeDriver {
     public static void main(String[] args) {
         try {
 	    // Application.launch(ArcadeApp.class, args);
+	    //NEED TO CHANGE THE DRIVER CLASS. THIS IS JUST TO TEST INTERNAL PART OF GAME!
 	    App2048 g= new App2048(); //change back to game
-	    g.print(); //need to put in the other methods
-
+	    //adding random numbers 3 times to get more than one 2 on the board
+	    for(int x=0;x<3;x++){
+		g.addNewRandom();
+	    }
+	    
+	    /*
+	    for(int i=0;i<3;i++){
+		g.addNewRandom();
+	    }
+	    System.out.println("This is the beginning array");
+	    g.print();
+	    System.out.println("This is the array pushed up");
+	    g.keyUp();
+	    g.print();
+	    */
+	    //testing push up thing right now
 	    for(int x=0;x<7;x++){
 		g.addNewRandom();
 		g.print();
+		g.keyUp();
+		g.print(); //to see if the changes were made
 	    }
+	    for(int i=0;i<7;i++){
+		g.addNewRandom();
+		g.print();
+		g.keyDown();
+		g.print();
+	    }
+	    
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
             System.err.println("If this is a DISPLAY problem, then your X server connection");
