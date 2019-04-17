@@ -16,21 +16,11 @@ public class ArcadeDriver {
 	    // Application.launch(ArcadeApp.class, args);
 	    //NEED TO CHANGE THE DRIVER CLASS. THIS IS JUST TO TEST INTERNAL PART OF GAME!
 	    App2048 g= new App2048(); //change back to game
-	    //adding random numbers 3 times to get more than one 2 on the board
+
+	    //******************checking the key methods************************
 	    for(int x=0;x<3;x++){
 		g.addNewRandom();
 	    }
-	    
-	    /*
-	    for(int i=0;i<3;i++){
-		g.addNewRandom();
-	    }
-	    System.out.println("This is the beginning array");
-	    g.print();
-	    System.out.println("This is the array pushed up");
-	    g.keyUp();
-	    g.print();
-	    */
 	    //testing push up thing right now
 	    for(int x=0;x<7;x++){
 		g.addNewRandom();
@@ -44,6 +34,21 @@ public class ArcadeDriver {
 		g.keyDown();
 		g.print();
 	    }
+	    //this is to test the keyLeft method
+	    for(int i=0;i<7;i++){
+		g.addNewRandom();
+		g.print();
+		g.keyLeft();
+		g.print();
+	    }
+	    //this is to test the keyRight method
+	    for(int i=0; i<7;i++){
+		g.addNewRandom();
+		g.print();
+		g.keyRight();
+		g.print();
+	    }
+	    //*************************************************
 	    
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
