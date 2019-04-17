@@ -153,4 +153,95 @@ public class App2048{
               }
          }
      }
+    /**
+     *This method is used when the user pressed the left keyboard
+     */
+    public void keyLeft(){
+	System.out.println("This is testing the push left method");
+	boolean[] alreadyCombined= {false,false,false,false}; //creating a boolean method
+	for(int row=0;row<4;row++){
+	    for(int col=1;col<4;col++){
+		//box goes up until it hits another non empty box/space
+		if(board[row][col]!=0){
+		    int value=board[row][col]; //storing what number was in the original place
+		    int tempY=col-1; //this is the temperary Y that gets shifted to the left
+		    //we continue this while loop until there is a space that is not empty
+		    while((tempY>=0)&&(board[row][tempY]==0)){
+			tempY--; //continue to go upwards until it hits a non empty place
+		    }
+		    //to check if the thing has reached the end wall boundaries, etc.
+		    if(tempY==-1){
+			board[row][0]=value; //this means it has reached the very top (row=0)
+			board[row][col]=0; //setting the intial value into 0.
+		    }
+		    else if(board[row][tempY]!=value){
+			//only changes original to 0 if the row and tempX are not 1 apart
+			if((tempY+1)!=col){
+			    board[row][tempY+1]=value;
+			    board[row][col]=0; //setting original back to 0.
+			}
+		    }
+		    else {
+			if(alreadyCombined[tempY]==true){
+			    board[row][tempY+1]=value;
+			    board[row][col]=0;
+			}
+			else{
+			    //this only executes if the values are the same/ match
+			    //this also only executes if it already has not been pushed up before.
+			    board[row][tempY]*=2; //basically the value doubles
+			    alreadyCombined[tempY]=true;
+			    board[row][col]=0; //setting the previous one back to 0.
+			}
+		    }
+		}
+	    }
+	}
+    }
+
+    /**
+     *This method is used when the user presses the right keyboard button
+     */
+    public void keyRight(){
+         System.out.println("This is testing the push right method");
+         boolean[] alreadyCombined= {false,false,false,false}; //creating a boolean method
+         for(int row=0;row<4;row++){
+             for(int col=2;col>-1;col--){
+                 //box goes up until it hits another non empty box/space
+                 if(board[row][col]!=0){
+                     int value=board[row][col]; //storing what number was in the original place
+                     int tempY=col+1; //this is the temperary Y that gets shifted to the left
+                     //we continue this while loop until there is a space that is not empty
+                     while((tempY<=3)&&(board[row][tempY]==0)){
+                         tempY++; //continue to go upwards until it hits a non empty place
+                     }
+                     //to check if the thing has reached the end wall boundaries, etc.
+                     if(tempY==4){
+                         board[row][3]=value; //this means it has reached the very top (row=0)
+                         board[row][col]=0; //setting the intial value into 0.
+                     }
+                     else if(board[row][tempY]!=value){
+                         //only changes original to 0 if the row and tempX are not 1 apart
+                         if((tempY-1)!=col){
+                             board[row][tempY-1]=value;
+                             board[row][col]=0; //setting original back to 0.
+                         }
+                     }
+                     else {
+                         if(alreadyCombined[tempY]==true){
+                             board[row][tempY-1]=value;
+                             board[row][col]=0;
+                         }
+                         else{
+                             //this only executes if the values are the same/ match
+                             //this also only executes if it already has not been pushed up before.
+                             board[row][tempY]*=2; //basically the value doubles
+                             alreadyCombined[tempY]=true;
+                             board[row][col]=0; //setting the previous one back to 0.
+                         }
+                     }
+                 }
+             }
+         }
+     }
 }
