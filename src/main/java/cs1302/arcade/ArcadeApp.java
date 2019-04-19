@@ -13,63 +13,16 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
 
-public class ArcadeApp{
-//extends Application {
-/*
-    //Group group = new Group();           // main container
-    Random rgn = new Random();           // random number generator
+public class ArcadeApp extends Application {
+
+    Group group = new Group();           // main container
+    Random rgn = new Random();// random number generator
+    BorderPane b;
+    ImageView tile2,tile4,tile8,tile16,tile32,tile64,tile128,tile256,tile512,tile1024,tile2048;
     //Rectangle r = new Rectangle(20, 20); // some rectangle
-    private int[][] board;
-
-    /**
-     *This is the constructor that sets the board to size 4X4
-     */
-    /*
-    public ArcadeApp(){
-	//this is initializing a board every time a new game is being created
-        board=new int[4][4];
-    }
-
-    /**
-     *This method is used to print the 2D array that we create. It just shows the 
-     *internal part of the game
-     */
-    /*
-    public void print(){
-        for(int[] x: board){
-            //setting the format for printing the board
-            System.out.format("%6d%6d%6d%6d%n",x[0],x[1],x[2],x[3]);
-        }
-	System.out.println(); //adding empty line below for formating
-    }
-*/
-    /*
-    /**
-     *This method is used when beginning a new game. It places randomly the number 2 into
-     *the board. 
-     */
-    /*
-    public void addNewRandom(){
-	//creating a new ArrayList that holds all of the blank empty spaces
-	ArrayList<Integer> blankSpacesX= new ArrayList<Integer>(); //creating to hold X
-	ArrayList<Integer> blankSpacesY= new ArrayList<Integer>(); //creating to hold Y
-	//going through the board and recording which areas are empty or not
-	for(int row=0;row<4;row++){
-	    for(int col=0;col<4;col++){
-		if(board[row][col]==0){
-		    Integer integerX= new Integer(row); //converting int to Integer
-		    Integer integerY=new Integer(col);
-		    blankSpacesX.add(integerX); //adding the  x coordinate of empty space into array
-		    blankSpacesY.add(integerY); //adding the y coordinate of empty space to array
-		}
-	    }
-	}
-	int choice= rgn.nextInt(blankSpacesX.size()); //using blankSpacesX b/c same size as y
-	int changingX=blankSpacesX.get(choice); //getting the x coordinate of the random spot
-	int changingY=blankSpacesY.get(choice); //getting the y coordinate of the random spot
-	board[changingX][changingY]=2; //setting that random location with a 2
-    }*/
     /*
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -102,9 +55,9 @@ public class ArcadeApp{
 	    // TODO bounds checking
 	};
     } // createKeyHandler
-
+    */
     /** {@inheritdoc} */
-    /*
+    
     @Override
     public void start(Stage stage) {
 
@@ -113,12 +66,25 @@ public class ArcadeApp{
          * simple sample code for mouse and keyboard interactions with a node
          * (rectangle) in a group.
          */
-    /*
-        r.setX(50);                                // 50px in the x direction (right)
-        r.setY(50);                                // 50ps in the y direction (down)
-        group.getChildren().add(r);                // add to main container
+        b = new BorderPane();
+        //TILE IMAGES
+        tile2 = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81fe0a9f0042616cb42405617a2661b4.jpg");
+        tile4 = new ImageView("https://i.pinimg.com/564x/6b/93/0b/6b930bf4a15baeca5561b11f5b0940d7.jpg");
+        tile8 = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b593549debda8a1158452283d348c1.jpg");
+        tile16 = new ImageView("https://i.pinimg.com/564x/4d/9e/8d/4d9e8d7d019aa107d2e267a8d4eb4771.jpg");
+        tile32 = new ImageView("https://i.pinimg.com/564x/ec/a2/1f/eca21f53a4587ae3dfa77fe174358bf6.jpg");
+        tile64 = new ImageView("https://i.pinimg.com/564x/a7/a5/94/a7a5947e894f1ca7d5f33fac12e0f7b6.jpg");
+        tile128 = new ImageView("https://i.pinimg.com/564x/40/10/c0/4010c0659be6aef6d9782b858446cb0f.jpg");
+        tile256 = new ImageView("https://i.pinimg.com/564x/4f/00/84/4f00842b8492488c51240ad935846a27.jpg");
+        tile512 = new ImageView("https://i.pinimg.com/564x/25/4b/1c/254b1c5d02478eb6e92ab0590b5cab92.jpg");
+        tile1024 = new ImageView("https://i.pinimg.com/564x/bd/22/19/bd2219feb2b5fe0636fc43c2f1409b8b.jpg");
+        tile2048 = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296bad25fc18dd24a103fddf6c2a1ed.jpg");
+        
+//r.setX(50);                                // 50px in the x direction (right)
+        //r.setY(50);                                // 50ps in the y direction (down)
+        //group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
+        //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
         Scene scene = new Scene(group, 640, 480);
         stage.setTitle("cs1302-arcade!");
@@ -131,5 +97,5 @@ public class ArcadeApp{
         group.requestFocus();
 
     } // start
-    */
+    
 } // ArcadeApp

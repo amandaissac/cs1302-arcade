@@ -13,7 +13,9 @@ public class ArcadeDriver {
      */
     public static void main(String[] args) {
         try {
-	    // Application.launch(ArcadeApp.class, args);
+	     Application.launch(ArcadeApp.class, args);
+
+        /*    
 	    //NEED TO CHANGE THE DRIVER CLASS. THIS IS JUST TO TEST INTERNAL PART OF GAME!
 	    App2048 g= new App2048(); //change back to game
 
@@ -49,7 +51,7 @@ public class ArcadeDriver {
 		g.print();
 	    }
 	    //*************************************************
-	    
+	    */
         } catch (UnsupportedOperationException e) {
             System.out.println(e);
             System.err.println("If this is a DISPLAY problem, then your X server connection");
