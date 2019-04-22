@@ -18,7 +18,7 @@ import javafx.scene.layout.TilePane;
 
 public class App2048{
     Random rgn = new Random();// random number generator
-    
+    private int score = 0;
     private int[][] board;
     //ImageView tile;
     ArrayList<ImageView> images = new ArrayList<>();
@@ -87,14 +87,16 @@ public class App2048{
                 }
                 
                 //adding the tile late into the img Gallery
-	    Platform.runLater(()->t.getChildren().add(tile));
-            t.setPrefColumns(4);
-	    t.setHgap(2);
-	    t.setVgap(2);
-            tile.setFitWidth(60);
-	    tile.setFitHeight(60);
-            tile.setPreserveRatio(false);
-            tile.setSmooth(true);    
+             
+                t.getChildren().clear();//clears the tile before adding new tiles
+                Platform.runLater(()->t.getChildren().add(tile));
+                t.setPrefColumns(4);
+                t.setHgap(2);
+                t.setVgap(2);
+                tile.setFitWidth(60);
+                tile.setFitHeight(60);
+                tile.setPreserveRatio(false);
+                tile.setSmooth(true);    
                 
             }
             
@@ -185,6 +187,7 @@ public class App2048{
 		}
 	    }
 	}
+    addNewRandom();
     }
 
     /**
@@ -231,6 +234,8 @@ public class App2048{
                  }
               }
          }
+          //adds a new 2 tile
+          addNewRandom();
      }
     /**
      *This method is used when the user pressed the left keyboard
@@ -276,6 +281,8 @@ public class App2048{
 		}
 	    }
 	}
+    //I just added this:adds a new 2 tile
+    addNewRandom();
     }
 
     /**
@@ -322,5 +329,9 @@ public class App2048{
                  }
              }
          }
+         addNewRandom();
      }
-}
+    public void score(){
+
+    }
+}//App2048

@@ -1,3 +1,4 @@
+
 package cs1302.arcade;
 
 import java.util.Random;
@@ -61,8 +62,42 @@ public class ArcadeApp extends Application {
     */
     
     //THIS IS FOR THE ARCADEAPP
+    private EventHandler<? super KeyEvent> createKeyHandler() {
+        return event -> {
+            System.out.println(event);
+            if (event.getCode() == KeyCode.LEFT)
+             {
+                 
+                 a.keyLeft();
+                 //a.addNewRandom();
+                 a.makeFrame(t,b);
+             }
+             if (event.getCode() == KeyCode.RIGHT)
+             {
+                 
+                 a.keyRight();
+                 //a.addNewRandom();
+                 a.makeFrame(t,b);
+             }
+             if (event.getCode() == KeyCode.UP)
+             {
+                 
+                 a.keyUp();
+                 //a.addNewRandom();
+                 a.makeFrame(t,b);
+             }
+             if (event.getCode() == KeyCode.DOWN)
+             {
+                 
+                 a.keyDown();
+                 //a.addNewRandom();
+                 a.makeFrame(t,b);
+             }
+             // TODO bounds checking
+        };
+	} // createKeyHandler
     
-     
+    
     /** {@inheritdoc} */
     
     @Override
@@ -76,25 +111,10 @@ public class ArcadeApp extends Application {
         //a = new App2048();
         b = new BorderPane();
         //adding the tilepane to window
-        a.addNewRandom();
-        a.makeFrame(t,b);
-	private EventHandler<? super KeyEvent> createKeyHandler() {
-         return event -> {
-             System.out.println(event);
-             if (event.getCode() == KeyCode.LEFT)
-		 {
-		     a.keyLeft();
-		     a.makeFrame();
-		 }
-             if (event.getCode() == KeyCode.RIGHT)
-		 {
-		     a.keyRight();
-		     a.makeFrame();
-		 }
-             // TODO bounds checking
-         };
-	} // createKeyHandler
-       
+        //a.addNewRandom();
+        //a.makeFrame(t,b);
+        
+	        
 	//r.setX(50);                                // 50px in the x direction (right)
         //r.setY(50);                                // 50ps in the y direction (down)
         //group.getChildren().add(r);                // add to main container
@@ -102,7 +122,7 @@ public class ArcadeApp extends Application {
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
         Scene scene = new Scene(b/*group*/, 640, 480);
-	scene.setOnKeyPressed(createKeyHandler());
+        scene.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
