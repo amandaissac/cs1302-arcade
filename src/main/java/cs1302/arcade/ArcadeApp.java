@@ -15,13 +15,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 public class ArcadeApp extends Application {
 
-    Group group = new Group();           // main container
+    //  Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
     BorderPane b;
-    ImageView tile2,tile4,tile8,tile16,tile32,tile64,tile128,tile256,tile512,tile1024,tile2048;
+    TilePane t;
+    App2048 a;
     //Rectangle r = new Rectangle(20, 20); // some rectangle
     /*
     /**
@@ -66,19 +69,11 @@ public class ArcadeApp extends Application {
          * simple sample code for mouse and keyboard interactions with a node
          * (rectangle) in a group.
          */
+        a = new App2048();
         b = new BorderPane();
-        //TILE IMAGES
-        tile2 = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81fe0a9f0042616cb42405617a2661b4.jpg");
-        tile4 = new ImageView("https://i.pinimg.com/564x/6b/93/0b/6b930bf4a15baeca5561b11f5b0940d7.jpg");
-        tile8 = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b593549debda8a1158452283d348c1.jpg");
-        tile16 = new ImageView("https://i.pinimg.com/564x/4d/9e/8d/4d9e8d7d019aa107d2e267a8d4eb4771.jpg");
-        tile32 = new ImageView("https://i.pinimg.com/564x/ec/a2/1f/eca21f53a4587ae3dfa77fe174358bf6.jpg");
-        tile64 = new ImageView("https://i.pinimg.com/564x/a7/a5/94/a7a5947e894f1ca7d5f33fac12e0f7b6.jpg");
-        tile128 = new ImageView("https://i.pinimg.com/564x/40/10/c0/4010c0659be6aef6d9782b858446cb0f.jpg");
-        tile256 = new ImageView("https://i.pinimg.com/564x/4f/00/84/4f00842b8492488c51240ad935846a27.jpg");
-        tile512 = new ImageView("https://i.pinimg.com/564x/25/4b/1c/254b1c5d02478eb6e92ab0590b5cab92.jpg");
-        tile1024 = new ImageView("https://i.pinimg.com/564x/bd/22/19/bd2219feb2b5fe0636fc43c2f1409b8b.jpg");
-        tile2048 = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296bad25fc18dd24a103fddf6c2a1ed.jpg");
+        //adding the tilepane to window
+        a.addNewRandom();
+        a.makeFrame(t,b);
         
 //r.setX(50);                                // 50px in the x direction (right)
         //r.setY(50);                                // 50ps in the y direction (down)
@@ -86,7 +81,7 @@ public class ArcadeApp extends Application {
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
-        Scene scene = new Scene(group, 640, 480);
+        Scene scene = new Scene(b/*group*/, 640, 480);
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
@@ -94,7 +89,7 @@ public class ArcadeApp extends Application {
 
         // the group must request input focus to receive key events
         // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
-        group.requestFocus();
+        //group.requestFocus();
 
     } // start
     

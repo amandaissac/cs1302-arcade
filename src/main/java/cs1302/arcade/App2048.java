@@ -11,12 +11,18 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.TilePane;
 
 public class App2048{
     Random rgn = new Random();// random number generator
     
     private int[][] board;
-    
+    //ImageView tile;
+    ArrayList<ImageView> images = new ArrayList<>();
+
     /**
       *This is the constructor that sets the board to size 4X4
       */
@@ -24,7 +30,65 @@ public class App2048{
         //this is initializing a board every time a new game is being created
         board=new int[4][4];
      }
-    
+    public void makeFrame(TilePane t, BorderPane b){
+        
+        for(int i = 0;i<4; i++){
+            for(int j = 0; j<4; j++){
+                ImageView tempTile;
+                
+                if(board[i][j]==2){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81fe0a9f0042616cb42405617a2661b4.jpg");
+                }
+                else if(board[i][j]==4){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/6b/93/0b/6b930bf4a15baeca5561b11f5b0940d7.jpg");
+                }
+                else if(board[i][j]==8){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b593549debda8a1158452283d348c1.jpg");
+                }
+                else if(board[i][j]==16){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/4d/9e/8d/4d9e8d7d019aa107d2e267a8d4eb4771.jpg");
+                }
+                else if(board[i][j]==32){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/ec/a2/1f/eca21f53a4587ae3dfa77fe174358bf6.jpg");
+                }
+                else if(board[i][j]==64){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/a7/a5/94/a7a5947e894f1ca7d5f33fac12e0f7b6.jpg");
+                }
+                else if(board[i][j]==128){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/40/10/c0/4010c0659be6aef6d9782b858446cb0f.jpg");
+                }
+                else if(board[i][j]==256){
+                    tempTile = new ImageView("https://i.pinimg.com/originals/4f/00/84/4f00842b8492488c51240ad935846a27.png");
+                }
+                else if(board[i][j]==512){
+                    tempTile = new ImageView("https://i.pinimg.com/originals/25/4b/1c/254b1c5d02478eb6e92ab0590b5cab92.png");
+                }
+                else if(board[i][j]==1024){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/bd/22/19/bd2219feb2b5fe0636fc43c2f1409b8b.jpg");
+                }
+                else if(board[i][j]==2048){
+                    tempTile = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296bad25fc18dd24a103fddf6c2a1ed.jpg");
+                }
+                else{
+                    tempTile = new ImageView("https://i.pinimg.com/564x/bd/26/33/bd26336b2208faa58912c37d63a7d556.jpg");
+                }
+                ImageView tile = tempTile ;
+                
+                //adding the tile late into the img Gallery
+            Platform.runLater(()-> t.getChildren().add(tile));
+            t.setPrefColumns(4);
+            tile.setFitWidth(100);
+            tile.setPreserveRatio(true);
+            tile.setSmooth(true);    
+                
+            }
+            
+        }
+
+        //added tilpane to borderpane
+        Platform.runLater(() -> b.setCenter(t));
+
+    }
     /**
       *This method is used to print the 2D array that we create. It just shows the
       *internal part of the game
