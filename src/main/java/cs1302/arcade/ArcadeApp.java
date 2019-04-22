@@ -131,7 +131,7 @@ public class ArcadeApp extends Application {
         stage.setScene(scene);
         //stage.sizeToScene();
 	stage.setWidth(250);
-	stage.setHeight(250);
+	stage.setHeight(300);
         stage.show();
 
         // the group must request input focus to receive key events
