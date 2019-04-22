@@ -33,12 +33,12 @@ public class App2048{
         board=new int[4][4];
      }
     public void makeFrame(TilePane t, BorderPane b){
-        
+         t.getChildren().clear();
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
 		//setting it to blank tile initially when initalizing it
-                ImageView tile;
-		
+                ImageView tile; 
+               
                 if(board[i][j]==2){
                     tile = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81"+
                                               "fe0a9f0042616cb42405617a2661b4.jpg");
@@ -90,8 +90,12 @@ public class App2048{
                 
                 //adding the tile late into the img Gallery
              
-                t.getChildren().clear();//clears the tile before adding new tiles
-                Platform.runLater(()->t.getChildren().add(tile));
+                //t.getChildren().clear();//clears the tile before adding new tiles
+                
+                        t.getChildren().add(tile);
+                                  
+                    
+                    // add Platform.runLater when making threads
                 t.setPrefRows(4);
                 t.setHgap(2);
                 t.setVgap(2);
