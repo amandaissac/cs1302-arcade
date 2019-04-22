@@ -1,4 +1,5 @@
 package cs1302.arcade;
+import javafx.geometry.Pos;
 import java.util.Random;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -186,7 +187,7 @@ public class App2048{
 			    //this only executes if the values are the same/ match
 			    //this also only executes if it already has not been pushed up before. 
 			    board[tempX][col]*=2; //basically the value doubles
-                score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
+			    score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
 			    alreadyCombined[tempX]=true;
 			    board[row][col]=0; //setting the previous one back to 0.
 			}
@@ -343,11 +344,13 @@ public class App2048{
      }
     public void score(BorderPane b){
         VBox topVBox= new VBox();
-        Label title = new Label("2048");
-        Label rules = new Label("Use arrow keys to move tiles!");
+        Label title = new Label("Welcome to 2048!");
+        Label rules = new Label("Use arrow keys to move tiles");
         String scoreString= "Score: " +score;
         Label score = new Label(scoreString);
-        topVBox.getChildren().addAll(title,rules,score);
+	Label emptyLine= new Label("");
+        topVBox.getChildren().addAll(title,rules,score,emptyLine);
+	topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
         b.setTop(topVBox);
     }
 }//App2048
