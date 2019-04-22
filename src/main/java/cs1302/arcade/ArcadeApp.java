@@ -20,11 +20,11 @@ import javafx.scene.layout.VBox;
 
 public class ArcadeApp extends Application {
 
-    //  Group group = new Group();           // main container
+    //Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
     BorderPane b;
-    TilePane t;
-    App2048 a;
+    TilePane t= new TilePane();
+    App2048 a = new App2048();;
     //Rectangle r = new Rectangle(20, 20); // some rectangle
     /*
     /**
@@ -59,6 +59,10 @@ public class ArcadeApp extends Application {
 	};
     } // createKeyHandler
     */
+    
+    //THIS IS FOR THE ARCADEAPP
+    
+     
     /** {@inheritdoc} */
     
     @Override
@@ -69,22 +73,41 @@ public class ArcadeApp extends Application {
          * simple sample code for mouse and keyboard interactions with a node
          * (rectangle) in a group.
          */
-        a = new App2048();
+        //a = new App2048();
         b = new BorderPane();
         //adding the tilepane to window
         a.addNewRandom();
         a.makeFrame(t,b);
-        
-//r.setX(50);                                // 50px in the x direction (right)
+	private EventHandler<? super KeyEvent> createKeyHandler() {
+         return event -> {
+             System.out.println(event);
+             if (event.getCode() == KeyCode.LEFT)
+		 {
+		     a.keyLeft();
+		     a.makeFrame();
+		 }
+             if (event.getCode() == KeyCode.RIGHT)
+		 {
+		     a.keyRight();
+		     a.makeFrame();
+		 }
+             // TODO bounds checking
+         };
+	} // createKeyHandler
+       
+	//r.setX(50);                                // 50px in the x direction (right)
         //r.setY(50);                                // 50ps in the y direction (down)
         //group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
 
         Scene scene = new Scene(b/*group*/, 640, 480);
+	scene.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         stage.sizeToScene();
+	stage.setWidth(250);
+	stage.setHeight(250);
         stage.show();
 
         // the group must request input focus to receive key events
