@@ -34,51 +34,66 @@ public class App2048{
         
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
-                ImageView tempTile;
-                
+		//setting it to blank tile initially when initalizing it
+                ImageView tile;
+		
                 if(board[i][j]==2){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81fe0a9f0042616cb42405617a2661b4.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/81/fe/0a/81"+
+                                              "fe0a9f0042616cb42405617a2661b4.jpg");
                 }
                 else if(board[i][j]==4){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/6b/93/0b/6b930bf4a15baeca5561b11f5b0940d7.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/6b/93/0b/6b9"+
+                                              "30bf4a15baeca5561b11f5b0940d7.jpg");
                 }
                 else if(board[i][j]==8){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b593549debda8a1158452283d348c1.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b"+
+                                              "593549debda8a1158452283d348c1.jpg");
                 }
                 else if(board[i][j]==16){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/4d/9e/8d/4d9e8d7d019aa107d2e267a8d4eb4771.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/4d/9e/8d/4d9"+
+                                              "e8d7d019aa107d2e267a8d4eb4771.jpg");
                 }
                 else if(board[i][j]==32){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/ec/a2/1f/eca21f53a4587ae3dfa77fe174358bf6.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/ec/a2/1f/eca"+
+                                              "21f53a4587ae3dfa77fe174358bf6.jpg");
                 }
                 else if(board[i][j]==64){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/a7/a5/94/a7a5947e894f1ca7d5f33fac12e0f7b6.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/a7/a5/94/a7"+
+                                              "a5947e894f1ca7d5f33fac12e0f7b6.jpg");
                 }
                 else if(board[i][j]==128){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/40/10/c0/4010c0659be6aef6d9782b858446cb0f.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/40/10/c0/40"+
+                                              "10c0659be6aef6d9782b858446cb0f.jpg");
                 }
                 else if(board[i][j]==256){
-                    tempTile = new ImageView("https://i.pinimg.com/originals/4f/00/84/4f00842b8492488c51240ad935846a27.png");
+                    tile = new ImageView("https://i.pinimg.com/originals/4f/00"+
+                                              "/84/4f00842b8492488c51240ad935846a27.png");
                 }
                 else if(board[i][j]==512){
-                    tempTile = new ImageView("https://i.pinimg.com/originals/25/4b/1c/254b1c5d02478eb6e92ab0590b5cab92.png");
+                    tile = new ImageView("https://i.pinimg.com/originals/25/4b/1c/2"+
+                                              "54b1c5d02478eb6e92ab0590b5cab92.png");
                 }
                 else if(board[i][j]==1024){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/bd/22/19/bd2219feb2b5fe0636fc43c2f1409b8b.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/bd/22/19/bd2219"+
+                                              "feb2b5fe0636fc43c2f1409b8b.jpg");
                 }
                 else if(board[i][j]==2048){
-                    tempTile = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296bad25fc18dd24a103fddf6c2a1ed.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296ba"+
+                                              "d25fc18dd24a103fddf6c2a1ed.jpg");
                 }
                 else{
-                    tempTile = new ImageView("https://i.pinimg.com/564x/bd/26/33/bd26336b2208faa58912c37d63a7d556.jpg");
+                    tile = new ImageView("https://i.pinimg.com/564x/bd/26/33/bd2633"+
+                                              "6b2208faa58912c37d63a7d556.jpg");
                 }
-                ImageView tile = tempTile ;
                 
                 //adding the tile late into the img Gallery
-            Platform.runLater(()-> t.getChildren().add(tile));
+	    Platform.runLater(()->t.getChildren().add(tile));
             t.setPrefColumns(4);
-            tile.setFitWidth(100);
-            tile.setPreserveRatio(true);
+	    t.setHgap(2);
+	    t.setVgap(2);
+            tile.setFitWidth(60);
+	    tile.setFitHeight(60);
+            tile.setPreserveRatio(false);
             tile.setSmooth(true);    
                 
             }
