@@ -1,4 +1,3 @@
-
 package cs1302.arcade;
 
 import java.util.Random;
@@ -69,30 +68,34 @@ public class ArcadeApp extends Application {
              {
                  
                  a.keyLeft();
-                 //a.addNewRandom();
+                 a.score(b);
                  a.makeFrame(t,b);
              }
-             if (event.getCode() == KeyCode.RIGHT)
+            else if (event.getCode() == KeyCode.RIGHT)
              {
                  
                  a.keyRight();
-                 //a.addNewRandom();
+                 a.score(b);
                  a.makeFrame(t,b);
              }
-             if (event.getCode() == KeyCode.UP)
+            else if (event.getCode() == KeyCode.UP)
              {
                  
                  a.keyUp();
-                 //a.addNewRandom();
+                 a.score(b);
                  a.makeFrame(t,b);
              }
-             if (event.getCode() == KeyCode.DOWN)
+            else if (event.getCode() == KeyCode.DOWN)
              {
                  
                  a.keyDown();
-                 //a.addNewRandom();
+                 a.score(b);
                  a.makeFrame(t,b);
              }
+            else
+            {
+                //will do nothing
+            }
              // TODO bounds checking
         };
 	} // createKeyHandler
@@ -110,6 +113,7 @@ public class ArcadeApp extends Application {
          */
         //a = new App2048();
         b = new BorderPane();
+        a.score(b);
         //adding the tilepane to window
         //a.addNewRandom();
         //a.makeFrame(t,b);
@@ -125,7 +129,7 @@ public class ArcadeApp extends Application {
         scene.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
-        stage.sizeToScene();
+        //stage.sizeToScene();
 	stage.setWidth(250);
 	stage.setHeight(250);
         stage.show();

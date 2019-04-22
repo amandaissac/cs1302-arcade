@@ -15,6 +15,8 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class App2048{
     Random rgn = new Random();// random number generator
@@ -90,7 +92,7 @@ public class App2048{
              
                 t.getChildren().clear();//clears the tile before adding new tiles
                 Platform.runLater(()->t.getChildren().add(tile));
-                t.setPrefColumns(4);
+                t.setPrefRows(4);
                 t.setHgap(2);
                 t.setVgap(2);
                 tile.setFitWidth(60);
@@ -180,6 +182,7 @@ public class App2048{
 			    //this only executes if the values are the same/ match
 			    //this also only executes if it already has not been pushed up before. 
 			    board[tempX][col]*=2; //basically the value doubles
+                score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
 			    alreadyCombined[tempX]=true;
 			    board[row][col]=0; //setting the previous one back to 0.
 			}
@@ -227,6 +230,7 @@ public class App2048{
                               //this only executes if the values are the same/ match
                              //this also only executes if it already has not been pushed up before.
                              board[tempX][col]*=2; //basically the value doubles
+                             score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
                              alreadyCombined[tempX]=true;
                              board[row][col]=0; //setting the previous one back to 0.
                          }
@@ -274,6 +278,7 @@ public class App2048{
 			    //this only executes if the values are the same/ match
 			    //this also only executes if it already has not been pushed up before.
 			    board[row][tempY]*=2; //basically the value doubles
+                score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
 			    alreadyCombined[tempY]=true;
 			    board[row][col]=0; //setting the previous one back to 0.
 			}
@@ -322,6 +327,7 @@ public class App2048{
                              //this only executes if the values are the same/ match
                              //this also only executes if it already has not been pushed up before.
                              board[row][tempY]*=2; //basically the value doubles
+                             score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
                              alreadyCombined[tempY]=true;
                              board[row][col]=0; //setting the previous one back to 0.
                          }
@@ -331,7 +337,13 @@ public class App2048{
          }
          addNewRandom();
      }
-    public void score(){
-
+    public void score(BorderPane b){
+        VBox topVBox= new VBox();
+        Label title = new Label("2048");
+        Label rules = new Label("Use arrow keys to move tiles!");
+        String scoreString= "Score: " +score;
+        Label score = new Label(scoreString);
+        topVBox.getChildren().addAll(title,rules,score);
+        b.setTop(topVBox);
     }
 }//App2048
