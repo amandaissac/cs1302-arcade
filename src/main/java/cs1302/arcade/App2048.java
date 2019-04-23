@@ -34,7 +34,8 @@ public class App2048{
         board=new int[4][4];
      }
     public void makeFrame(TilePane t, BorderPane b){
-         t.getChildren().clear();
+	boolean gameWon=false; 
+	t.getChildren().clear();
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
 		//setting it to blank tile initially when initalizing it
@@ -49,6 +50,7 @@ public class App2048{
                                               "30bf4a15baeca5561b11f5b0940d7.jpg");
                 }
                 else if(board[i][j]==8){
+		    gameWon=true;
                     tile = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b"+
                                               "593549debda8a1158452283d348c1.jpg");
                 }
@@ -83,6 +85,7 @@ public class App2048{
                 else if(board[i][j]==2048){
                     tile = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296ba"+
                                               "d25fc18dd24a103fddf6c2a1ed.jpg");
+		    //gameWon=true; //setting boolean to true
                 }
                 else{
                     tile = new ImageView("https://i.pinimg.com/564x/bd/26/33/bd2633"+
@@ -92,8 +95,7 @@ public class App2048{
                 //adding the tile late into the img Gallery
              
                 //t.getChildren().clear();//clears the tile before adding new tiles
-                
-                        t.getChildren().add(tile);
+                t.getChildren().add(tile);
                                   
                     
                     // add Platform.runLater when making threads
@@ -108,10 +110,19 @@ public class App2048{
             }
             
         }
-
-        //added tilpane to borderpane
-        Platform.runLater(() -> b.setCenter(t));
-
+	//only executes if it is given to be true
+	if(gameWon){
+	    //creating gameOver image
+	    ImageView gameOverImage= new ImageView("https://i-h2.pinimg.com/564x/d8/be/5d/d8be5d3c73"+
+						   "2bee3b25448807c628d681.jpg");
+	    gameOverImage.setFitHeight(200);
+	    gameOverImage.setFitWidth(200);
+	    b.setCenter(gameOverImage);
+	}
+	else{
+	    //added tilpane to borderpane
+	    Platform.runLater(() -> b.setCenter(t));
+	}
     }
     /**
       *This method is used to print the 2D array that we create. It just shows the
