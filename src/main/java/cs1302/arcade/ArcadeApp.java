@@ -115,8 +115,9 @@ public class ArcadeApp extends Application {
         b = new BorderPane();
         a.score(b);
         //adding the tilepane to window
-        //a.addNewRandom();
-        //a.makeFrame(t,b);
+        a.addNewRandom();
+	a.addNewRandom();
+        a.makeFrame(t,b);
         
 	        
 	//r.setX(50);                                // 50px in the x direction (right)
