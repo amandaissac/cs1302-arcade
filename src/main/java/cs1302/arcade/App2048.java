@@ -23,6 +23,7 @@ public class App2048{
     Random rgn = new Random();// random number generator
     private int score = 0;
     private int[][] board;
+    boolean gameWon=false; 
     //ImageView tile;
     ArrayList<ImageView> images = new ArrayList<>();
 
@@ -34,7 +35,7 @@ public class App2048{
         board=new int[4][4];
      }
     public void makeFrame(TilePane t, BorderPane b){
-	boolean gameWon=false; 
+	 
 	t.getChildren().clear();
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
@@ -121,7 +122,8 @@ public class App2048{
 	}
 	else{
 	    //added tilpane to borderpane
-	    Platform.runLater(() -> b.setCenter(t));
+	    b.setCenter(t);
+	    //Platform.runLater(() -> b.setCenter(t));
 	}
     }
     /**
@@ -209,7 +211,9 @@ public class App2048{
 			    //this only executes if the values are the same/ match
 			    //this also only executes if it already has not been pushed up before. 
 			    board[tempX][col]*=2; //basically the value doubles
-			    score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
+			    if(gameWon==false){
+				score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
+			    }
 			    alreadyCombined[tempX]=true;
 			    board[row][col]=0; //setting the previous one back to 0.
 			}
@@ -257,7 +261,9 @@ public class App2048{
                               //this only executes if the values are the same/ match
                              //this also only executes if it already has not been pushed up before.
                              board[tempX][col]*=2; //basically the value doubles
-                             score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
+                             if(gameWon==false){
+				 score = score+ board[tempX][col];// ADDING TO SCORE WHEN TILES MERGE
+			     }
                              alreadyCombined[tempX]=true;
                              board[row][col]=0; //setting the previous one back to 0.
                          }
@@ -305,7 +311,9 @@ public class App2048{
 			    //this only executes if the values are the same/ match
 			    //this also only executes if it already has not been pushed up before.
 			    board[row][tempY]*=2; //basically the value doubles
-                score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
+			    if(gameWon==false){
+				score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
+			    }
 			    alreadyCombined[tempY]=true;
 			    board[row][col]=0; //setting the previous one back to 0.
 			}
@@ -354,8 +362,10 @@ public class App2048{
                              //this only executes if the values are the same/ match
                              //this also only executes if it already has not been pushed up before.
                              board[row][tempY]*=2; //basically the value doubles
-                             score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
-                             alreadyCombined[tempY]=true;
+                             if(gameWon==false){
+				 score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
+			     }
+			     alreadyCombined[tempY]=true;
                              board[row][col]=0; //setting the previous one back to 0.
                          }
                      }
