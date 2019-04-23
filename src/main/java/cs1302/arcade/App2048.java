@@ -51,7 +51,7 @@ public class App2048{
                                               "30bf4a15baeca5561b11f5b0940d7.jpg");
                 }
                 else if(board[i][j]==8){
-		    gameWon=true;
+		    
                     tile = new ImageView("https://i.pinimg.com/564x/b0/b5/93/b0b"+
                                               "593549debda8a1158452283d348c1.jpg");
                 }
@@ -86,7 +86,7 @@ public class App2048{
                 else if(board[i][j]==2048){
                     tile = new ImageView("https://i.pinimg.com/564x/72/96/ba/7296ba"+
                                               "d25fc18dd24a103fddf6c2a1ed.jpg");
-		    //gameWon=true; //setting boolean to true
+                    gameWon=true; //setting boolean to true
                 }
                 else{
                     tile = new ImageView("https://i.pinimg.com/564x/bd/26/33/bd2633"+

@@ -17,12 +17,21 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+
 
 public class ArcadeApp extends Application {
 
     //Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
-    BorderPane b;
+    BorderPane b;//2048
+    BorderPane b1;//Welcome
+    Scene scene;
+    Button app2048;
+    Button tetris;
     TilePane t= new TilePane();
     App2048 a = new App2048();;
     //Rectangle r = new Rectangle(20, 20); // some rectangle
@@ -99,8 +108,29 @@ public class ArcadeApp extends Application {
              // TODO bounds checking
         };
 	} // createKeyHandler
-    
-    
+    public void welcome(){
+        b1 = new BorderPane();
+        HBox h = new HBox();
+        
+        app2048 = new Button("Play 2048");
+        tetris = new Button("Play Tetris");
+        h.getChildren().addAll(app2048,tetris);
+        ImageView welcome = new ImageView("https://i-h2.pinimg.com/564x/13/78/3d/"+
+                                          "13783d5dbc5927e449cd075c2c52dc60.jpg");
+        b1.setCenter(welcome);
+        b1.setBottom(h);
+        
+        scene = new Scene(b1,640,480);
+
+    }
+    public void scene2048(){
+        app2048.setOnAction(new EventHandler<ActionEvent>() {
+                 @Override public void handle(ActionEvent e) {
+                     scene = new Scene(b/*group*/, 640, 480);
+                 }//handle
+             });//setOnAction
+        //scene = new Scene(b/*group*/, 640, 480);
+    }
     /** {@inheritdoc} */
     
     @Override
@@ -116,7 +146,7 @@ public class ArcadeApp extends Application {
         a.score(b);
         //adding the tilepane to window
         a.addNewRandom();
-	a.addNewRandom();
+        a.addNewRandom();
         a.makeFrame(t,b);
         
 	        
@@ -125,14 +155,15 @@ public class ArcadeApp extends Application {
         //group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
-
-        Scene scene = new Scene(b/*group*/, 640, 480);
+        welcome();
+        scene2048();
+        //scene = new Scene(b/*group*/, 640, 480);
         scene.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
         stage.setScene(scene);
         //stage.sizeToScene();
-	stage.setWidth(250);
-	stage.setHeight(320);
+        stage.setWidth(250);
+        stage.setHeight(320);
         stage.show();
 
         // the group must request input focus to receive key events
