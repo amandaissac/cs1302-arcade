@@ -147,7 +147,18 @@ public class App2048{
         int choice= rgn.nextInt(blankSpacesX.size()); //using blankSpacesX b/c same size as y
         int changingX=blankSpacesX.get(choice); //getting the x coordinate of the random spot
         int changingY=blankSpacesY.get(choice); //getting the y coordinate of the random spot
-       board[changingX][changingY]=2; //setting that random location with a 2
+
+	//the 90 percent probability portion
+	Double probCalculator= Math.random();
+	if(probCalculator<0.9)
+	    {
+		board[changingX][changingY]=2;
+	    }
+	else
+	    {
+		board[changingX][changingY]=4; 
+	    }
+        //board[changingX][changingY]=2; //setting that random location with a 2
     }
     
     /**
