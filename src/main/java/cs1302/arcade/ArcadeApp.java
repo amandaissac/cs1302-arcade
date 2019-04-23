@@ -29,9 +29,10 @@ public class ArcadeApp extends Application {
     Random rgn = new Random();// random number generator
     BorderPane b;//2048
     BorderPane b1;//Welcome
-    Scene scene;
+    //Scene scene;
     Button app2048;
     Button tetris;
+    //Scene scene2048 = new Scene(b/*group*/, 640, 480);
     TilePane t= new TilePane();
     App2048 a = new App2048();;
     //Rectangle r = new Rectangle(20, 20); // some rectangle
@@ -108,7 +109,9 @@ public class ArcadeApp extends Application {
              // TODO bounds checking
         };
 	} // createKeyHandler
+    /*
     public void welcome(){
+        Scene start;
         b1 = new BorderPane();
         HBox h = new HBox();
         
@@ -120,17 +123,18 @@ public class ArcadeApp extends Application {
         b1.setCenter(welcome);
         b1.setBottom(h);
         
-        scene = new Scene(b1,640,480);
-
+        start = new Scene(b1,640,480);
+        stage.setScene(start);
     }
     public void scene2048(){
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     scene = new Scene(b/*group*/, 640, 480);
+                     Scene app2048 = new Scene(b, 640, 480);
+                     stage.setScene(app2048);
                  }//handle
              });//setOnAction
-        //scene = new Scene(b/*group*/, 640, 480);
-    }
+        //scene = new Scene(b/, 640, 480);
+    }*/
     /** {@inheritdoc} */
     
     @Override
@@ -142,6 +146,32 @@ public class ArcadeApp extends Application {
          * (rectangle) in a group.
          */
         //a = new App2048();
+        //Testing the button from welcome page
+        Scene start;
+        b1 = new BorderPane();
+        HBox h = new HBox();
+        
+        app2048 = new Button("Play 2048");
+        tetris = new Button("Play Tetris");
+        h.getChildren().addAll(app2048,tetris);
+        ImageView welcome = new ImageView("https://i-h2.pinimg.com/564x/13/78/3d/"+
+                                          "13783d5dbc5927e449cd075c2c52dc60.jpg");
+        welcome.setFitHeight(250);
+        welcome.setFitWidth(250);
+        b1.setCenter(welcome);
+        b1.setBottom(h);
+        
+        start = new Scene(b1,640,480);
+        stage.setScene(start);
+        
+        app2048.setOnAction(new EventHandler<ActionEvent>() {
+                 @Override public void handle(ActionEvent e) {
+                     Scene scene2048 = new Scene(b/*group*/, 640, 480);
+                     scene2048.setOnKeyPressed(createKeyHandler());
+                     stage.setScene(scene2048);
+                 }//handle
+             });//setOnAction
+        //Testing button from welcome page
         b = new BorderPane();
         a.score(b);
         //adding the tilepane to window
@@ -155,12 +185,12 @@ public class ArcadeApp extends Application {
         //group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
-        welcome();
-        scene2048();
+        //welcome();
+        //scene2048();
         //scene = new Scene(b/*group*/, 640, 480);
-        scene.setOnKeyPressed(createKeyHandler());
+        //scene2048.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
-        stage.setScene(scene);
+        //stage.setScene(scene);
         //stage.sizeToScene();
         stage.setWidth(250);
         stage.setHeight(320);
