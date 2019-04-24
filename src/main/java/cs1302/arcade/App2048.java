@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class App2048{
     Random rgn = new Random();// random number generator
@@ -374,13 +377,28 @@ public class App2048{
          }
          addNewRandom();
      }
-    public void score(BorderPane b){
+    
+    public void score(BorderPane b)
+    {
         VBox topVBox= new VBox();
         Label title = new Label("Welcome to 2048!");
         Label rules = new Label("Use arrow keys to move tiles");
         String scoreString= "Score: " +score;
         Label score = new Label(scoreString);
-        Label emptyLine= new Label("");
+	/*
+	Button menuButton= new Button("Main Menu");
+	menuButton.setOnAction(new EventHandler<ActionEvent>() {
+                   @Override public void handle(ActionEvent e) {
+	
+       
+                       //Scene  = new Scene(b, 640, 480);
+                       //scene2048.setOnKeyPressed(createKeyHandler());
+                       stage.setScene(start);
+                   }//handle
+	    });//setOnAction
+	*/
+
+        Label emptyLine= new Label(""); 
         topVBox.getChildren().addAll(title,rules,score,emptyLine);
         topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
         b.setTop(topVBox);

@@ -2,7 +2,7 @@ package cs1302.arcade;
 
 import java.util.Random;
 import java.util.ArrayList;
-
+import javafx.geometry.Pos;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -28,6 +28,8 @@ public class ArcadeApp extends Application {
     //Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
     BorderPane b;//2048
+    //Scene start;
+    //Stage stage; 
     BorderPane b1;//Welcome
     //Scene scene;
     Button app2048;
@@ -154,11 +156,13 @@ public class ArcadeApp extends Application {
         app2048 = new Button("Play 2048");
         tetris = new Button("Play Tetris");
         h.getChildren().addAll(app2048,tetris);
+	h.setAlignment(Pos.CENTER);
         ImageView welcome = new ImageView("https://i-h2.pinimg.com/564x/13/78/3d/"+
                                           "13783d5dbc5927e449cd075c2c52dc60.jpg");
-        welcome.setFitHeight(250);
-        welcome.setFitWidth(250);
+        welcome.setFitHeight(300);
+        welcome.setFitWidth(240);
         b1.setCenter(welcome);
+	//b.setAlignment(h,Pos.CENTER);
         b1.setBottom(h);
         
         start = new Scene(b1,640,480);
@@ -173,6 +177,20 @@ public class ArcadeApp extends Application {
              });//setOnAction
         //Testing button from welcome page
         b = new BorderPane();
+
+	Button menuButton= new Button("Main Menu");
+
+         menuButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        //Scene  = new Scene(b/*group*/, 640, 480);
+                        //scene2048.setOnKeyPressed(createKeyHandler());
+                        stage.setScene(start);
+                    }//handle
+                });//setOnAction
+	 b.setAlignment(menuButton, Pos.CENTER);
+	 b.setBottom(menuButton);
+	 
+	 
         a.score(b);
         //adding the tilepane to window
         a.addNewRandom();
@@ -193,7 +211,7 @@ public class ArcadeApp extends Application {
         //stage.setScene(scene);
         //stage.sizeToScene();
         stage.setWidth(250);
-        stage.setHeight(320);
+        stage.setHeight(340);
         stage.show();
 
         // the group must request input focus to receive key events
