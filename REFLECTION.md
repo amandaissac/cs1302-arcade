@@ -7,7 +7,7 @@ that the Markdown is transformed into nice looking HTML.
 
 Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
 
-## TUES 2019-16-05 @ 11:55 PM EST
+## TUES 2019-16-04 @ 11:55 PM EST
 
 1. **DONE:** Downloaded the skeleton code.
     -SUMMARY: overall we created the internal part of the game through 2D arrays.
@@ -30,3 +30,26 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
     - Technical problems: there was confusion when sometimes there would be a double merge.
         - We fixed this by creating a boolean array that recorded if a current row had already been merged
           so that it couldn't be merged twice. 
+
+
+ ## TUES 2019-23-04 @ 11:55 PM EST
+
+ 1. **DONE:** Downloaded the skeleton code.
+    -SUMMARY: Overall we figure out the GUI part of 2048. The game is bascially done.
+        - we also added a welcome page which includes button in order to switch scene for the games
+	- created a scene that displays you have won
+2. **TODO:** Finish the small bugs in game, and complete half of tetris
+   	- Bugs rom 2048
+	  - game over
+	  - returning back to the 2048 scene after returning back to main menu. (making buttons continuous)
+	- Tetris
+	  - make shapes, background for board
+	  - figure out lines of blocks
+	  - have the shapes move, etc.
+	  
+3. **PROB:** We had trouble creating another class for the 2048 game and organizing our project as a whole.
+    -  Had a lot of problems dealing with setting the actions of the buttons.
+       - it was hard switching between the scenes
+    - There was confusion on setting actions on the keyboard keys
+    - there was a lot of confusion between the classes and its method.
+      - problems with a class's scope and figuring out a way not to use static variables. 
