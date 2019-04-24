@@ -380,9 +380,9 @@ public class App2048{
         Label rules = new Label("Use arrow keys to move tiles");
         String scoreString= "Score: " +score;
         Label score = new Label(scoreString);
-	Label emptyLine= new Label("");
+        Label emptyLine= new Label("");
         topVBox.getChildren().addAll(title,rules,score,emptyLine);
-	topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
+        topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
         b.setTop(topVBox);
     }
 }//App2048
