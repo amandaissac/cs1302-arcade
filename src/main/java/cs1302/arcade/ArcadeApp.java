@@ -27,10 +27,10 @@ public class ArcadeApp extends Application {
 
     //Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
-    BorderPane b;//2048
+    BorderPane b2048;//2048
     //Scene start;
     //Stage stage; 
-    BorderPane b1;//Welcome
+    BorderPane bWelcome;//Welcome
     //Scene scene;
     Button app2048;
     Button tetris;
@@ -81,29 +81,29 @@ public class ArcadeApp extends Application {
              {
                  
                  a.keyLeft();
-                 a.score(b);
-                 a.makeFrame(t,b);
+                 a.score(b2048);
+                 a.makeFrame(t,b2048);
              }
             else if (event.getCode() == KeyCode.RIGHT)
              {
                  
                  a.keyRight();
-                 a.score(b);
-                 a.makeFrame(t,b);
+                 a.score(b2048);
+                 a.makeFrame(t,b2048);
              }
             else if (event.getCode() == KeyCode.UP)
              {
                  
                  a.keyUp();
-                 a.score(b);
-                 a.makeFrame(t,b);
+                 a.score(b2048);
+                 a.makeFrame(t,b2048);
              }
             else if (event.getCode() == KeyCode.DOWN)
              {
                  
                  a.keyDown();
-                 a.score(b);
-                 a.makeFrame(t,b);
+                 a.score(b2048);
+                 a.makeFrame(t,b2048);
              }
             else
             {
@@ -151,7 +151,7 @@ public class ArcadeApp extends Application {
         //a = new App2048();
         //Testing the button from welcome page
         Scene start;
-        b1 = new BorderPane();
+        bWelcome = new BorderPane();
         HBox h = new HBox();
         
         app2048 = new Button("Play 2048");
@@ -162,41 +162,42 @@ public class ArcadeApp extends Application {
                                           "13783d5dbc5927e449cd075c2c52dc60.jpg");
         welcome.setFitHeight(300);
         welcome.setFitWidth(240);
-        b1.setCenter(welcome);
+        bWelcome.setCenter(welcome);
 	//b.setAlignment(h,Pos.CENTER);
-        b1.setBottom(h);
+        bWelcome.setBottom(h);
         
-        start = new Scene(b1,640,480);
+        start = new Scene(bWelcome,640,480);
+	//Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
         
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     Scene scene2048 = new Scene(b/*group*/, 640, 480);
+                     Scene scene2048 = new Scene(b2048/*group*/, 640, 480);
                      scene2048.setOnKeyPressed(keyHandler2048());
                      stage.setScene(scene2048);
                  }//handle
              });//setOnAction
         //Testing button from welcome page
-        b = new BorderPane();
+        b2048 = new BorderPane();
 
 	Button menuButton= new Button("Main Menu");
 
-         menuButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+                  @Override public void handle(ActionEvent e) {
                         //Scene  = new Scene(b/*group*/, 640, 480);
                         //scene2048.setOnKeyPressed(createKeyHandler());
                         stage.setScene(start);
                     }//handle
                 });//setOnAction
-	 b.setAlignment(menuButton, Pos.CENTER);
-	 b.setBottom(menuButton);
+	 b2048.setAlignment(menuButton, Pos.CENTER);
+	 b2048.setBottom(menuButton);
 	 
 	 
-        a.score(b);
+        a.score(b2048);
         //adding the tilepane to window
         a.addNewRandom();
         a.addNewRandom();
-        a.makeFrame(t,b);
+        a.makeFrame(t,b2048);
         
 	        
 	//r.setX(50);                                // 50px in the x direction (right)
