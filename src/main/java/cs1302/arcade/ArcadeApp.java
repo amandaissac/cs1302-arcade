@@ -73,7 +73,7 @@ public class ArcadeApp extends Application {
     */
     
     //THIS IS FOR THE ARCADEAPP
-    private EventHandler<? super KeyEvent> createKeyHandler() {
+    private EventHandler<? super KeyEvent> keyHandler2048() {
         return event -> {
             System.out.println(event);
             if (event.getCode() == KeyCode.LEFT)
@@ -171,7 +171,7 @@ public class ArcadeApp extends Application {
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      Scene scene2048 = new Scene(b/*group*/, 640, 480);
-                     scene2048.setOnKeyPressed(createKeyHandler());
+                     scene2048.setOnKeyPressed(keyHandler2048());
                      stage.setScene(scene2048);
                  }//handle
              });//setOnAction
