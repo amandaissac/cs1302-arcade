@@ -117,12 +117,21 @@ public class App2048{
 	//only executes if it is given to be true
 	if(gameWon){
 	    //creating gameOver image
-	    ImageView gameOverImage= new ImageView("https://i-h2.pinimg.com/564x/d8/be/5d/d8be5d3c73"+
+	    ImageView youWin= new ImageView("https://i-h2.pinimg.com/564x/d8/be/5d/d8be5d3c73"+
 						   "2bee3b25448807c628d681.jpg");
-	    gameOverImage.setFitHeight(200);
-	    gameOverImage.setFitWidth(200);
-	    b.setCenter(gameOverImage);
+	    youWin.setFitHeight(200);
+	    youWin.setFitWidth(200);
+	    b.setCenter(youWin);
 	}
+	//bascailly if board is full (true) && there are no more moves, it will return you lost 
+	else if(boardIsFull()&&(!hasMoves())){
+	    ImageView youLose= new ImageView("https://i.pinimg.com/564x/df/f7/83/dff783d00d3d2"+
+					     "bb93c37c9204b951b71.jpg");
+	    youLose.setFitHeight(200);
+	    youLose.setFitWidth(200);
+	    b.setCenter(youLose);
+	}
+	//if you have not won or lost, then execute this
 	else{
 	    //added tilpane to borderpane
 	    b.setCenter(t);
@@ -161,6 +170,7 @@ public class App2048{
          }
        }
         int choice= rgn.nextInt(blankSpacesX.size()); //using blankSpacesX b/c same size as y
+	//System.out.println(choice); //***********************************************************
         int changingX=blankSpacesX.get(choice); //getting the x coordinate of the random spot
         int changingY=blankSpacesY.get(choice); //getting the y coordinate of the random spot
 
@@ -366,7 +376,7 @@ public class App2048{
                              //this also only executes if it already has not been pushed up before.
                              board[row][tempY]*=2; //basically the value doubles
                              if(gameWon==false){
-				 score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILES MERGE
+				 score = score+ board[row][tempY];// ADDING TO SCORE WHEN TILE MERGE
 			     }
 			     alreadyCombined[tempY]=true;
                              board[row][col]=0; //setting the previous one back to 0.
@@ -402,5 +412,101 @@ public class App2048{
         topVBox.getChildren().addAll(title,rules,score,emptyLine);
         topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
         b.setTop(topVBox);
+    }
+
+    /**
+     * This method is used to see if the board is full.
+     *@return true if it is full, else returns false
+     */
+    public boolean boardIsFull(){
+	//using a nested for loop to go through each value of the array to see if 0.
+	for(int row=0;row<4;row++){
+	    for(int col=0;col<4;col++){
+		if(board[row][col]==0){
+		    return false;
+		}
+	    }
+	}
+	return true; //else it returns true
+    }
+    
+    /**
+     *This method is only used if the board is full. It checks to see if there can be any more moves.
+     *@return true if the board still can have moves.
+     */
+    /*
+    public boolean hasMoves(){
+	boolean left=true;
+	boolean right=true;
+	boolean up=true;
+	boolean down=true;
+	for(int x=0;x<4;x++){
+	    for(int y=0;y<4;y++){
+		//looking at tile to the left
+		if(x!=0){
+		    if(board[x][y]==board[x-1][y]){
+			left=true;
+		    }
+		    else{
+			left=false;
+		    }
+		}
+		if(x!=4){
+		    if(board[x][y]==board[x+1][y]){
+			right=true;
+		    }
+		    else{
+			right=false;
+		    }
+		}
+		if(y!=0){
+		    if(board[x][y]==board[x][y-1]){
+			up=true;
+		    }
+		    else{
+			up=false;
+		    }
+		}
+		if(y!=4){
+		    if(board[x][y]==board[x][y+1]){
+			down=true;
+		    }
+		    else{
+			down=false;
+		    }
+		}
+	    }
+	}
+	if((!right)&&(!left)&&(!up)&&(!down)){
+	    return false;
+	}
+	return true;
+    }
+   */
+    public boolean hasMoves(){
+	for(int row=0;row<4;row++){
+	    for(int col=0;col<4;col++){
+		if(row==0){
+		    if(col!=0){
+			//checking if the position in first row is equal to column before
+			if(board[row][col]==board[row][col-1]){
+			    return true;
+			}
+		    }
+		}
+		else{
+		    if(col!=0){
+			//would do same if x wasn't a 0.
+			if(board[row][col]==board[row][col-1]){
+			    return true;
+			}
+		    }
+		    if(board[row][col]==board[row-1][col]){
+			return true;
+		    }
+		}
+	    }
+	}
+	return false;
     }
 }//App2048
