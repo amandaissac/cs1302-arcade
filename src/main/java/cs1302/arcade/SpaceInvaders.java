@@ -7,6 +7,9 @@ public class SpaceInvaders{
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
     ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList to store bullets
 
+    public SpaceInvaders(){
+	//this is the constructor
+    }
     public void createEnemy(Group g){
 	for(int i=0;i<5;i++){
 	    ImageView enemy= new ImageView();
