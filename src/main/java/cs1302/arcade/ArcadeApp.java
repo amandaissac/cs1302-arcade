@@ -36,7 +36,8 @@ public class ArcadeApp extends Application {
     //Scene scene2048 = new Scene(b/*group*/, 640, 480);
     TilePane t= new TilePane();
     App2048 a = new App2048();;
-    Rectangle r = new Rectangle(20, 20); // some rectangle
+    Sprite r = new Sprite(50,50,100,100,"player");
+    //Rectangle r = new Rectangle(20, 20); // some rectangle
     /*
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -146,7 +147,7 @@ public class ArcadeApp extends Application {
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      Scene sceneSpace = new Scene(group, 640, 480);
-                     //group.setOnKeyPressed(keyHandlerSpace());
+                     group.setOnKeyPressed(keyHandlerSpace());
                      stage.setScene(sceneSpace);
                  }//handle
              });//setOnAction
@@ -184,7 +185,7 @@ public class ArcadeApp extends Application {
         r.setY(50);                                // 50ps in the y direction (down)
         group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        group.setOnKeyPressed(keyHandlerSpace()); // left-right key presses move the rectangle
+        //group.setOnKeyPressed(keyHandlerSpace()); // left-right key presses move the rectangle
         //welcome();
         //scene2048();
         //scene = new Scene(b/*group*/, 640, 480);
