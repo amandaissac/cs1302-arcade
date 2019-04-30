@@ -1,5 +1,5 @@
 package cs1302.arcade;
-import java.util.Random;
+0;136;0cimport java.util.Random;
 import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.application.Application;
@@ -36,8 +36,8 @@ public class ArcadeApp extends Application {
     //Scene scene2048 = new Scene(b/*group*/, 640, 480);
     TilePane t= new TilePane();
     App2048 a = new App2048();;
-    Sprite r = new Sprite(50,50,100,100,"player");
-    //Rectangle r = new Rectangle(20, 20); // some rectangle
+    Sprite r = new Sprite(50,50,20,20,"player");
+    // Rectangle r = new Rectangle(20, 20); // some rectangle
     /*
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -64,12 +64,12 @@ public class ArcadeApp extends Application {
     //REMEMBER TO CHANGE r to whatever the alien object is
     //r is the Rectangle object!!
     private EventHandler<? super KeyEvent> keyHandlerSpace() {
-	return event -> {
-	    System.out.println(event);
-	    if (event.getCode() == KeyCode.LEFT)  r.setX(r.getX() - 10.0);
-	    if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
-	    // TODO bounds checking
-	};
+        return event -> {
+            System.out.println(event);
+            if (event.getCode() == KeyCode.LEFT)  r.setX(r.getX() - 10.0);
+            if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
+            // TODO bounds checking
+        };
     } // createKeyHandler
     
     
@@ -147,7 +147,7 @@ public class ArcadeApp extends Application {
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      Scene sceneSpace = new Scene(group, 640, 480);
-                     group.setOnKeyPressed(keyHandlerSpace());
+                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
                      stage.setScene(sceneSpace);
                  }//handle
              });//setOnAction
