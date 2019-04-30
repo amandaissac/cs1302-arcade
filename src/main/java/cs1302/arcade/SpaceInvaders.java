@@ -12,15 +12,18 @@ public class SpaceInvaders{
 	//this is the constructor
     }
     public void createEnemy(Group g){
-	for(int i=0;i<5;i++){
-	    ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
+	for(int x=0;x<5;x++){
+	    
+	    for(int i=0;i<12;i++){
+		ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
 						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
-	    enemy.setX(90+i*100);
-	    enemy.setY(150);
-	    enemy.setFitHeight(30);
-	    enemy.setFitWidth(30);
-	    g.getChildren().add(enemy);
-	    listEnemy.add(enemy); //adding enemy into the list containing enemy
+		enemy.setX(12+i*17);
+		enemy.setY(50+x*20);
+		enemy.setFitHeight(10);
+		enemy.setFitWidth(10);
+		g.getChildren().add(enemy);
+		listEnemy.add(enemy); //adding enemy into the list containing enemy
+	    }
 	}
     }
     /*
