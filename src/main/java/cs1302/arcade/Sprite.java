@@ -17,9 +17,9 @@ public class Sprite extends ImageView{
             image = new ImageView("https://i.pinimg.com/564x/34/7d/80/347d80a7c7cc0faf3a507a04a8d50433.jpg");
         }
         else{
-            //image = new ImageView("
+            image = new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecbf81a49b3f.jpg");
         }
     }
-    
+    x
     
 }

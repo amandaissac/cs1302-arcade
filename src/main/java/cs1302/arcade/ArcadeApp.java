@@ -25,7 +25,7 @@ import javafx.event.ActionEvent;
 
 public class ArcadeApp extends Application {
 
-    //Group group = new Group();           // main container
+    Group group = new Group();           // main container
     Random rgn = new Random();// random number generator
     BorderPane b2048;//2048
     //Scene start;
@@ -112,32 +112,7 @@ public class ArcadeApp extends Application {
              // TODO bounds checking
         };
 	} // createKeyHandler
-    /*
-    public void welcome(){
-        Scene start;
-        b1 = new BorderPane();
-        HBox h = new HBox();
-        
-        app2048 = new Button("Play 2048");
-        tetris = new Button("Play Tetris");
-        h.getChildren().addAll(app2048,tetris);
-        ImageView welcome = new ImageView("https://i-h2.pinimg.com/564x/13/78/3d/"+
-                                          "13783d5dbc5927e449cd075c2c52dc60.jpg");
-        b1.setCenter(welcome);
-        b1.setBottom(h);
-        
-        start = new Scene(b1,640,480);
-        stage.setScene(start);
-    }
-    public void scene2048(){
-        app2048.setOnAction(new EventHandler<ActionEvent>() {
-                 @Override public void handle(ActionEvent e) {
-                     Scene app2048 = new Scene(b, 640, 480);
-                     stage.setScene(app2048);
-                 }//handle
-             });//setOnAction
-        //scene = new Scene(b/, 640, 480);
-    }*/
+   
     /** {@inheritdoc} */
     
     @Override
@@ -155,9 +130,9 @@ public class ArcadeApp extends Application {
         HBox h = new HBox();
         
         app2048 = new Button("Play 2048");
-        tetris = new Button("Play Tetris");
-        h.getChildren().addAll(app2048,tetris);
-	h.setAlignment(Pos.CENTER);
+        space = new Button("Play Space Invaders");
+        h.getChildren().addAll(app2048,space);
+        h.setAlignment(Pos.CENTER);
         ImageView welcome = new ImageView("https://i-h2.pinimg.com/564x/13/78/3d/"+
                                           "13783d5dbc5927e449cd075c2c52dc60.jpg");
         welcome.setFitHeight(300);
@@ -169,19 +144,25 @@ public class ArcadeApp extends Application {
         start = new Scene(bWelcome,640,480);
 	//Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
-        
+        space.setOnAction(new EventHandler<ActionEvent>() {
+                 @Override public void handle(ActionEvent e) {
+                     Scene sceneSpace = new Scene(b2048/*group*/, 640, 480);
+                     scene2048.setOnKeyPressed(keyHandlerSpace());
+                     stage.setScene(sceneSpace);
+                 }//handle
+             });//setOnAction
+        //Making the action for the 2048 button
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     Scene scene2048 = new Scene(b2048/*group*/, 640, 480);
+                     Scene scene2048 = new Scene(group, 640, 480);
                      scene2048.setOnKeyPressed(keyHandler2048());
                      stage.setScene(scene2048);
                  }//handle
              });//setOnAction
         //Testing button from welcome page
         b2048 = new BorderPane();
-
-	Button menuButton= new Button("Main Menu");
-
+        //Making the the action for the menu button
+        Button menuButton= new Button("Main Menu");
         menuButton.setOnAction(new EventHandler<ActionEvent>() {
                   @Override public void handle(ActionEvent e) {
                         //Scene  = new Scene(b/*group*/, 640, 480);
@@ -199,9 +180,9 @@ public class ArcadeApp extends Application {
         a.addNewRandom();
         a.makeFrame(t,b2048);
         
-	        
-	//r.setX(50);                                // 50px in the x direction (right)
-        //r.setY(50);                                // 50ps in the y direction (down)
+	       
+        r.setX(50);                                // 50px in the x direction (right)
+        r.setY(50);                                // 50ps in the y direction (down)
         //group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
