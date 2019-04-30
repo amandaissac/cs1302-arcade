@@ -1,18 +1,20 @@
 package cs1302.arcade;
 import javafx.scene.Group;
 import java.util.ArrayList;
+import javafx.scene.image.Image; 
 import javafx.scene.image.ImageView;
 public class SpaceInvaders{
 
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
-    ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList to store bullets
+    ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList for bullets
 
     public SpaceInvaders(){
 	//this is the constructor
     }
     public void createEnemy(Group g){
 	for(int i=0;i<5;i++){
-	    ImageView enemy= new ImageView();
+	    ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
+						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
 	    enemy.setX(90+i*100);
 	    enemy.setY(150);
 	    enemy.setFitHeight(30);
