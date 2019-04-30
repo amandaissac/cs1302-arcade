@@ -1,16 +1,16 @@
-package cs1302.arcade;
-import javafx.scene.shape.Rectangle;
+package cs1302.arcade;import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.image.ImageView;
-public class Sprite extends ImageView{
+public class Sprite extends Rectangle{
     ImageView image;
     boolean alive = true;
     String type;
-    public Sprite(int x,int y,int height, int width,String type){
+    Rectangle r;
+    public Sprite(double x,double y,int height, int width,String type){
         //super(w,h,color);
         setX(x);
         setY(y);
-	this.type=type;
+        this.type=type;
 	
         if(type.equals("player")){
             image = new ImageView("https://i.pinimg.com/originals/4f/58/27/4f58272fa91d49ad60c22bf"+
@@ -26,7 +26,8 @@ public class Sprite extends ImageView{
 				 "f81a49b3f.jpg");
         }
 	image.setFitWidth(width);
-	image.setFitHeight(height); 
+	image.setFitHeight(height);
+    
     }
 
     /**
