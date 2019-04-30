@@ -28,4 +28,12 @@ public class Sprite extends ImageView{
 	image.setWidth(width);
 	image.setHeight(height); 
     }
+
+    /**
+     *This method gives the type of tje sprite.
+     *@return type of sprite
+     */
+    public String getType(){
+	return type; 
+    }
 }
