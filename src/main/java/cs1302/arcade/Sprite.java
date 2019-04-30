@@ -22,6 +22,8 @@ public class Sprite extends ImageView{
 				  "0433.jpg");
         }
         else{
+	    image= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecb"+
+				 "f81a49b3f.jpg");
         }
     }
 }
