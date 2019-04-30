@@ -6,7 +6,7 @@ public class Sprite extends ImageView{
     ImageView image;
     boolean alive = true;
     String type;
-    public Sprite(int x,int y,String type){
+    public Sprite(int x,int y,int height, int width,String type){
         //super(w,h,color);
         setX(x);
         setY(y);
@@ -25,5 +25,7 @@ public class Sprite extends ImageView{
 	    image= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecb"+
 				 "f81a49b3f.jpg");
         }
+	image.setWidth(width);
+	image.setHeight(height); 
     }
 }
