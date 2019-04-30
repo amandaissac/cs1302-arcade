@@ -1,5 +1,5 @@
 package cs1302.arcade;
-0;136;0cimport java.util.Random;
+import java.util.Random;
 import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.application.Application;
