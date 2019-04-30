@@ -1,5 +1,4 @@
 package cs1302.arcade;
-
 import java.util.Random;
 import java.util.ArrayList;
 import javafx.geometry.Pos;
@@ -33,7 +32,7 @@ public class ArcadeApp extends Application {
     BorderPane bWelcome;//Welcome
     //Scene scene;
     Button app2048;
-    Button tetris;
+    Button space;
     //Scene scene2048 = new Scene(b/*group*/, 640, 480);
     TilePane t= new TilePane();
     App2048 a = new App2048();;
@@ -146,15 +145,15 @@ public class ArcadeApp extends Application {
         stage.setScene(start);
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     Scene sceneSpace = new Scene(b2048/*group*/, 640, 480);
-                     scene2048.setOnKeyPressed(keyHandlerSpace());
+                     Scene sceneSpace = new Scene(group, 640, 480);
+                     //group.setOnKeyPressed(keyHandlerSpace());
                      stage.setScene(sceneSpace);
                  }//handle
              });//setOnAction
         //Making the action for the 2048 button
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     Scene scene2048 = new Scene(group, 640, 480);
+                     Scene scene2048 = new Scene(b2048, 640, 480);
                      scene2048.setOnKeyPressed(keyHandler2048());
                      stage.setScene(scene2048);
                  }//handle
@@ -183,9 +182,9 @@ public class ArcadeApp extends Application {
 	       
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(50);                                // 50ps in the y direction (down)
-        //group.getChildren().add(r);                // add to main container
+        group.getChildren().add(r);                // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        //group.setOnKeyPressed(createKeyHandler()); // left-right key presses move the rectangle
+        group.setOnKeyPressed(keyHandlerSpace()); // left-right key presses move the rectangle
         //welcome();
         //scene2048();
         //scene = new Scene(b/*group*/, 640, 480);
