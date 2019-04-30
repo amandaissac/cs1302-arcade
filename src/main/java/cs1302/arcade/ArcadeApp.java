@@ -37,6 +37,7 @@ public class ArcadeApp extends Application {
     //Scene scene2048 = new Scene(b/*group*/, 640, 480);
     TilePane t= new TilePane();
     App2048 a = new App2048();;
+    SpaceInvaders s = new SpaceInvaders();
     ImageView r;
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
@@ -130,7 +131,7 @@ public class ArcadeApp extends Application {
          * (rectangle) in a group.
          */
         //a = new App2048();
-        r = new ImageView("https://i.pinimg.com/564x/34/7d/80/347d80a7c7cc0faf3a507a04a8d50433.jpg");
+        r = new ImageView("https://i.pinimg.com/564x/4f/58/27/4f58272fa91d49ad60c22bf49b94f3fb.jpg");
     r.setFitWidth(20);
     r.setFitHeight(20);
         //Testing the button from welcome page
@@ -153,10 +154,11 @@ public class ArcadeApp extends Application {
         start = new Scene(bWelcome,640,480);
 	//Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
+        s.createEnemy(group);
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      r.setX(50);                                // 50px in the x direction (right)
-                     r.setY(50);                                // 50ps in the y direction (down)
+                     r.setY(300);                                // 50ps in the y direction (down)
                      group.getChildren().add(r);
                      Scene sceneSpace = new Scene(group, 640, 480);
                       
