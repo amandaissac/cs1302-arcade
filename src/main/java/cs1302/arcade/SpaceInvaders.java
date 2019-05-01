@@ -131,6 +131,12 @@ public class SpaceInvaders{
     }
     public void updateBull(ImageView bullet){
 	bullet.setY(bullet.getY()-3);
+	/*
+	for(int i=0;i<listEnemy.size();i++){
+	    ImageView enemy= listEnemy.get(i);
+	    group.removeIf(n -> bullet.getBoundsInParent().intersects(enemy.getBoundsInParent()));
+	}
+	*/
     }
     //**********************************************
     
