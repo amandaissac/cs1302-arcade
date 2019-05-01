@@ -12,19 +12,53 @@ public class SpaceInvaders{
 	//this is the constructor
     }
     public void createEnemy(Group g){
-	for(int x=0;x<5;x++){
-	    
-	    for(int i=0;i<12;i++){
-		ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
+        for(int x=0;x<5;x++){
+            
+            for(int i=0;i<12;i++){
+                ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
 						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
-		enemy.setX(12+i*17);
-		enemy.setY(50+x*20);
-		enemy.setFitHeight(10);
-		enemy.setFitWidth(10);
-		g.getChildren().add(enemy);
-		listEnemy.add(enemy); //adding enemy into the list containing enemy
-	    }
-	}
+                enemy.setX(12+i*17);
+                enemy.setY(50+x*20);
+                enemy.setFitHeight(10);
+                enemy.setFitWidth(10);
+                g.getChildren().add(enemy);
+                listEnemy.add(enemy); //adding enemy into the list containing enemy
+            }
+        }
+    }
+    public void alienMovement(){
+        EventHandler<ActionEvent> handler = event -> {
+            System.out.println(LocalTime.now());
+            //updateX();
+            while(listEnemy.get(12)<330){
+                updateX(1);
+                //make down method
+            }
+            while(listEnemy.get(0)>5){
+                updateX(2);
+                //down method
+            }
+        }
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+        
+    }
+    public void updateX(int count){
+        if(count%2==0){
+            
+            for(int i=0;i<listEnemy.size();i++){
+                listEnemy.get(i).setX(listEnemy.getX()+(count*5));
+            }
+        }
+        else{
+            //for left
+            for(int i=0;i<listEnemy.size();i++){
+                listEnemy.get(i).setX(listEnemy.getX()-5);
+            }
+        }
     }
     /*
     //this is to run it smooth; I think it should be in the start method
