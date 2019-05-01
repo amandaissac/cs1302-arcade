@@ -40,7 +40,7 @@ public class SpaceInvaders{
         }
     }
     
-    //AMANDA's PART ***********************************************
+    // ***********************************************
     public void setCountX(int x){
 	countX=x;
     }
@@ -83,7 +83,23 @@ public class SpaceInvaders{
 	    }
 	}
     }
-    
+
+    //NOW FOR THE Y MOVEMENT
+    public void alienMovementY(){
+          EventHandler<ActionEvent> handler = event -> {
+	      updateY(); //will go down
+          };
+          KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.5), handler);
+          Timeline timeline = new Timeline();
+          timeline.setCycleCount(6);
+          timeline.getKeyFrames().add(keyFrame);
+          timeline.play();
+      }
+     public void updateY(){
+	 for(int i=0;i<listEnemy.size();i++){
+	     listEnemy.get(i).setY(listEnemy.get(i).getY()+10);
+	 }
+      }
     
     /*
     public void alienMovement(){
