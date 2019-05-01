@@ -65,7 +65,7 @@ public class SpaceInvaders{
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
 	Timeline timeline = new Timeline();
-	timeline.setCycleCount(Timeline.INDEFINITE);
+	timeline.setCycleCount(57);
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
@@ -89,9 +89,9 @@ public class SpaceInvaders{
           EventHandler<ActionEvent> handler = event -> {
 	      updateY(); //will go down
           };
-          KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.5), handler);
+          KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.6), handler);
           Timeline timeline = new Timeline();
-          timeline.setCycleCount(6);
+          timeline.setCycleCount(15);
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
       }
@@ -100,6 +100,9 @@ public class SpaceInvaders{
 	     listEnemy.get(i).setY(listEnemy.get(i).getY()+10);
 	 }
      }
+
+    /*
+    //FOR SPACE BAR ********************************************
     public int getXCoord(ImageView sprite){
       return sprite.getX();
     }
@@ -126,50 +129,10 @@ public class SpaceInvaders{
         }
         
     }
-    
-    /*
-    public void alienMovement(){
-        EventHandler<ActionEvent> handler = event -> {
-            System.out.println(LocalTime.now());
-            //updateX();
-            int count=2;
-            if(listEnemy.get(12).getX()==330){
-                //updateX(1);
-                count=1;
-                //make down method
-            }
-            else if(listEnemy.get(0).getX()==5){
-                //updateX(2);
-                count=2;
-                //down method
-            }
-            else{
-                // updateX(count);
-            }
-            updateX(count);
-        };
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-        
-    }
-    public void updateX(int count){
-        if(count%2==0){
-            
-            for(int i=0;i<listEnemy.size();i++){
-                listEnemy.get(i).setX(listEnemy.get(i).getX()+(count*5));
-            }
-        }
-        else{
-            //for left
-            for(int i=0;i<listEnemy.size();i++){
-                listEnemy.get(i).setX(listEnemy.get(i).getX()-5);
-            }
-        }
-    }
+    //**********************************************
     */
+
+    
     
     /*
     //this is to run it smooth; I think it should be in the start method
