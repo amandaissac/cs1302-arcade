@@ -26,7 +26,19 @@ public void updateBull(ImageView player,ImageView bullet){
     }
     
 }
-public void shoot(){
-
+*/
+/*
+public boolean isAlive(ImageView sprite, ImageView bullet){
+    boolean alive = true;
+    if(bullet.getBoundsInParent().intersects(enemy.getBoundsInParent())){
+        alive = false;
+    }
+    return alive;
+}
+//what happens if intersects returns false
+public void removeAlien(){
+    if(isAlive()==false){
+        listEnemies.remove();//idk how to find which alien in the arraylist intersected with the bullet??
+    }
 }
 */
