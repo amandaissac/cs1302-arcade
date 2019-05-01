@@ -30,7 +30,7 @@ public class SpaceInvaders{
             for(int i=0;i<12;i++){
                 ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
 						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
-                enemy.setX(10+i*17);
+                enemy.setX(13+i*17);
                 enemy.setY(50+x*20);
                 enemy.setFitHeight(10);
                 enemy.setFitWidth(10);
@@ -40,7 +40,7 @@ public class SpaceInvaders{
         }
     }
     
-    //AMANDA's PART ***********************************************
+    // ***********************************************
     public void setCountX(int x){
 	countX=x;
     }
@@ -49,17 +49,18 @@ public class SpaceInvaders{
     }
     public void alienMovementX(){
 	EventHandler<ActionEvent> handler = event -> {
-	    if(getCountX()==0){
-		for(int i=0;i<3;i++){
-		    updateX(0); //will go right
-		}
-		setCountX(1);
+	    if(getCountX()<=3){
+		updateX(0); //will go right
+		setCountX(getCountX()+1); //setting it one more
 	    }
-	    else{
-		for(int i=0;i<3;i++){
-		    updateX(1); //will shift to left
+	    if((getCountX()>3)&&(getCountX()<=7)){
+		updateX(1); //will shift to left
+		if(getCountX()==7){
+		    setCountX(0);
 		}
-		setCountX(0);
+		else{
+		    setCountX(getCountX()+1); //setting it to one more until it is 5
+		}
 	    }
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
@@ -72,17 +73,33 @@ public class SpaceInvaders{
 	//if the count is 0, then it will shift to right
 	if(count==0){
 	    for(int i=0;i<listEnemy.size();i++){
-		listEnemy.get(i).setX(listEnemy.get(i).getX()+10);
+		listEnemy.get(i).setX(listEnemy.get(i).getX()+7);
 	    }
 	}
 	else{
 	    //for left; only if it is 1
 	    for(int i=0;i<listEnemy.size();i++){
-		listEnemy.get(i).setX(listEnemy.get(i).getX()-10);
+		listEnemy.get(i).setX(listEnemy.get(i).getX()-7);
 	    }
 	}
     }
-    
+
+    //NOW FOR THE Y MOVEMENT
+    public void alienMovementY(){
+          EventHandler<ActionEvent> handler = event -> {
+	      updateY(); //will go down
+          };
+          KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.5), handler);
+          Timeline timeline = new Timeline();
+          timeline.setCycleCount(6);
+          timeline.getKeyFrames().add(keyFrame);
+          timeline.play();
+      }
+     public void updateY(){
+	 for(int i=0;i<listEnemy.size();i++){
+	     listEnemy.get(i).setY(listEnemy.get(i).getY()+10);
+	 }
+      }
     
     /*
     public void alienMovement(){
