@@ -22,7 +22,7 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
-
+import javafx.scene.paint.Color;
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -39,7 +39,7 @@ public class ArcadeApp extends Application {
     App2048 a = new App2048();;
     SpaceInvaders s = new SpaceInvaders();
     ImageView r;
-    ImageView bullet;
+    //ImageView bullet= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecbf81a49b3f.jpg");
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
     //r.setImage(sprite.getImage());
@@ -77,7 +77,9 @@ public class ArcadeApp extends Application {
             if (event.getCode() == KeyCode.LEFT)  r.setX(r.getX() - 10.0);
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
             //make method that animates bullets
-            if (event.getCode() == KeyCode.SPACE) s.bulletAnim(r,bullet));
+            if (event.getCode() == KeyCode.SPACE){
+		s.bulletAnim(r,group); //r is player
+	    }
 // TODO bounds checking
         };
     } // createKeyHandler
@@ -154,7 +156,7 @@ public class ArcadeApp extends Application {
 	//b.setAlignment(h,Pos.CENTER);
         bWelcome.setBottom(h);
         
-        start = new Scene(bWelcome,640,480);
+        start = new Scene(bWelcome,640,480, Color.DEEPSKYBLUE);
 	//Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
         s.createEnemy(group);
@@ -174,7 +176,7 @@ public class ArcadeApp extends Application {
         //Making the action for the 2048 button
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
-                     Scene scene2048 = new Scene(b2048, 640, 480);
+                     Scene scene2048 = new Scene(b2048, 640, 480,Color.LIGHTGREY);
                      scene2048.setOnKeyPressed(keyHandler2048());
                      stage.setScene(scene2048);
                  }//handle

@@ -101,36 +101,39 @@ public class SpaceInvaders{
 	 }
      }
 
-    /*
+    
     //FOR SPACE BAR ********************************************
-    public int getXCoord(ImageView sprite){
+    public double getXCoord(ImageView sprite){
       return sprite.getX();
     }
-    public int getYCoord(ImageView sprite){
+    public double getYCoord(ImageView sprite){
         return sprite.getY();
     }
-    public void bulletAnim(ImageView player,ImageView bullet){
-        EventHandler<ActionEvent> handler = event -> {
-            updateBull(player,bullet);
-            
+    public void bulletAnim(ImageView player,Group g){
+	ImageView bullet= new ImageView(new Image("https://i.pinimg.com/564x/8a/34/04/8a340499a281"+
+						  "be7b9166ecbf81a49b3f.jpg"));
+	bullet.setFitHeight(5);
+	bullet.setFitWidth(5);
+	g.getChildren().add(bullet);
+	listBullet.add(bullet); //adding the newly made bullet into ArrayList of bullets
+	//setting original starting place of bullet
+	bullet.setX(getXCoord(player)+5);
+	bullet.setY(getYCoord(player));
+        EventHandler<ActionEvent> handler = event -> { 
+	    updateBull(bullet);
         };
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), handler);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
       
     }
-    public void updateBull(ImageView player,ImageView bullet){
-        bullet.setX(getXCoord(player));
-        bullet.setY(getYCoord(player));
-        for(int i=0;i<listEnemy.size();i++){
-            bullet.setX(bullet.getY()+10);
-        }
-        
+    public void updateBull(ImageView bullet){
+	bullet.setY(bullet.getY()-3);
     }
     //**********************************************
-    */
+    
 
     
     
