@@ -39,6 +39,7 @@ public class ArcadeApp extends Application {
     App2048 a = new App2048();;
     SpaceInvaders s = new SpaceInvaders();
     ImageView r;
+    ImageView bullet;
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
     //r.setImage(sprite.getImage());
@@ -75,7 +76,9 @@ public class ArcadeApp extends Application {
             System.out.println(event);
             if (event.getCode() == KeyCode.LEFT)  r.setX(r.getX() - 10.0);
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
-            // TODO bounds checking
+            //make method that animates bullets
+            //if (event.getCode() == KeyCode.SPACE) s.bulletAnim(r,bullet));
+// TODO bounds checking
         };
     } // createKeyHandler
     
