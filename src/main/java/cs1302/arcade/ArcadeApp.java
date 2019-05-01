@@ -155,7 +155,7 @@ public class ArcadeApp extends Application {
 	//Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
         s.createEnemy(group);
-        s.alienMovement();
+        s.alienMovementX();
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      r.setX(50);                                // 50px in the x direction (right)

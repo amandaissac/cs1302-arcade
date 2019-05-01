@@ -15,17 +15,22 @@ public class SpaceInvaders{
 
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
     ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList for bullets
+    
+    int countX=0;
+    int countY=0;
 
     public SpaceInvaders(){
 	//this is the constructor
     }
+
+    
     public void createEnemy(Group g){
         for(int x=0;x<5;x++){
             
             for(int i=0;i<12;i++){
                 ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
 						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
-                enemy.setX(12+i*17);
+                enemy.setX(10+i*17);
                 enemy.setY(50+x*20);
                 enemy.setFitHeight(10);
                 enemy.setFitWidth(10);
@@ -34,6 +39,52 @@ public class SpaceInvaders{
             }
         }
     }
+    
+    //AMANDA's PART ***********************************************
+    public void setCountX(int x){
+	countX=x;
+    }
+    public int getCountX(){
+	return countX;
+    }
+    public void alienMovementX(){
+	EventHandler<ActionEvent> handler = event -> {
+	    if(getCountX()==0){
+		for(int i=0;i<3;i++){
+		    updateX(0); //will go right
+		}
+		setCountX(1);
+	    }
+	    else{
+		for(int i=0;i<3;i++){
+		    updateX(1); //will shift to left
+		}
+		setCountX(0);
+	    }
+	};
+	KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
+	Timeline timeline = new Timeline();
+	timeline.setCycleCount(Timeline.INDEFINITE);
+	timeline.getKeyFrames().add(keyFrame);
+	timeline.play();
+    }
+    public void updateX(int count){
+	//if the count is 0, then it will shift to right
+	if(count==0){
+	    for(int i=0;i<listEnemy.size();i++){
+		listEnemy.get(i).setX(listEnemy.get(i).getX()+10);
+	    }
+	}
+	else{
+	    //for left; only if it is 1
+	    for(int i=0;i<listEnemy.size();i++){
+		listEnemy.get(i).setX(listEnemy.get(i).getX()-10);
+	    }
+	}
+    }
+    
+    
+    /*
     public void alienMovement(){
         EventHandler<ActionEvent> handler = event -> {
             System.out.println(LocalTime.now());
@@ -75,6 +126,8 @@ public class SpaceInvaders{
             }
         }
     }
+    */
+    
     /*
     //this is to run it smooth; I think it should be in the start method
     AnimationTime timer =new AnimationTimer(){
