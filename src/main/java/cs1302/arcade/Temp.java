@@ -1,3 +1,4 @@
+/*
 boolean alive = true;
 public int getXCoord(ImageView sprite){
     return sprite.getX();
@@ -28,3 +29,4 @@ public void updateBull(ImageView player,ImageView bullet){
 public void shoot(){
 
 }
+*/
