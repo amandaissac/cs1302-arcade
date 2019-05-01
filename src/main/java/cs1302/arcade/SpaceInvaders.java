@@ -3,6 +3,14 @@ import javafx.scene.Group;
 import java.util.ArrayList;
 import javafx.scene.image.Image; 
 import javafx.scene.image.ImageView;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
+import javafx.animation.Animation;
+import java.time.LocalTime;
+
 public class SpaceInvaders{
 
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
@@ -30,15 +38,22 @@ public class SpaceInvaders{
         EventHandler<ActionEvent> handler = event -> {
             System.out.println(LocalTime.now());
             //updateX();
-            while(listEnemy.get(12)<330){
-                updateX(1);
+            int count=2;
+            if(listEnemy.get(12).getX()==330){
+                //updateX(1);
+                count=1;
                 //make down method
             }
-            while(listEnemy.get(0)>5){
-                updateX(2);
+            else if(listEnemy.get(0).getX()==5){
+                //updateX(2);
+                count=2;
                 //down method
             }
-        }
+            else{
+                // updateX(count);
+            }
+            updateX(count);
+        };
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -50,13 +65,13 @@ public class SpaceInvaders{
         if(count%2==0){
             
             for(int i=0;i<listEnemy.size();i++){
-                listEnemy.get(i).setX(listEnemy.getX()+(count*5));
+                listEnemy.get(i).setX(listEnemy.get(i).getX()+(count*5));
             }
         }
         else{
             //for left
             for(int i=0;i<listEnemy.size();i++){
-                listEnemy.get(i).setX(listEnemy.getX()-5);
+                listEnemy.get(i).setX(listEnemy.get(i).getX()-5);
             }
         }
     }
