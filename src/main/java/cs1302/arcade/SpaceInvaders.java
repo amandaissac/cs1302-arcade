@@ -209,13 +209,16 @@ public class SpaceInvaders{
                          bullet.setY(0);
                          if(i>36){
                              setScore(getScore()+10);
+			     System.out.println(getScore());
                          }
                          else if(i>12){
                              setScore(getScore()+20);
+			     System.out.println(getScore());
                          }
                          else{
                              //the first row is worth 40
                              setScore(getScore()+20);
+			     System.out.println(getScore());
                          }
                      }
                  }
