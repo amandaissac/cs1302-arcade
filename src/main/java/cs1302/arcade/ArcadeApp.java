@@ -168,22 +168,21 @@ public class ArcadeApp extends Application {
         s.alienMovementY();
         //s.enemyDeath();
 
+        int actualScore  = s.getScore();
+        String scoreString = "Score: "+ s.getScore();
+        Label score =new Label(scoreString);
        
         space.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     //HBox hSpace =new HBox();
                     Label name =new Label("Space Invaders");
-                    Label intro = new Label("Use the arrow keys to move \n"
-                                               +"left and right. Spacebar is to shoot!");
-                    String scoreString = "Score: "+ s.getScore();
-                    Label score =new Label(scoreString);
+                    Label intro = new Label("Use the arrow keys to move");
+                    Label intro2 = new Label("left and right. Spacebar is to shoot!");
+                    
                     r.setX(50);                                // 50px in the x direction (right)
-                    r.setY(300);                    // 50ps in the y direction (down)
-                    //hSpace.setAlignment(Pos.CENTER);
-                    // hSpace.setHgrow(gameName, Priority.ALWAYS);
-                    //hSpace.setHgrow(score,Priority.ALWAYS); 
-                    //hSpace.getChildren().addAll(gameName,score);
-                    VBox vbox = new VBox(name,intro,score, menuButton);
+                    r.setY(300);                               // 50ps in the y direction (down)
+                    
+                    VBox vbox = new VBox(name,intro,intro2,score, menuButton);
                     vbox.setAlignment(Pos.CENTER);
                     group.getChildren().addAll(/*hSpace,r,menuButton*/vbox,r);
                    
