@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import javafx.animation.Animation;
 import java.time.LocalTime;
+import javafx.application.Platform;
 
 public class SpaceInvaders{
 
@@ -18,12 +19,11 @@ public class SpaceInvaders{
     
     int countX=0;
     int countY=0;
+    int score=0;
 
     public SpaceInvaders(){
 	//this is the constructor
-    }
-
-    
+    }    
     public void createEnemy(Group g){
         for(int x=0;x<5;x++){
             
@@ -34,9 +34,10 @@ public class SpaceInvaders{
                 enemy.setY(50+x*20);
                 enemy.setFitHeight(10);
                 enemy.setFitWidth(10);
-                if(listBullet.size()!=0){
+		/*
+		if(listBullet.size()!=0){
                 for(int j=0;j<listBullet.size();j++){
-                    if(!(enemy.getBoundsInParent().intersects(listBullet.get(j).getBoundsInParent()))){
+                     if(!(enemy.getBoundsInParent().intersects(listBullet.get(j).getBoundsInParent()))){
                         g.getChildren().add(enemy);
                         listEnemy.add(enemy); //adding enemy into the list containing enemy
                   }
@@ -44,9 +45,10 @@ public class SpaceInvaders{
                 }
                 }
                 else{
-                    //g.getChildren().add(enemy);
-                    //listEnemy.add(enemy);
-                }
+		*/
+                g.getChildren().add(enemy);
+                listEnemy.add(enemy);
+                //}
             }
         }
     }
@@ -141,19 +143,43 @@ public class SpaceInvaders{
     }
     public void updateBull(ImageView bullet){
 	bullet.setY(bullet.getY()-3);
-	/*
-	for(int i=0;i<listEnemy.size();i++){
-	    ImageView enemy= listEnemy.get(i);
-	    group.getChildren().stream()
-		.removeIf(n -> bullet.getBoundsInParent().intersects(enemy.getBoundsInParent()));
-	}
-	*/
-	
-	
+	enemyDeath(bullet);
+    }
+    public int getScore(){
+	return score; 
+    }
+    public void enemyDeath(ImageView bullet){
+	//EventHandler<ActionEvent> handler = event -> {
+	    Runnable r = () -> {
+		for(int i=0;i<listEnemy.size();i++){
+		    ImageView enemy=listEnemy.get(i);
+		    if(enemy.getBoundsInParent().intersects(bullet.getBoundsInParent())){
+			listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
+								"fff63515a436df1e0799bf823abc07d.jpg")));
+			bullet.setX(0);
+			bullet.setY(0);
+			if(i>36){
+			    score=score+10;
+			}
+			else if(i>12){
+			    score=score+20;
+			}
+			else{
+			    //the first row is worth 40
+			    score=score+40;
+			}
+		    }
+		}
+	    };
+	    Platform.runLater(r);
+	    //Thread t = new Thread(r);
+	    //t.setDaemon(true);
+	    //t.start();
+	    //};
     }
     //**********************************************
     
-
+    
     
     
     /*

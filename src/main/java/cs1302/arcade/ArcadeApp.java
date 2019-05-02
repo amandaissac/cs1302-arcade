@@ -162,6 +162,7 @@ public class ArcadeApp extends Application {
         s.createEnemy(group);
         s.alienMovementX();
 	s.alienMovementY();
+	//s.enemyDeath();
         space.setOnAction(new EventHandler<ActionEvent>() {
                  @Override public void handle(ActionEvent e) {
                      r.setX(50);                                // 50px in the x direction (right)
