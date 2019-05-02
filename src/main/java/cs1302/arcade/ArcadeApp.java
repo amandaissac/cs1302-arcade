@@ -79,7 +79,7 @@ public class ArcadeApp extends Application {
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
             //make method that animates bullets
             if (event.getCode() == KeyCode.SPACE){
-                s.bulletAnim(r,group,"player"); //r is player
+                s.bulletAnim(r,group); //r is player
 	    }
 // TODO bounds checking
         };

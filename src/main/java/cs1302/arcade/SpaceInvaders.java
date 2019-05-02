@@ -125,7 +125,8 @@ public class SpaceInvaders{
     public double getYCoord(ImageView sprite){
         return sprite.getY();
     }
-    public void bulletAnim(ImageView player,Group g, String playerType){
+    
+    public void bulletAnim(ImageView player,Group g){
 	ImageView bullet= new ImageView(new Image("https://i.pinimg.com/564x/8a/34/04/8a340499a281"+
 						  "be7b9166ecbf81a49b3f.jpg"));
 	bullet.setFitHeight(5);
@@ -136,7 +137,7 @@ public class SpaceInvaders{
 	bullet.setX(getXCoord(player)+5);
 	bullet.setY(getYCoord(player));
         EventHandler<ActionEvent> handler = event -> { 
-	    updateBull(bullet,g,playerType);
+	    updateBull(bullet,g);
         };
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), handler);
         Timeline timeline = new Timeline();
@@ -145,14 +146,16 @@ public class SpaceInvaders{
         timeline.play();
       
     }
-    public void updateBull(ImageView bullet,Group g, String playerType){
+    public void updateBull(ImageView bullet,Group g){
+	/*
 	if(playerType.equals("enemy")){ //if the playerType is a enemy, then bullets will go down
-		bullet.setY(bullet.getY()-3);
+		bullet.setY(bullet.getY()+3);
 	}
 	else{ //if the type is a player
+	*/
 	    bullet.setY(bullet.getY()-3);
-	    enemyDeath(bullet,g);
-	}
+	    //}
+	enemyDeath(bullet,g);
     }
     public int getScore(){
 	return score; 
@@ -162,8 +165,8 @@ public class SpaceInvaders{
 	    Runnable r = () -> {
 		for(int i=0;i<listEnemyStatus.size();i++){
 		    ImageView enemy=listEnemy.get(i);
-		    boolean alive=listEnemyStatus.get(i).equals("alive");
-		    if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))&(alive)){
+		    //boolean alive=listEnemyStatus.get(i).equals("alive");
+		    if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))){
 			group.getChildren().remove(i);
 			listEnemyStatus.set(i,"dead");//need to see that status array to dead
 			//listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
