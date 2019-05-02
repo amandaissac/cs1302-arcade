@@ -80,7 +80,7 @@ public class ArcadeApp extends Application {
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
             //make method that animates bullets
             if (event.getCode() == KeyCode.SPACE){
-                s.bulletAnim(r,group); //r is player
+                s.bulletAnim(r,group,"player"); //r is player
 	    }
 // TODO bounds checking
         };
@@ -178,7 +178,7 @@ public class ArcadeApp extends Application {
                     group.getChildren().add(r);
                     //bSpaceInv.setAlignment(gameName,Pos.CENTER);
                     //bSpaceInv.setTop(gameName);
-                    
+                    //bSpaceInv.getChildren().addAll(gameName, group);
                     //bSpaceInv.setCenter(group);
                     Scene sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
