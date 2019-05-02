@@ -16,6 +16,7 @@ public class SpaceInvaders{
 
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
     ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList for bullets
+    ArrayList<String> listEnemyStatus= new ArrayList<String>(); 
     
     int countX=0;
     int countY=0;
@@ -23,10 +24,13 @@ public class SpaceInvaders{
 
     public SpaceInvaders(){
 	//this is the constructor
-    }    
+    }
+    
     public void createEnemy(Group g){
-        for(int x=0;x<5;x++){
-            
+	for(int i=0;i<60;i++){
+	    listEnemyStatus.add("alive");
+	}
+        for(int x=0;x<5;x++){   
             for(int i=0;i<12;i++){
                 ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
 						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
@@ -132,7 +136,7 @@ public class SpaceInvaders{
 	bullet.setX(getXCoord(player)+5);
 	bullet.setY(getYCoord(player));
         EventHandler<ActionEvent> handler = event -> { 
-	    updateBull(bullet);
+	    updateBull(bullet,g);
         };
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), handler);
         Timeline timeline = new Timeline();
@@ -141,21 +145,23 @@ public class SpaceInvaders{
         timeline.play();
       
     }
-    public void updateBull(ImageView bullet){
+    public void updateBull(ImageView bullet,Group g){
 	bullet.setY(bullet.getY()-3);
-	enemyDeath(bullet);
+	enemyDeath(bullet,g);
     }
     public int getScore(){
 	return score; 
     }
-    public void enemyDeath(ImageView bullet){
+    public void enemyDeath(ImageView bullet,Group group){
 	//EventHandler<ActionEvent> handler = event -> {
 	    Runnable r = () -> {
 		for(int i=0;i<listEnemy.size();i++){
 		    ImageView enemy=listEnemy.get(i);
 		    if(enemy.getBoundsInParent().intersects(bullet.getBoundsInParent())){
-			listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
-								"fff63515a436df1e0799bf823abc07d.jpg")));
+			group.getChildren().remove(i);
+			listEnemyStatus.set(i,"dead");//need to see that status array to dead
+			//listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
+			//					"fff63515a436df1e0799bf823abc07d.jpg")));
 			bullet.setX(0);
 			bullet.setY(0);
 			if(i>36){
