@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
+import javafx.geometry.Pos;
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -170,14 +171,16 @@ public class ArcadeApp extends Application {
                 @Override public void handle(ActionEvent e) {
                     BorderPane bSpaceInv =new BorderPane();
                     
-                    Label gameName = new Label("Space Invaders\nUse the arrow keys to move left and right. \nSpacebar is to shoot!");
+                    Label gameName = new Label("Space Invaders\nUse the arrow keys to\nmove left and right. Spacebar is to shoot!");
                     
                     r.setX(50);                                // 50px in the x direction (right)
                     r.setY(300);                                // 50ps in the y direction (down)
                     group.getChildren().add(r);
-                    bSpaceInv.setTop(gameName);
-                    bSpaceInv.setCenter(group);
-                    Scene sceneSpace = new Scene(bSpaceInv, 640, 480);
+                    //bSpaceInv.setAlignment(gameName,Pos.CENTER);
+                    //bSpaceInv.setTop(gameName);
+                    
+                    //bSpaceInv.setCenter(group);
+                    Scene sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
                     stage.setScene(sceneSpace);
