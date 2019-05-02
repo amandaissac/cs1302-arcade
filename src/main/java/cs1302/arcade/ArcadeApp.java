@@ -25,6 +25,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -41,6 +42,7 @@ public class ArcadeApp extends Application {
     App2048 a = new App2048();;
     SpaceInvaders s = new SpaceInvaders();
     ImageView r;
+    Button menuButton;
     //ImageView bullet= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecbf81a49b3f.jpg");
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
@@ -169,17 +171,22 @@ public class ArcadeApp extends Application {
        
         space.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
-                    BorderPane bSpaceInv =new BorderPane();
-                    
-                    Label gameName = new Label("Space Invaders\nUse the arrow keys to\nmove left and right. Spacebar is to shoot!");
-                    
+                    //HBox hSpace =new HBox();
+                    Label name =new Label("Space Invaders");
+                    Label intro = new Label("Use the arrow keys to move \n"
+                                               +"left and right. Spacebar is to shoot!");
+                    String scoreString = "Score: "+ s.getScore();
+                    Label score =new Label(scoreString);
                     r.setX(50);                                // 50px in the x direction (right)
-                    r.setY(300);                                // 50ps in the y direction (down)
-                    group.getChildren().add(r);
-                    //bSpaceInv.setAlignment(gameName,Pos.CENTER);
-                    //bSpaceInv.setTop(gameName);
-                    //bSpaceInv.getChildren().addAll(gameName, group);
-                    //bSpaceInv.setCenter(group);
+                    r.setY(300);                    // 50ps in the y direction (down)
+                    //hSpace.setAlignment(Pos.CENTER);
+                    // hSpace.setHgrow(gameName, Priority.ALWAYS);
+                    //hSpace.setHgrow(score,Priority.ALWAYS); 
+                    //hSpace.getChildren().addAll(gameName,score);
+                    VBox vbox = new VBox(name,intro,score, menuButton);
+                    vbox.setAlignment(Pos.CENTER);
+                    group.getChildren().addAll(/*hSpace,r,menuButton*/vbox,r);
+                   
                     Scene sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
@@ -197,7 +204,7 @@ public class ArcadeApp extends Application {
         //Testing button from welcome page
         b2048 = new BorderPane();
         //Making the the action for the menu button
-        Button menuButton= new Button("Main Menu");
+        menuButton= new Button("Main Menu");
         menuButton.setOnAction(new EventHandler<ActionEvent>() {
                   @Override public void handle(ActionEvent e) {
                       //Scene  = new Scene(b/*group*/, 640, 480);
@@ -207,7 +214,7 @@ public class ArcadeApp extends Application {
             });//setOnAction
         b2048.setAlignment(menuButton, Pos.CENTER);
         b2048.setBottom(menuButton);
-        
+        menuButton.setFocusTraversable(false);
         
         a.score(b2048);
         //adding the tilepane to window
