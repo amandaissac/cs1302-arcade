@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -78,7 +79,7 @@ public class ArcadeApp extends Application {
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
             //make method that animates bullets
             if (event.getCode() == KeyCode.SPACE){
-		s.bulletAnim(r,group); //r is player
+                s.bulletAnim(r,group,"player"); //r is player
 	    }
 // TODO bounds checking
         };
@@ -129,7 +130,7 @@ public class ArcadeApp extends Application {
     
     @Override
     public void start(Stage stage) {
-
+        
         /* You are allowed to rewrite this start method, add other methods,
          * files, classes, etc., as needed. This currently contains some
          * simple sample code for mouse and keyboard interactions with a node
@@ -137,8 +138,8 @@ public class ArcadeApp extends Application {
          */
         //a = new App2048();
         r = new ImageView("https://i.pinimg.com/564x/4f/58/27/4f58272fa91d49ad60c22bf49b94f3fb.jpg");
-    r.setFitWidth(20);
-    r.setFitHeight(20);
+        r.setFitWidth(20);
+        r.setFitHeight(20);
         //Testing the button from welcome page
         Scene start;
         bWelcome = new BorderPane();
@@ -153,34 +154,42 @@ public class ArcadeApp extends Application {
         welcome.setFitHeight(300);
         welcome.setFitWidth(240);
         bWelcome.setCenter(welcome);
-	//b.setAlignment(h,Pos.CENTER);
+        //b.setAlignment(h,Pos.CENTER);
         bWelcome.setBottom(h);
         
         start = new Scene(bWelcome,640,480, Color.DEEPSKYBLUE);
-	//Scene startButton = new Scene(bWelcome,640,480);
+        //Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
         s.createEnemy(group);
         s.alienMovementX();
-	s.alienMovementY();
-	//s.enemyDeath();
+        s.alienMovementY();
+        //s.enemyDeath();
+
+       
         space.setOnAction(new EventHandler<ActionEvent>() {
-                 @Override public void handle(ActionEvent e) {
-                     r.setX(50);                                // 50px in the x direction (right)
-                     r.setY(300);                                // 50ps in the y direction (down)
-                     group.getChildren().add(r);
-                     Scene sceneSpace = new Scene(group, 640, 480);
-                      
-                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
-                     stage.setScene(sceneSpace);
-                 }//handle
-             });//setOnAction
+                @Override public void handle(ActionEvent e) {
+                    BorderPane bSpaceInv =new BorderPane();
+                    
+                    Label gameName = new Label("Space Invaders\nUse the arrow keys to move left and right. \nSpacebar is to shoot!");
+                    
+                    r.setX(50);                                // 50px in the x direction (right)
+                    r.setY(300);                                // 50ps in the y direction (down)
+                    group.getChildren().add(r);
+                    bSpaceInv.setTop(gameName);
+                    bSpaceInv.setCenter(group);
+                    Scene sceneSpace = new Scene(bSpaceInv, 640, 480);
+                    
+                    sceneSpace.setOnKeyPressed(keyHandlerSpace());
+                    stage.setScene(sceneSpace);
+                }//handle
+            });//setOnAction
         //Making the action for the 2048 button
         app2048.setOnAction(new EventHandler<ActionEvent>() {
-                 @Override public void handle(ActionEvent e) {
-                     Scene scene2048 = new Scene(b2048, 640, 480,Color.LIGHTGREY);
-                     scene2048.setOnKeyPressed(keyHandler2048());
-                     stage.setScene(scene2048);
-                 }//handle
+                @Override public void handle(ActionEvent e) {
+                    Scene scene2048 = new Scene(b2048, 640, 480,Color.LIGHTGREY);
+                    scene2048.setOnKeyPressed(keyHandler2048());
+                    stage.setScene(scene2048);
+                }//handle
              });//setOnAction
         //Testing button from welcome page
         b2048 = new BorderPane();
@@ -188,23 +197,23 @@ public class ArcadeApp extends Application {
         Button menuButton= new Button("Main Menu");
         menuButton.setOnAction(new EventHandler<ActionEvent>() {
                   @Override public void handle(ActionEvent e) {
-                        //Scene  = new Scene(b/*group*/, 640, 480);
+                      //Scene  = new Scene(b/*group*/, 640, 480);
                         //scene2048.setOnKeyPressed(createKeyHandler());
-                        stage.setScene(start);
-                    }//handle
-                });//setOnAction
-	 b2048.setAlignment(menuButton, Pos.CENTER);
-	 b2048.setBottom(menuButton);
-	 
-	 
+                      stage.setScene(start);
+                  }//handle
+            });//setOnAction
+        b2048.setAlignment(menuButton, Pos.CENTER);
+        b2048.setBottom(menuButton);
+        
+        
         a.score(b2048);
         //adding the tilepane to window
         a.addNewRandom();
         a.addNewRandom();
         a.makeFrame(t,b2048);
         
-	       
-                       // add to main container
+	    
+        // add to main container
         //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
         //group.setOnKeyPressed(keyHandlerSpace()); // left-right key presses move the rectangle
         //welcome();
@@ -217,7 +226,7 @@ public class ArcadeApp extends Application {
         stage.setWidth(250);
         stage.setHeight(340);
         stage.show();
-
+        
         // the group must request input focus to receive key events
         // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
         //group.requestFocus();
