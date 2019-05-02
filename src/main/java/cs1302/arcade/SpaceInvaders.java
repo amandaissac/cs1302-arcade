@@ -155,9 +155,10 @@ public class SpaceInvaders{
     public void enemyDeath(ImageView bullet,Group group){
 	//EventHandler<ActionEvent> handler = event -> {
 	    Runnable r = () -> {
-		for(int i=0;i<listEnemy.size();i++){
+		for(int i=0;i<listEnemyStatus.size();i++){
 		    ImageView enemy=listEnemy.get(i);
-		    if(enemy.getBoundsInParent().intersects(bullet.getBoundsInParent())){
+		    boolean alive=listEnemy.status.get(i).equals("alive");
+		    if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))&(alive)){
 			group.getChildren().remove(i);
 			listEnemyStatus.set(i,"dead");//need to see that status array to dead
 			//listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
