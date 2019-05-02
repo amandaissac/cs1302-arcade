@@ -49,7 +49,7 @@ public class SpaceInvaders{
 		}
 		
                 enemy.setX(13+i*17);
-                enemy.setY(70+x*20);
+                enemy.setY(90+x*20);
                 enemy.setFitHeight(15);
                 enemy.setFitWidth(15);
 		/*
@@ -95,7 +95,7 @@ public class SpaceInvaders{
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
 	Timeline timeline = new Timeline();
-	timeline.setCycleCount(57);
+	timeline.setCycleCount(41);
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
@@ -121,7 +121,7 @@ public class SpaceInvaders{
           };
           KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.6), handler);
           Timeline timeline = new Timeline();
-          timeline.setCycleCount(15);
+          timeline.setCycleCount(11);
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
       }
@@ -208,14 +208,14 @@ public class SpaceInvaders{
                          bullet.setX(0);
                          bullet.setY(0);
                          if(i>36){
-                             score=score+10;
+                             setScore(getScore()+10);
                          }
                          else if(i>12){
-                             score=score+20;
+                             setScore(getScore()+20);
                          }
                          else{
                              //the first row is worth 40
-                             score=score+40;
+                             setScore(getScore()+20);
                          }
                      }
                  }
