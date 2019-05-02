@@ -1,4 +1,5 @@
 package cs1302.arcade;
+import java.util.Random;
 import javafx.scene.Group;
 import java.util.ArrayList;
 import javafx.scene.image.Image; 
@@ -22,22 +23,35 @@ public class SpaceInvaders{
     int countY=0;
     int score=0;
 
+    /**
+     *This method is the constructor for the spaceInvaders App
+     */
     public SpaceInvaders(){
 	//this is the constructor
     }
-    
+    /**
+     *This method is to set the format of the 12X5 enemies
+     */
     public void createEnemy(Group g){
 	for(int i=0;i<60;i++){
 	    listEnemyStatus.add("alive");
 	}
         for(int x=0;x<5;x++){   
             for(int i=0;i<12;i++){
-                ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/34/7d/80/347"+
-						     "d80a7c7cc0faf3a507a04a8d50433.jpg"));
+		ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/74/43/4a/74434ac3d70e2f4f96a69cb96c7a339c.jpg"));
+		
+		if((x==1)||(x==2)){
+		    //second a third row
+		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/85/c4/36/85c4368fa5272e61d000bf3a0bd5121d.jpg"));
+		}
+		if((x==3)||(x==4)){
+		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/ba/98/ba/ba98ba5d925a4f32d535488b0b11b765.jpg"));
+		}
+		
                 enemy.setX(13+i*17);
-                enemy.setY(50+x*20);
-                enemy.setFitHeight(10);
-                enemy.setFitWidth(10);
+                enemy.setY(70+x*20);
+                enemy.setFitHeight(15);
+                enemy.setFitWidth(15);
 		/*
 		if(listBullet.size()!=0){
                 for(int j=0;j<listBullet.size();j++){
@@ -125,7 +139,22 @@ public class SpaceInvaders{
     public double getYCoord(ImageView sprite){
         return sprite.getY();
     }
-    
+    public void randomEnemyShooting(Group g){
+	EventHandler<ActionEvent> handler1= event -> {
+	    Random rand= new Random();
+	    int i=rand.nextInt(60); //getting random number for index
+	    while(listEnemyStatus.get(i).equals("dead")){
+		i=rand.nextInt(60);
+	    }
+	    //calling the bulletAnim method
+	    bulletAnim(listEnemy.get(i),g,"enemy");
+	};
+	KeyFrame keyFrame= new KeyFrame(Duration.seconds(1),handler1);
+	Timeline timeline= new Timeline();
+	timeline.setCycleCount(Timeline.INDEFINITE);
+	timeline.getKeyFrames().add(keyFrame);
+	timeline.play();
+    }
     public void bulletAnim(ImageView player,Group g,String playerType){
 	ImageView bullet= new ImageView(new Image("https://i.pinimg.com/564x/8a/34/04/8a340499a281"+
 						  "be7b9166ecbf81a49b3f.jpg"));
@@ -157,6 +186,9 @@ public class SpaceInvaders{
     }
     public int getScore(){
 	return score; 
+    }
+    public void setScore(int value){
+	score=value;
     }
          public void enemyDeath(ImageView bullet,Group group){
          //EventHandler<ActionEvent> handler = event -> {
