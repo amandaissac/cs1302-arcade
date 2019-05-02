@@ -142,7 +142,7 @@ public class SpaceInvaders{
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), handler);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(keyFrame);
+        timeline.getKeyFrames().add(keyFrame); 
         timeline.play();
       
     }
@@ -160,38 +160,38 @@ public class SpaceInvaders{
     public int getScore(){
 	return score; 
     }
-    public void enemyDeath(ImageView bullet,Group group){
-	//EventHandler<ActionEvent> handler = event -> {
-	    Runnable r = () -> {
-		for(int i=0;i<listEnemyStatus.size();i++){
-		    ImageView enemy=listEnemy.get(i);
-		    //boolean alive=listEnemyStatus.get(i).equals("alive");
-		    if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))){
-			group.getChildren().remove(i);
-			listEnemyStatus.set(i,"dead");//need to see that status array to dead
-			//listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
-			//					"fff63515a436df1e0799bf823abc07d.jpg")));
-			bullet.setX(0);
-			bullet.setY(0);
-			if(i>36){
-			    score=score+10;
-			}
-			else if(i>12){
-			    score=score+20;
-			}
-			else{
-			    //the first row is worth 40
-			    score=score+40;
-			}
-		    }
-		}
-	    };
-	    Platform.runLater(r);
-	    //Thread t = new Thread(r);
-	    //t.setDaemon(true);
-	    //t.start();
-	    //};
-    }
+         public void enemyDeath(ImageView bullet,Group group){
+         //EventHandler<ActionEvent> handler = event -> {
+             Runnable r = () -> {
+                 for(int i=0;i<listEnemy.size();i++){
+                     ImageView enemy=listEnemy.get(i);
+                     if(enemy.getBoundsInParent().intersects(bullet.getBoundsInParent())){
+                         group.getChildren().remove(i);
+                         listEnemyStatus.set(i,"dead");//need to see that status array to dead
+                         //listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
+                         //                                      "fff63515a436df1e0799bf823abc07d.jpg")));
+                         bullet.setX(0);
+                         bullet.setY(0);
+                         if(i>36){
+                             score=score+10;
+                         }
+                         else if(i>12){
+                             score=score+20;
+                         }
+                         else{
+                             //the first row is worth 40
+                             score=score+40;
+                         }
+                     }
+                 }
+             };
+             Platform.runLater(r);
+             //Thread t = new Thread(r);
+             //t.setDaemon(true);
+            //t.start();
+             //};
+     }
+
     //**********************************************
     
     
