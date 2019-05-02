@@ -12,7 +12,10 @@ import javafx.util.Duration;
 import javafx.animation.Animation;
 import java.time.LocalTime;
 import javafx.application.Platform;
-
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 public class SpaceInvaders{
 
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
@@ -22,6 +25,7 @@ public class SpaceInvaders{
     int countX=0;
     int countY=0;
     int score=0;
+    boolean goRight=true;
 
     /**
      *This method is the constructor for the spaceInvaders App
@@ -43,22 +47,35 @@ public class SpaceInvaders{
 		
 		if((x==1)||(x==2)){
 		    //second a third row
-		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/85/c4/36/85c4368fa52"+
-						   "72e61d000bf3a0bd5121d.jpg"));
+		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/71/ac/11/71ac11de7255"+
+						   "6b5b94b96efd82277f8b.jpg"));
 		}
 		if((x==3)||(x==4)){
-		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/ba/98/ba/ba98ba5d925"+
-						   "a4f32d535488b0b11b765.jpg"));
+		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/37/02/4b/37024b0926a"+
+						   "a2e474c213610a932c11f.jpg"));
 		}
 		
                 enemy.setX(13+i*17);
-                enemy.setY(90+x*20);
+                enemy.setY(110+x*20);
                 enemy.setFitHeight(15);
                 enemy.setFitWidth(15);
                 g.getChildren().add(enemy);
                 listEnemy.add(enemy);
             }
         }
+	listEnemyStatus.add("alive"); //for the red extra point one
+	ImageView enemy=new ImageView(new Image("https://i.pinimg.com/564x/10/fe/0f/10fe0f"+
+						"5bcf6b364ee39a9b896a99bdde.jpg"));
+	enemy.setX(10);
+	enemy.setY(95);
+	enemy.setFitHeight(15);
+	enemy.setFitWidth(15);
+	g.getChildren().add(enemy);
+	listEnemy.add(enemy);
+
+	for(int i=0;i<3;i++){
+	    //ImageView obstacle= new ImageView(new Image
+	}
     }
     // ***********************************************
     /**
@@ -78,6 +95,7 @@ public class SpaceInvaders{
      *The alienMovementX is used to move the aliens right and left. 
      */
     public void alienMovementX(){
+	redAlienMovement();
 	EventHandler<ActionEvent> handler = event -> {
 	    if(getCountX()<=3){
 		updateX(0); //will go right
@@ -95,7 +113,37 @@ public class SpaceInvaders{
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
 	Timeline timeline = new Timeline();
-	timeline.setCycleCount(41);
+	timeline.setCycleCount(39);
+	timeline.getKeyFrames().add(keyFrame);
+	timeline.play();
+    }
+    public boolean getGoRight(){
+	return goRight;
+    }
+    public void setGoRight(boolean status){
+	goRight=status;
+    }
+    public void redAlienMovement(){
+	ImageView redEnemy=listEnemy.get(60);
+	EventHandler<ActionEvent> handler = event -> {
+	    if((redEnemy.getX()<200)&&getGoRight()){
+		redEnemy.setX(redEnemy.getX()+2);
+		if(redEnemy.getX()>470){
+		    setGoRight(false);
+		}
+	    }
+	    else{
+		if(redEnemy.getX()>30){
+		    redEnemy.setX(redEnemy.getX()-2);
+		    if(redEnemy.getX()<30){
+			setGoRight(true);
+		    }
+		}
+	    }
+	};
+	KeyFrame keyFrame= new KeyFrame(Duration.seconds(0.1),handler);
+	Timeline timeline= new Timeline();
+	timeline.setCycleCount(Timeline.INDEFINITE);
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
@@ -105,13 +153,13 @@ public class SpaceInvaders{
     public void updateX(int count){
 	//if the count is 0, then it will shift to right
 	if(count==0){
-	    for(int i=0;i<listEnemy.size();i++){
+	    for(int i=0;i<60;i++){
 		listEnemy.get(i).setX(listEnemy.get(i).getX()+7);
 	    }
 	}
 	else{
 	    //for left; only if it is 1
-	    for(int i=0;i<listEnemy.size();i++){
+	    for(int i=0;i<60;i++){
 		listEnemy.get(i).setX(listEnemy.get(i).getX()-7);
 	    }
 	}
@@ -127,7 +175,7 @@ public class SpaceInvaders{
           };
           KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.6), handler);
           Timeline timeline = new Timeline();
-          timeline.setCycleCount(11);
+          timeline.setCycleCount(10);
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
       }
@@ -135,7 +183,7 @@ public class SpaceInvaders{
      *updates the y location of the enemy
      */
      public void updateY(){
-	 for(int i=0;i<listEnemy.size();i++){
+	 for(int i=0;i<60;i++){
 	     listEnemy.get(i).setY(listEnemy.get(i).getY()+10);
 	 }
      }
@@ -184,8 +232,8 @@ public class SpaceInvaders{
 	g.getChildren().add(bullet);
 	listBullet.add(bullet); //adding the newly made bullet into ArrayList of bullets
 	//setting original starting place of bullet
-	bullet.setX(getXCoord(player)+5);
-	bullet.setY(getYCoord(player));
+	bullet.setX(player.getX()+5);
+	bullet.setY(player.getY());
         EventHandler<ActionEvent> handler = event -> { 
 	    updateBull(bullet,g,playerType);
         };
@@ -204,8 +252,8 @@ public class SpaceInvaders{
 	}
 	else{ //if the type is a player
 	    bullet.setY(bullet.getY()-3);
+	    enemyDeath(bullet,g);
 	}
-	enemyDeath(bullet,g);
     }
     /**
      *returns the score
@@ -240,6 +288,10 @@ public class SpaceInvaders{
                     //                                      "fff63515a436df1e0799bf823abc07d.jpg")));
 		    bullet.setX(0);
                     bullet.setY(0);
+		    if(i==60){
+			setScore(getScore()+60);
+			System.out.println(getScore());
+		    }
                     if(i>36){
 			setScore(getScore()+10);
 			System.out.println(getScore());
@@ -250,13 +302,31 @@ public class SpaceInvaders{
 		    }
 		    else{
 			//the first row is worth 40
-			setScore(getScore()+20);
+			setScore(getScore()+40);
 			System.out.println(getScore());
 		    }
 		}
 	    }
 	};
 	Platform.runLater(r);
+    }
+
+    public void makeSpace(Group group,ImageView r, Button menuButton){
+	Label name =new Label("Space Invaders");
+                     Label intro = new Label("Use the arrow keys to move");
+                     Label intro2 = new Label("left and right. Spacebar is to shoot!");
+                     String scoreString = "Score: "+ getScore();
+                     Label score =new Label(scoreString);
+                     createEnemy(group);
+                     alienMovementX();
+                     alienMovementY();
+                     randomEnemyShooting(group);
+                     r.setX(50);                                // 50px in the x direction (right)
+                     r.setY(310);                               // 50ps in the y direction (down)
+
+                     VBox vbox = new VBox(name,intro,intro2,score, menuButton);
+                     vbox.setAlignment(Pos.CENTER);
+                     group.getChildren().addAll(vbox,r);
     }
 
     //**********************************************

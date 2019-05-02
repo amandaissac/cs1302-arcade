@@ -171,16 +171,23 @@ public class ArcadeApp extends Application {
         //s.enemyDeath();
         
         app2048.setFocusTraversable(false);
-        space.setFocusTraversable(false);       
+
+	Label name =new Label("Space Invaders");
+	Label intro = new Label("Use the arrow keys to move");
+	Label intro2 = new Label("left and right. Spacebar is to shoot!");
+	String scoreString = "Score: "+ s.getScore();
+	Label score =new Label(scoreString);
+        space.setFocusTraversable(false);
         space.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     //HBox hSpace =new HBox();
                     group =new Group();
-                    Label name =new Label("Space Invaders");
-                    Label intro = new Label("Use the arrow keys to move");
-                    Label intro2 = new Label("left and right. Spacebar is to shoot!");
-                    String scoreString = "Score: "+ s.getScore();
-                    Label score =new Label(scoreString);
+		    s.setScore(0);
+                    //Label name =new Label("Space Invaders");
+                    //Label intro = new Label("Use the arrow keys to move");
+                    //Label intro2 = new Label("left and right. Spacebar is to shoot!");
+                    //String scoreString = "Score: "+ s.getScore();
+                    //Label score =new Label(scoreString);
                     s.createEnemy(group);
                     s.alienMovementX();
                     s.alienMovementY();
@@ -192,6 +199,7 @@ public class ArcadeApp extends Application {
                     vbox.setAlignment(Pos.CENTER);
                     group.getChildren().addAll(vbox,r);
                     
+		    //s.makeSpace(group,r,menuButton);
                     sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
@@ -206,7 +214,8 @@ public class ArcadeApp extends Application {
                     b2048.setAlignment(menuButton, Pos.CENTER);
                     b2048.setBottom(menuButton);
                     menuButton.setFocusTraversable(false);
-                    
+                    a.setScore(0);
+		    a.clearBoard();
                     a.score(b2048);
                     //adding the tilepane to window
                     a.addNewRandom();

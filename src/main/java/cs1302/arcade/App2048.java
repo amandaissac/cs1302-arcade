@@ -37,6 +37,9 @@ public class App2048{
         //this is initializing a board every time a new game is being created
         board=new int[4][4];
      }
+    public void clearBoard(){
+	board=new int[4][4];
+    }
     public void makeFrame(TilePane t, BorderPane b){
 	 
 	t.getChildren().clear();
@@ -387,7 +390,9 @@ public class App2048{
          }
          addNewRandom();
      }
-    
+    public void setScore(int x){
+	score=x;
+    }
     public void score(BorderPane b)
     {
         VBox topVBox= new VBox();
