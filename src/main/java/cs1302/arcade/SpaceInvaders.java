@@ -34,12 +34,22 @@ public class SpaceInvaders{
                 enemy.setY(50+x*20);
                 enemy.setFitHeight(10);
                 enemy.setFitWidth(10);
-                g.getChildren().add(enemy);
-                listEnemy.add(enemy); //adding enemy into the list containing enemy
+                if(listBullet.size()!=0){
+                for(int j=0;j<listBullet.size();j++){
+                    if(!(enemy.getBoundsInParent().intersects(listBullet.get(j).getBoundsInParent()))){
+                        g.getChildren().add(enemy);
+                        listEnemy.add(enemy); //adding enemy into the list containing enemy
+                  }
+                    //add empty images
+                }
+                }
+                else{
+                    g.getChildren().add(enemy);
+                    listEnemy.add(enemy);
+                }
             }
         }
     }
-    
     // ***********************************************
     public void setCountX(int x){
 	countX=x;
