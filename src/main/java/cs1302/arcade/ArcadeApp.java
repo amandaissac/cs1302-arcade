@@ -28,7 +28,8 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Priority;
 public class ArcadeApp extends Application {
 
-    Group group = new Group();           // main container
+    Group group;// = new Group();           // main container
+    //Group aliens = new Group();
     Random rgn = new Random();// random number generator
     BorderPane b2048;//2048
     //Scene start;
@@ -43,6 +44,9 @@ public class ArcadeApp extends Application {
     SpaceInvaders s = new SpaceInvaders();
     ImageView r;
     Button menuButton;
+    Scene scene2048;
+    Scene sceneSpace;
+     Scene start;
     //ImageView bullet= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecbf81a49b3f.jpg");
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
@@ -134,17 +138,17 @@ public class ArcadeApp extends Application {
     @Override
     public void start(Stage stage) {
         
-        /* You are allowed to rewrite this start method, add other methods,
+        /** You are allowed to rewrite this start method, add other methods,
          * files, classes, etc., as needed. This currently contains some
          * simple sample code for mouse and keyboard interactions with a node
          * (rectangle) in a group.
          */
-        //a = new App2048();
+        
         r = new ImageView("https://i.pinimg.com/564x/4f/58/27/4f58272fa91d49ad60c22bf49b94f3fb.jpg");
         r.setFitWidth(20);
         r.setFitHeight(20);
         //Testing the button from welcome page
-        Scene start;
+       
         bWelcome = new BorderPane();
         HBox h = new HBox();
         
@@ -157,36 +161,38 @@ public class ArcadeApp extends Application {
         welcome.setFitHeight(300);
         welcome.setFitWidth(240);
         bWelcome.setCenter(welcome);
-        //b.setAlignment(h,Pos.CENTER);
+        
         bWelcome.setBottom(h);
         
         start = new Scene(bWelcome,640,480, Color.DEEPSKYBLUE);
         //Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
-        s.createEnemy(group);
-        s.alienMovementX();
-        s.alienMovementY();
+        
         //s.enemyDeath();
-
-        int actualScore  = s.getScore();
-        String scoreString = "Score: "+ s.getScore();
-        Label score =new Label(scoreString);
-       
+        
+        app2048.setFocusTraversable(false);
+        space.setFocusTraversable(false);       
         space.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     //HBox hSpace =new HBox();
+                    group =new Group();
                     Label name =new Label("Space Invaders");
                     Label intro = new Label("Use the arrow keys to move");
                     Label intro2 = new Label("left and right. Spacebar is to shoot!");
-                    
+                    String scoreString = "Score: "+ s.getScore();
+                    Label score =new Label(scoreString);
+                    s.createEnemy(group);
+                    s.alienMovementX();
+                    s.alienMovementY();
+                    s.randomEnemyShooting(group);
                     r.setX(50);                                // 50px in the x direction (right)
-                    r.setY(300);                               // 50ps in the y direction (down)
+                    r.setY(310);                               // 50ps in the y direction (down)
                     
                     VBox vbox = new VBox(name,intro,intro2,score, menuButton);
                     vbox.setAlignment(Pos.CENTER);
-                    group.getChildren().addAll(/*hSpace,r,menuButton*/vbox,r);
-                   
-                    Scene sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
+                    group.getChildren().addAll(vbox,r);
+                    
+                    sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
                     stage.setScene(sceneSpace);
@@ -195,40 +201,36 @@ public class ArcadeApp extends Application {
         //Making the action for the 2048 button
         app2048.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
-                    Scene scene2048 = new Scene(b2048, 640, 480,Color.LIGHTGREY);
+                    //Was perviously in start
+                    b2048 = new BorderPane();
+                    b2048.setAlignment(menuButton, Pos.CENTER);
+                    b2048.setBottom(menuButton);
+                    menuButton.setFocusTraversable(false);
+                    
+                    a.score(b2048);
+                    //adding the tilepane to window
+                    a.addNewRandom();
+                    a.addNewRandom();
+                    a.makeFrame(t,b2048);
+                    //Was previously in start
+                    scene2048 = new Scene(b2048, 640, 480,Color.LIGHTGREY);
                     scene2048.setOnKeyPressed(keyHandler2048());
                     stage.setScene(scene2048);
                 }//handle
-             });//setOnAction
+            });//setOnAction
         //Testing button from welcome page
-        b2048 = new BorderPane();
+        
         //Making the the action for the menu button
         menuButton= new Button("Main Menu");
-        menuButton.setOnAction(new EventHandler<ActionEvent>() {
-                  @Override public void handle(ActionEvent e) {
-                      //Scene  = new Scene(b/*group*/, 640, 480);
-                        //scene2048.setOnKeyPressed(createKeyHandler());
-                      stage.setScene(start);
-                  }//handle
-            });//setOnAction
-        b2048.setAlignment(menuButton, Pos.CENTER);
-        b2048.setBottom(menuButton);
         menuButton.setFocusTraversable(false);
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    //Scene  = new Scene(b/*group*/, 640, 480);
+                    //scene2048.setOnKeyPressed(createKeyHandler());
+                    stage.setScene(start);
+                }//handle
+            });//setOnAction
         
-        a.score(b2048);
-        //adding the tilepane to window
-        a.addNewRandom();
-        a.addNewRandom();
-        a.makeFrame(t,b2048);
-        
-	    
-        // add to main container
-        //r.setOnMouseClicked(createMouseHandler()); // clicks on the rectangle move it randomly
-        //group.setOnKeyPressed(keyHandlerSpace()); // left-right key presses move the rectangle
-        //welcome();
-        //scene2048();
-        //scene = new Scene(b/*group*/, 640, 480);
-        //scene2048.setOnKeyPressed(createKeyHandler());
         stage.setTitle("cs1302-arcade!");
         //stage.setScene(scene);
         //stage.sizeToScene();
