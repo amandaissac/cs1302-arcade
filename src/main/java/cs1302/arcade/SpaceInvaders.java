@@ -44,8 +44,8 @@ public class SpaceInvaders{
                 }
                 }
                 else{
-                    g.getChildren().add(enemy);
-                    listEnemy.add(enemy);
+                    //g.getChildren().add(enemy);
+                    //listEnemy.add(enemy);
                 }
             }
         }
