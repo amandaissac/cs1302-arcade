@@ -33,6 +33,7 @@ public class SpaceInvaders{
     boolean gameOver;
     ImageView gameOverPic;
     VBox v;
+    ArrayList<Integer> listObstacleCount;
     /**
      *This method is the constructor for the spaceInvaders App
      */
@@ -54,6 +55,10 @@ public class SpaceInvaders{
 	createHearts(g);
 	v=new VBox();
 	g.getChildren().add(addToVBox());
+	listObstacleCount=new ArrayList<Integer>();
+	for(int i=0;i<3;i++){
+	    listObstacleCount.add(0);
+	}
     }
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
@@ -328,6 +333,51 @@ public class SpaceInvaders{
             bullet.setY(bullet.getY()-3);
             enemyDeath(bullet,g);
         }
+	destroyObstacle(bullet,g); //destroy obstacle if the bullet hits it
+    }
+    public void destroyObstacle(ImageView bullet,Group g){
+	for(int i=0;i<listObstacle.size();i++){
+	    ImageView obstacle=listObstacle.get(i);
+	    if(obstacle.getBoundsInParent().intersects(bullet.getBoundsInParent())){
+		listObstacleCount.set(i,listObstacleCount.get(i)+1);
+		System.out.println("This is the obstacleCount: "+listObstacleCount.get(i));
+		if(listObstacleCount.get(i)<=5){
+		    ImageView newObstacle=new ImageView(new Image("obstacle1.jpg"));
+		    imageFormat(obstacle,newObstacle,g);
+		    bullet.setX(-100);
+		    bullet.setY(-100);
+		}
+		else if(listObstacleCount.get(i)<=10){
+		    ImageView newObstacle=new ImageView(new Image("obstacle2.jpg"));
+		    imageFormat(obstacle,newObstacle,g);
+		    bullet.setX(-100);
+		    bullet.setY(-100);
+		}
+		else if(listObstacleCount.get(i)<=15){
+		    ImageView newObstacle=new ImageView(new Image("obstacle3.jpg"));
+		    imageFormat(obstacle,newObstacle,g);
+		    bullet.setX(-100);
+		    bullet.setY(-100);
+		}
+		else if(listObstacleCount.get(i)<=20){
+		    ImageView newObstacle=new ImageView(new Image("obstacle4.jpg"));
+		    imageFormat(obstacle,newObstacle,g);
+		    bullet.setX(-100);
+		    bullet.setY(-100);
+		}
+		else{ //if it has hit 5 times
+		    ImageView newObstacle=new ImageView(new Image("obstacle5.jpg"));
+		    imageFormat(obstacle,newObstacle,g);
+		}
+	    }
+	}
+    }
+    public void imageFormat(ImageView obstacle,ImageView newObstacle,Group g){
+	newObstacle.setX(obstacle.getX());
+	newObstacle.setY(obstacle.getY());
+        newObstacle.setFitHeight(obstacle.getFitHeight());
+        newObstacle.setFitWidth(obstacle.getFitWidth());
+        g.getChildren().add(newObstacle);
     }
     /**
      *returns the score
