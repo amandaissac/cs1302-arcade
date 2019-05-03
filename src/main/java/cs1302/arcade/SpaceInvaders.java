@@ -24,7 +24,7 @@ public class SpaceInvaders{
     
     int countX=0;
     int countY=0;
-    int score=0;
+    private int score=0;
     boolean goRight=true;
 
     /**
@@ -330,4 +330,17 @@ public class SpaceInvaders{
     }
 
     //**********************************************
+    public void addToVBox(VBox v,Button menuButton){
+        Label name =new Label("Space Invaders");
+        Label intro = new Label("Use the arrow keys to move");
+        Label intro2 = new Label("left and right. Spacebar is to shoot!");
+        String scoreString = "Score: "+ getScore()+7;
+        
+        Label score =new Label(scoreString);
+        //Label name =new Label("Space Invaders");
+        v.getChildren().addAll(name,intro,intro2,score, menuButton);
+        v.setAlignment(Pos.CENTER);
+
+        
+    }
 }

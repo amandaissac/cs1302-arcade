@@ -171,23 +171,24 @@ public class ArcadeApp extends Application {
         //s.enemyDeath();
         
         app2048.setFocusTraversable(false);
-
-	Label name =new Label("Space Invaders");
-	Label intro = new Label("Use the arrow keys to move");
-	Label intro2 = new Label("left and right. Spacebar is to shoot!");
-	String scoreString = "Score: "+ s.getScore();
-	Label score =new Label(scoreString);
+        //s.setScore(234);
+        VBox vbox =new VBox();;
+        
+        //Label name =new Label("Space Invaders");
+        //Label intro = new Label("Use the arrow keys to move");
+        //Label intro2 = new Label("left and right. Spacebar is to shoot!");
+        //String scoreString = "Score: "+ s.getScore();
+    
+        //Label score =new Label(scoreString);
+    //vbox.getChildren().add(score);
         space.setFocusTraversable(false);
+        
         space.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     //HBox hSpace =new HBox();
                     group =new Group();
-		    s.setScore(0);
-                    //Label name =new Label("Space Invaders");
-                    //Label intro = new Label("Use the arrow keys to move");
-                    //Label intro2 = new Label("left and right. Spacebar is to shoot!");
-                    //String scoreString = "Score: "+ s.getScore();
-                    //Label score =new Label(scoreString);
+                    //s.setScore(12);
+                    
                     s.createEnemy(group);
                     s.alienMovementX();
                     s.alienMovementY();
@@ -195,8 +196,8 @@ public class ArcadeApp extends Application {
                     r.setX(50);                                // 50px in the x direction (right)
                     r.setY(310);                               // 50ps in the y direction (down)
                     
-                    VBox vbox = new VBox(name,intro,intro2,score, menuButton);
-                    vbox.setAlignment(Pos.CENTER);
+                    //vbox.getChildren().addAll(name,intro,intro2,score, menuButton);
+                    //vbox.setAlignment(Pos.CENTER);
                     group.getChildren().addAll(vbox,r);
                     
 		    //s.makeSpace(group,r,menuButton);
@@ -239,7 +240,7 @@ public class ArcadeApp extends Application {
                     stage.setScene(start);
                 }//handle
             });//setOnAction
-        
+        s.addToVBox(vbox,menuButton);
         stage.setTitle("cs1302-arcade!");
         //stage.setScene(scene);
         //stage.sizeToScene();
