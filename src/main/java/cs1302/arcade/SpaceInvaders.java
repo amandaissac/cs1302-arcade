@@ -48,7 +48,7 @@ public class SpaceInvaders{
 	countY=0;
 	score=0;
 	goRight=true;
-	numLives=3;
+	numLives=0;
 	listHeart=new ArrayList<ImageView>();
 	gameOver=false;
 	createHearts(g);
@@ -298,11 +298,18 @@ public class SpaceInvaders{
         if(playerType.equals("enemy")){ //if the playerType is a enemy, then bullets will go down
             bullet.setY(bullet.getY()+3);
 	    if(bullet.getBoundsInParent().intersects(mainPlayer.getBoundsInParent())){
-		setNumLives(getNumLives()-1/9);
-		if(getNumLives()!=0){
-		    System.out.println(getNumLives());
-		    listHeart.get(getNumLives()).setX(-100);
-		    listHeart.get(getNumLives()).setY(-100);
+		setNumLives(getNumLives()-1);
+		System.out.println("This is the number of lives: "+getNumLives());
+		if(getNumLives()==-9){
+		    listHeart.get(2).setX(-100);
+		    listHeart.get(2).setY(-100);
+		    //System.out.println("This is the number of lives: "+getNumLives()); 
+		    //listHeart.get(getNumLives()).setX(-100);
+		    //listHeart.get(getNumLives()).setY(-100);
+		}
+		else if (getNumLives()==-18){
+		    listHeart.get(1).setX(-100);
+		    listHeart.get(1).setY(-100);
 		}
 		else{ //if it is 0; may need to fix formating
 		    gameOver=true;
