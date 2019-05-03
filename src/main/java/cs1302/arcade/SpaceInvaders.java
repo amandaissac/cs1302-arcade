@@ -67,7 +67,7 @@ public class SpaceInvaders{
 	listEnemyStatus.add("alive"); //for the red extra point one
 	ImageView enemy=new ImageView(new Image("https://i.pinimg.com/564x/10/fe/0f/10fe0f"+
                                             "5bcf6b364ee39a9b896a99bdde.jpg"));
-	enemy.setX(10);
+	enemy.setX(-100);
 	enemy.setY(95);
 	enemy.setFitHeight(15);
 	enemy.setFitWidth(15);
@@ -134,22 +134,25 @@ public class SpaceInvaders{
     }
     public void redAlienMovement(){
         ImageView redEnemy=listEnemy.get(60);
+        //setGoRight(true);
         EventHandler<ActionEvent> handler = event -> {
-            if((redEnemy.getX()<200)&&getGoRight()){
+                        
+            if((redEnemy.getX()<=350)&&getGoRight()){
                 redEnemy.setX(redEnemy.getX()+2);
-                if(redEnemy.getX()>470){
+                if(redEnemy.getX()>350){
                     setGoRight(false);
-                
                 }
             }
             else{
-            if(redEnemy.getX()>30){
+                if((redEnemy.getX()>-100)&&(!getGoRight())){
                 redEnemy.setX(redEnemy.getX()-2);
-                if(redEnemy.getX()<30){
+                if(redEnemy.getX()<=-100){
                     setGoRight(true);
                 }
+                }
             }
-            }
+            
+                 
         };
         KeyFrame keyFrame= new KeyFrame(Duration.seconds(0.1),handler);
         Timeline timeline= new Timeline();
@@ -346,7 +349,7 @@ public class SpaceInvaders{
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
         Label intro2 = new Label("left and right. Spacebar is to shoot!");
-        String scoreString = "Score: "+ getScore()+7;
+        String scoreString = "Score: "+ getScore();
         
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");
