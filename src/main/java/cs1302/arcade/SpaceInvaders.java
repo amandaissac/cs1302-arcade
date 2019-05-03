@@ -108,7 +108,7 @@ public class SpaceInvaders{
 	listEnemyStatus.add("alive"); //for the red extra point one
 	ImageView enemy=new ImageView(new Image("redAlien.jpg"));
 	enemy.setX(10);
-	enemy.setY(95);
+	enemy.setY(100);
 	enemy.setFitHeight(15);
 	enemy.setFitWidth(15);
 	g.getChildren().add(enemy);
@@ -300,22 +300,24 @@ public class SpaceInvaders{
 	    if(bullet.getBoundsInParent().intersects(mainPlayer.getBoundsInParent())){
 		setNumLives(getNumLives()-1);
 		System.out.println("This is the number of lives: "+getNumLives());
-		if(getNumLives()==-9){
+		if((getNumLives()>=-9)&&(getNumLives()!=0)){
 		    listHeart.get(2).setX(-100);
 		    listHeart.get(2).setY(-100);
 		    //System.out.println("This is the number of lives: "+getNumLives()); 
 		    //listHeart.get(getNumLives()).setX(-100);
 		    //listHeart.get(getNumLives()).setY(-100);
 		}
-		else if (getNumLives()==-18){
+		else if(getNumLives()>=-18){
 		    listHeart.get(1).setX(-100);
 		    listHeart.get(1).setY(-100);
 		}
 		else{ //if it is 0; may need to fix formating
+		    listHeart.get(0).setX(-100);
+		    listHeart.get(0).setY(-100);
 		    gameOver=true;
-		    gameOverPic= new ImageView(new Image(""));
-		    gameOverPic.setFitHeight(300);
-		    gameOverPic.setFitWidth(240);
+		    gameOverPic= new ImageView(new Image("gameover.jpg"));
+		    gameOverPic.setFitHeight(250);
+		    gameOverPic.setFitWidth(250);
 		    gameOverPic.setX(0);
 		    gameOverPic.setY(100);
 		    g.getChildren().add(gameOverPic);
