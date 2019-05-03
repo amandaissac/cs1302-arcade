@@ -52,7 +52,8 @@ public class SpaceInvaders{
 	listHeart=new ArrayList<ImageView>();
 	gameOver=false;
 	createHearts(g);
-    v=new VBox();
+	v=new VBox();
+	g.getChildren().add(addToVBox());
     }
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
