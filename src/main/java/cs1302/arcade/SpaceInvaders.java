@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 public class SpaceInvaders{
-
+    
     ArrayList<ImageView> listEnemy; //creating an array to store enemies
     ArrayList<ImageView> listBullet; //creating arrayList for bullets
     ArrayList<String> listEnemyStatus; 
@@ -32,7 +32,7 @@ public class SpaceInvaders{
     ArrayList<ImageView> listHeart;
     boolean gameOver;
     ImageView gameOverPic;
-    
+    VBox v;
     /**
      *This method is the constructor for the spaceInvaders App
      */
@@ -52,6 +52,7 @@ public class SpaceInvaders{
 	listHeart=new ArrayList<ImageView>();
 	gameOver=false;
 	createHearts(g);
+    v=new VBox();
     }
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
@@ -343,7 +344,7 @@ public class SpaceInvaders{
      *If it does intersect, then the status of the enemy changes to dead. 
      */
     public void enemyDeath(ImageView bullet,Group group){
-        Runnable r = () -> {
+        //Runnable r = () -> {
             for(int i=0;i<listEnemy.size();i++){
                 ImageView enemy=listEnemy.get(i);
                 String aliveString= listEnemyStatus.get(i);
@@ -362,25 +363,30 @@ public class SpaceInvaders{
                     bullet.setY(0);
                     if(i==60){
                         setScore(getScore()+60);
+                        group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     if(i>36){
                         setScore(getScore()+10);
+                        group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     else if(i>12){
                         setScore(getScore()+20);
+                        group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     else{
                         //the first row is worth 40
                         setScore(getScore()+40);
+                        group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                 }
             }
-        };
-        Platform.runLater(r);
+            //};
+            //Platform.runLater(r);
+            //addToVBox(menuButton);
     }
     
     public void makeSpace(Group group,ImageView r, Button menuButton){
@@ -402,17 +408,18 @@ public class SpaceInvaders{
     }
     
     //**********************************************
-    public void addToVBox(VBox v,Button menuButton){
+    public VBox addToVBox(){
+        v.getChildren().clear();
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
         Label intro2 = new Label("left and right. Spacebar is to shoot!");
         String scoreString = "Score: "+ getScore()+ "         Num of Lives: ";
-        
+        System.out.println(scoreString);//test
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");
-        v.getChildren().addAll(name,intro,intro2,score, menuButton);
+        v.getChildren().addAll(name,intro,intro2,score);
         v.setAlignment(Pos.CENTER);
-
+        return v;
         
     }
 }

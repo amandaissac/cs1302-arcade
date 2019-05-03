@@ -1,3 +1,6 @@
+/*
+
+ */
 package cs1302.arcade;
 import java.util.Random;
 import java.util.ArrayList;
@@ -172,7 +175,7 @@ public class ArcadeApp extends Application {
         
         app2048.setFocusTraversable(false);
         //s.setScore(234);
-        VBox vbox =new VBox();;
+        //VBox vbox; //=new VBox();;
         
         //Label name =new Label("Space Invaders");
         //Label intro = new Label("Use the arrow keys to move");
@@ -195,15 +198,16 @@ public class ArcadeApp extends Application {
                     s.randomEnemyShooting(group,r);
                     r.setX(50);                                // 50px in the x direction (right)
                     r.setY(310);                               // 50ps in the y direction (down)
-                    
+                    //s.addToVBox(vbox,menuButton);
                     //vbox.getChildren().addAll(name,intro,intro2,score, menuButton);
                     //vbox.setAlignment(Pos.CENTER);
-                    group.getChildren().addAll(vbox,r);
+                    group.getChildren().addAll(r);
                     
 		    //s.makeSpace(group,r,menuButton);
                     sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
+                    s.setScore(12);
                     stage.setScene(sceneSpace);
                 }//handle
             });//setOnAction
@@ -240,7 +244,7 @@ public class ArcadeApp extends Application {
                     stage.setScene(start);
                 }//handle
             });//setOnAction
-        s.addToVBox(vbox,menuButton);
+        //s.addToVBox(vbox,menuButton);
         stage.setTitle("cs1302-arcade!");
         //stage.setScene(scene);
         //stage.sizeToScene();
