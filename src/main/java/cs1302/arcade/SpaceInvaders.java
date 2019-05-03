@@ -78,7 +78,7 @@ public class SpaceInvaders{
 	    ImageView obstacle= new ImageView(new Image("https://i.pinimg.com/564x/ed/9d/87/"+
                                                     "ed9d87e10c9cd3d131ee2805cf23ce3f.jpg"));
         listObstacle.add(obstacle);
-        obstacle.setX(25+i*70);
+        obstacle.setX(40+i*70);
         obstacle.setY(290);
         obstacle.setFitHeight(15);
         obstacle.setFitWidth(25);
@@ -291,8 +291,10 @@ public class SpaceInvaders{
 		    alive=true;
 		}
 		if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))&&alive){
-		    group.getChildren().remove(i);
+		    //group.getChildren().remove(i);
 		    listEnemyStatus.set(i,"dead");//need to see that status array to dead
+		    listEnemy.get(i).setX(-100);
+		    listEnemy.get(i).setY(-100);
 		    //listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
                     //                                      "fff63515a436df1e0799bf823abc07d.jpg")));
 		    bullet.setX(0);
