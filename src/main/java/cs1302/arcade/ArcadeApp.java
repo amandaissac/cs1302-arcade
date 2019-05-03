@@ -1,5 +1,5 @@
 /*
-0;136;0c0;136;0c
+0;136;0c0;136;0c0;136;0c
  */
 package cs1302.arcade;
 import java.util.Random;
@@ -191,9 +191,9 @@ public class ArcadeApp extends Application {
                     //HBox hSpace =new HBox();
                     group =new Group();
                     //s.setScore(12);
-		    menuButton.setAlignment(Pos.CENTER);
+                    //menuButton.setAlignment(Pos.CENTER);
                     VBox vMenu = new VBox(menuButton);
-                    vMenu.setAlignment(Pos.CENTER);
+                    //vMenu.setAlignment(Pos.CENTER);
                     s.createEnemy(group);
                     s.alienMovementX();
                     s.alienMovementY();
