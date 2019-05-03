@@ -58,8 +58,7 @@ public class SpaceInvaders{
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
       for(int i=0;i<3;i++){
-          heart=new ImageView(new Image("https://i.pinimg.com/564x/74/c8/a7/74c8a7e7396884fdf"+
-					"2db478bd18bbf43.jpg"));
+          heart=new ImageView(new Image("heart.jpg"));
           heart.setFitWidth(13);
           heart.setFitHeight(13);
           heart.setX(210+(i*10));
@@ -88,17 +87,14 @@ public class SpaceInvaders{
 	}
     for(int x=0;x<5;x++){   
         for(int i=0;i<12;i++){
-		ImageView enemy= new ImageView(new Image("https://i.pinimg.com/564x/74/43/4a/74434a"+
-                                                 "c3d70e2f4f96a69cb96c7a339c.jpg"));
+		ImageView enemy= new ImageView(new Image("topRowAlien.jpg"));
 		
 		if((x==1)||(x==2)){
 		    //second a third row
-		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/71/ac/11/71ac11de7255"+
-                                           "6b5b94b96efd82277f8b.jpg"));
+		    enemy= new ImageView(new Image("middleRowAlien.jpg"));
 		}
 		if((x==3)||(x==4)){
-		    enemy= new ImageView(new Image("https://i.pinimg.com/564x/37/02/4b/37024b0926a"+
-                                           "a2e474c213610a932c11f.jpg"));
+		    enemy= new ImageView(new Image("bottomRowAlien.jpg"));
 		}
 		
         enemy.setX(13+i*17);
@@ -110,8 +106,7 @@ public class SpaceInvaders{
         }
     }
 	listEnemyStatus.add("alive"); //for the red extra point one
-	ImageView enemy=new ImageView(new Image("https://i.pinimg.com/564x/10/fe/0f/10fe0f"+
-                                            "5bcf6b364ee39a9b896a99bdde.jpg"));
+	ImageView enemy=new ImageView(new Image("redAlien.jpg"));
 	enemy.setX(10);
 	enemy.setY(95);
 	enemy.setFitHeight(15);
@@ -120,8 +115,7 @@ public class SpaceInvaders{
 	listEnemy.add(enemy);
     
 	for(int i=0;i<3;i++){
-	    ImageView obstacle= new ImageView(new Image("https://i.pinimg.com/564x/ed/9d/87/"+
-                                                    "ed9d87e10c9cd3d131ee2805cf23ce3f.jpg"));
+	    ImageView obstacle= new ImageView(new Image("barrier.png"));
         listObstacle.add(obstacle);
         obstacle.setX(40+i*70);
         obstacle.setY(290);
@@ -280,8 +274,7 @@ public class SpaceInvaders{
      *creates the bullets and there is a timeline keyframe that decides where the bullets begin from
      */
     public void bulletAnim(ImageView player,Group g,String playerType,ImageView mainPlayer){
-        ImageView bullet= new ImageView(new Image("https://i.pinimg.com/564x/8a/34/04/8a340499a281"+
-                                                  "be7b9166ecbf81a49b3f.jpg"));
+        ImageView bullet= new ImageView(new Image("bullet.jpg"));
         bullet.setFitHeight(5);
         bullet.setFitWidth(5);
         g.getChildren().add(bullet);
@@ -420,7 +413,6 @@ public class SpaceInvaders{
         //Label name =new Label("Space Invaders");
         v.getChildren().addAll(name,intro,intro2,score);
         v.setAlignment(Pos.CENTER);
-        return v;
-        
+        return v;        
     }
 }
