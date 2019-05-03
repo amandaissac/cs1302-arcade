@@ -18,15 +18,20 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 public class SpaceInvaders{
 
-    ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
-    ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList for bullets
-    ArrayList<String> listEnemyStatus= new ArrayList<String>(); 
-    ArrayList<ImageView> listObstacle= new ArrayList<ImageView>();
+    ArrayList<ImageView> listEnemy; //creating an array to store enemies
+    ArrayList<ImageView> listBullet; //creating arrayList for bullets
+    ArrayList<String> listEnemyStatus; 
+    ArrayList<ImageView> listObstacle;
     
-    int countX=0;
-    int countY=0;
-    private int score=0;
-    boolean goRight=true;
+    int countX;
+    int countY;
+    int score;
+    boolean goRight;
+    int numLives;
+    ImageView heart;
+    ArrayList<ImageView> listHeart;
+    boolean gameOver;
+    ImageView gameOverPic;
     
     /**
      *This method is the constructor for the spaceInvaders App
@@ -34,10 +39,48 @@ public class SpaceInvaders{
     public SpaceInvaders(){
         //this is the constructor
     }
+    public void newGame(Group g){
+	listEnemy=new ArrayList<ImageView>();
+	listBullet=new ArrayList<ImageView>();
+	listEnemyStatus= new ArrayList<String>();
+	listObstacle= new ArrayList<ImageView>();
+	countX=0;
+	countY=0;
+	score=0;
+	goRight=true;
+	numLives=3;
+	listHeart=new ArrayList<ImageView>();
+	gameOver=false;
+	createHearts(g);
+    }
+    public void createHearts(Group g){
+      listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
+      for(int i=0;i<3;i++){
+          heart=new ImageView(new Image("https://i.pinimg.com/564x/74/c8/a7/74c8a7e7396884fdf"+
+					"2db478bd18bbf43.jpg"));
+          heart.setFitWidth(13);
+          heart.setFitHeight(13);
+          heart.setX(210+(i*10));
+          heart.setY(50);
+          listHeart.add(heart);//so this list will have length of 3
+	  g.getChildren().add(heart);
+      }
+    }
+     public void setGameOver(boolean value){
+	 gameOver=value;
+     }
+    public int getNumLives(){
+	return numLives;
+    }
+    public void setNumLives(int i){
+	numLives=i;
+    }
+
     /**
      *This method is to set the format of the 12X5 enemies
      */
     public void createEnemy(Group g){
+	newGame(g);
 	for(int i=0;i<60;i++){
 	    listEnemyStatus.add("alive");
 	}
@@ -67,7 +110,7 @@ public class SpaceInvaders{
 	listEnemyStatus.add("alive"); //for the red extra point one
 	ImageView enemy=new ImageView(new Image("https://i.pinimg.com/564x/10/fe/0f/10fe0f"+
                                             "5bcf6b364ee39a9b896a99bdde.jpg"));
-	enemy.setX(-100);
+	enemy.setX(10);
 	enemy.setY(95);
 	enemy.setFitHeight(15);
 	enemy.setFitWidth(15);
@@ -134,25 +177,22 @@ public class SpaceInvaders{
     }
     public void redAlienMovement(){
         ImageView redEnemy=listEnemy.get(60);
-        //setGoRight(true);
         EventHandler<ActionEvent> handler = event -> {
-                        
             if((redEnemy.getX()<=350)&&getGoRight()){
                 redEnemy.setX(redEnemy.getX()+2);
                 if(redEnemy.getX()>350){
                     setGoRight(false);
+                
                 }
             }
             else{
-                if((redEnemy.getX()>-100)&&(!getGoRight())){
+		if((redEnemy.getX()>-100)&(!getGoRight())){
                 redEnemy.setX(redEnemy.getX()-2);
                 if(redEnemy.getX()<=-100){
                     setGoRight(true);
                 }
-                }
             }
-            
-                 
+            }
         };
         KeyFrame keyFrame= new KeyFrame(Duration.seconds(0.1),handler);
         Timeline timeline= new Timeline();
@@ -218,7 +258,7 @@ public class SpaceInvaders{
     /**
      *generates the aliens radnomly shooting
      */
-    public void randomEnemyShooting(Group g){
+    public void randomEnemyShooting(Group g,ImageView mainPlayer){
         EventHandler<ActionEvent> handler1= event -> {
             Random rand= new Random();
             int i=rand.nextInt(60); //getting random number for index
@@ -226,7 +266,7 @@ public class SpaceInvaders{
                 i=rand.nextInt(60);
             }
             //calling the bulletAnim method
-            bulletAnim(listEnemy.get(i),g,"enemy");
+            bulletAnim(listEnemy.get(i),g,"enemy",mainPlayer);
         };
         KeyFrame keyFrame= new KeyFrame(Duration.seconds(1),handler1);
         Timeline timeline= new Timeline();
@@ -237,7 +277,7 @@ public class SpaceInvaders{
     /**
      *creates the bullets and there is a timeline keyframe that decides where the bullets begin from
      */
-    public void bulletAnim(ImageView player,Group g,String playerType){
+    public void bulletAnim(ImageView player,Group g,String playerType,ImageView mainPlayer){
         ImageView bullet= new ImageView(new Image("https://i.pinimg.com/564x/8a/34/04/8a340499a281"+
                                                   "be7b9166ecbf81a49b3f.jpg"));
         bullet.setFitHeight(5);
@@ -248,7 +288,7 @@ public class SpaceInvaders{
         bullet.setX(player.getX()+5);
         bullet.setY(player.getY());
         EventHandler<ActionEvent> handler = event -> { 
-            updateBull(bullet,g,playerType);
+            updateBull(bullet,g,playerType,mainPlayer);
         };
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), handler);
         Timeline timeline = new Timeline();
@@ -259,9 +299,26 @@ public class SpaceInvaders{
     /**
      *Causes the bullet to go up. 
      */
-    public void updateBull(ImageView bullet,Group g,String playerType){
+    public void updateBull(ImageView bullet,Group g,String playerType,ImageView mainPlayer){
         if(playerType.equals("enemy")){ //if the playerType is a enemy, then bullets will go down
             bullet.setY(bullet.getY()+3);
+	    if(bullet.getBoundsInParent().intersects(mainPlayer.getBoundsInParent())){
+		setNumLives(getNumLives()-1/9);
+		if(getNumLives()!=0){
+		    System.out.println(getNumLives());
+		    listHeart.get(getNumLives()).setX(-100);
+		    listHeart.get(getNumLives()).setY(-100);
+		}
+		else{ //if it is 0; may need to fix formating
+		    gameOver=true;
+		    gameOverPic= new ImageView(new Image(""));
+		    gameOverPic.setFitHeight(300);
+		    gameOverPic.setFitWidth(240);
+		    gameOverPic.setX(0);
+		    gameOverPic.setY(100);
+		    g.getChildren().add(gameOverPic);
+		}
+	    }
         }
         else{ //if the type is a player
             bullet.setY(bullet.getY()-3);
@@ -335,7 +392,7 @@ public class SpaceInvaders{
         createEnemy(group);
         alienMovementX();
         alienMovementY();
-        randomEnemyShooting(group);
+        randomEnemyShooting(group,r);
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(310);                               // 50ps in the y direction (down)
         
@@ -349,7 +406,7 @@ public class SpaceInvaders{
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
         Label intro2 = new Label("left and right. Spacebar is to shoot!");
-        String scoreString = "Score: "+ getScore();
+        String scoreString = "Score: "+ getScore()+ "         Num of Lives: ";
         
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");

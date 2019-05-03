@@ -86,7 +86,7 @@ public class ArcadeApp extends Application {
             if (event.getCode() == KeyCode.RIGHT) r.setX(r.getX() + 10.0);
             //make method that animates bullets
             if (event.getCode() == KeyCode.SPACE){
-                s.bulletAnim(r,group,"player"); //r is player
+                s.bulletAnim(r,group,"player",r); //r is player
 	    }
 // TODO bounds checking
         };
@@ -192,7 +192,7 @@ public class ArcadeApp extends Application {
                     s.createEnemy(group);
                     s.alienMovementX();
                     s.alienMovementY();
-                    s.randomEnemyShooting(group);
+                    s.randomEnemyShooting(group,r);
                     r.setX(50);                                // 50px in the x direction (right)
                     r.setY(310);                               // 50ps in the y direction (down)
                     

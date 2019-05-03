@@ -42,3 +42,70 @@ public void removeAlien(){
     }
 }
 */
+//in arcade app: randomEnemyShoot(group, r)
+//in arcade app: for space bar it should be bulletAnim(r, group,"player,r);
+
+///////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+/*
+int numLives=0;
+//ImageView player;
+ImageView heart;
+ArrayList<ImageView> listHeart= new ArrayList<ImageView>();
+boolean gameOver=false;
+ImageView gameOverPic;
+
+//call this in make enemy
+public boolean createHearts(){
+    listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
+    for(int i=0;i<3;i++){
+	heart=new ImageView(new Image(""));
+	heart.setFitWidth(10);
+	heart.setFitHieght(10);
+	heart.setX(100+(i*10));
+	heart.setY(300);
+	listHeart.add(heart);//so this list will have length of 3
+    }
+}
+public void randomEnemyShooting(Group g, ImageView mainplayer){
+    bulletAnim(listEnemy,get(i),g,"enemy",mainPlayer);
+}
+public void bulletAnim(ImageView player, Group g, String playerType, ImageView mainPlayer){
+    updateBull(bullet,g,playerType,mainPlayer);
+}
+public void updateBullet(ImageView bullet, Group g, String playerType, ImageView mainPlayer){
+    if(playerType.equals("enemy")){
+	bullet.setY(bullet.getY()+3);
+	if(bullet.getBoundsInParent().interects(mainPlayer.getBoundsInParent())){
+	    setNumLives(getNumLives()-1);
+	    if(getNumLives()!=0){
+		listHeart.get(i).setX(-100);
+		listHeart.get(i).setY(-100);
+	    }
+	    else{ //if it is 0; may need to fix formating
+		gameOver=true;
+		gameOverPic= new ImageView(new Image(""));
+		gameOverPic.setFitHeight(300);
+		gameOverPic.setFitWidth(240);
+		gameOverPic.setX(0);
+		gameOverPic.setY(100);
+		g.getChidren().add(gameOverPic);
+	    }
+	}
+    }
+    else{
+	//whatever
+    }
+}
+public void setGameOver(boolean value){
+    gameOver=value;
+}
+public int getNumLives(){
+    return numLives;
+}
+public void setNumLives(int i){
+    numLives=i;
+}
+*/
+
