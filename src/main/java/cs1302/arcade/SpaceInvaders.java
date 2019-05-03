@@ -59,10 +59,10 @@ public class SpaceInvaders{
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
       for(int i=0;i<3;i++){
           heart=new ImageView(new Image("heart.jpg"));
-          heart.setFitWidth(13);
-          heart.setFitHeight(13);
-          heart.setX(210+(i*10));
-          heart.setY(50);
+          heart.setFitWidth(30);
+          heart.setFitHeight(30);
+          heart.setX(120+(i*40));
+          heart.setY(5);
           listHeart.add(heart);//so this list will have length of 3
 	  g.getChildren().add(heart);
       }
@@ -357,22 +357,26 @@ public class SpaceInvaders{
                     bullet.setY(0);
                     if(i==60){
                         setScore(getScore()+60);
+			group.getChildren().remove(v);
                         group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     if(i>36){
                         setScore(getScore()+10);
+			group.getChildren().remove(v);
                         group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     else if(i>12){
                         setScore(getScore()+20);
+			group.getChildren().remove(v);
                         group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     else{
                         //the first row is worth 40
                         setScore(getScore()+40);
+			group.getChildren().remove(v);
                         group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
@@ -404,14 +408,16 @@ public class SpaceInvaders{
     //**********************************************
     public VBox addToVBox(){
         v.getChildren().clear();
+	Label empty= new Label("");
+	Label empty2=new Label("");
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
         Label intro2 = new Label("left and right. Spacebar is to shoot!");
-        String scoreString = "Score: "+ getScore()+ "         Num of Lives: ";
+        String scoreString = "Score: "+ getScore();
         System.out.println(scoreString);//test
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");
-        v.getChildren().addAll(name,intro,intro2,score);
+        v.getChildren().addAll(empty,empty2,name,intro,intro2,score);
         v.setAlignment(Pos.CENTER);
         return v;        
     }
