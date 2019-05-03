@@ -21,6 +21,7 @@ public class SpaceInvaders{
     ArrayList<ImageView> listEnemy= new ArrayList<ImageView>(); //creating an array to store enemies
     ArrayList<ImageView> listBullet= new ArrayList<ImageView>(); //creating arrayList for bullets
     ArrayList<String> listEnemyStatus= new ArrayList<String>(); 
+    ArrayList<ImageView> listObstacle= new ArrayList<ImageView>();
     
     int countX=0;
     int countY=0;
@@ -74,10 +75,18 @@ public class SpaceInvaders{
 	listEnemy.add(enemy);
 
 	for(int i=0;i<3;i++){
-	    //ImageView obstacle= new ImageView(new Image
+	    ImageView obstacle= new ImageView(new Image("https://i.pinimg.com/564x/ed/9d/87/"+
+                                                    "ed9d87e10c9cd3d131ee2805cf23ce3f.jpg"));
+        listObstacle.add(obstacle);
+        obstacle.setX(25+i*70);
+        obstacle.setY(290);
+        obstacle.setFitHeight(15);
+        obstacle.setFitWidth(25);
+        g.getChildren().add(obstacle);
 	}
     }
     // ***********************************************
+     
     /**
      *This method is used for the alienMovementX method. 
      */
