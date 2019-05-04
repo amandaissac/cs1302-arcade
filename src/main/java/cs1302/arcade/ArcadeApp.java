@@ -1,5 +1,5 @@
 /*
-0;136;0c0;136;0c0;136;0c
+0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c0;136;0c
  */
 package cs1302.arcade;
 import java.util.Random;
@@ -29,6 +29,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Priority;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+
+
 public class ArcadeApp extends Application {
 
     Group group;// = new Group();           // main container
@@ -50,6 +55,7 @@ public class ArcadeApp extends Application {
     Scene scene2048;
     Scene sceneSpace;
      Scene start;
+    boolean goRight=true;
     //ImageView bullet= new ImageView("https://i.pinimg.com/564x/8a/34/04/8a340499a281be7b9166ecbf81a49b3f.jpg");
     //Sprite r = new Sprite(50,50,20,20,"player");
     //Sprite r;
@@ -147,7 +153,7 @@ public class ArcadeApp extends Application {
          * (rectangle) in a group.
          */
         
-        r = new ImageView("https://i.pinimg.com/564x/4f/58/27/4f58272fa91d49ad60c22bf49b94f3fb.jpg");
+        r = new ImageView("player.jpg");
         r.setFitWidth(20);
         r.setFitHeight(20);
         //Testing the button from welcome page
@@ -163,10 +169,18 @@ public class ArcadeApp extends Application {
                                           "13783d5dbc5927e449cd075c2c52dc60.jpg");
         welcome.setFitHeight(300);
         welcome.setFitWidth(240);
-        bWelcome.setCenter(welcome);
-        
+        //adding HBox and welcome pic to borderpane
+        Group names = new Group();
+        ImageView ourNames = new ImageView("ourNames.png");
+        ourNames.setFitHeight(12.0);
+        ourNames.setFitWidth(100.0);
+        //moveNames(ourNames);
+        names.getChildren().add(ourNames);
+//moveNames(ourNames);
+        bWelcome.setTop(welcome);
+        bWelcome.setCenter(names);
         bWelcome.setBottom(h);
-        
+        moveNames(ourNames);
         start = new Scene(bWelcome,640,480, Color.DEEPSKYBLUE);
         //Scene startButton = new Scene(bWelcome,640,480);
         stage.setScene(start);
@@ -192,7 +206,7 @@ public class ArcadeApp extends Application {
                     group =new Group();
                     //s.setScore(12);
                     //menuButton.setAlignment(Pos.CENTER);
-                    VBox vMenu = new VBox(menuButton);
+                    //VBox vMenu = new VBox(menuButton);
                     //vMenu.setAlignment(Pos.CENTER);
                     s.createEnemy(group);
                     s.alienMovementX();
@@ -203,13 +217,13 @@ public class ArcadeApp extends Application {
                     //s.addToVBox(vbox,menuButton);
                     //vbox.getChildren().addAll(name,intro,intro2,score, menuButton);
                     //vbox.setAlignment(Pos.CENTER);
-                    group.getChildren().addAll(vMenu,r);
+                    group.getChildren().addAll(/*vMenu,*/r);
                     
 		    //s.makeSpace(group,r,menuButton);
                     sceneSpace = new Scene(/*bSpaceInv*/group, 640, 480);
                     
                     sceneSpace.setOnKeyPressed(keyHandlerSpace());
-                    s.setScore(12);
+                    //s.setScore(12);
                     stage.setScene(sceneSpace);
                 }//handle
             });//setOnAction
@@ -239,6 +253,7 @@ public class ArcadeApp extends Application {
         //Making the the action for the menu button
         menuButton= new Button("Main Menu");
         menuButton.setFocusTraversable(false);
+        s.setMenuButton(menuButton);//testing this
         menuButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     //Scene  = new Scene(b/*group*/, 640, 480);
@@ -259,5 +274,36 @@ public class ArcadeApp extends Application {
         //group.requestFocus();
 
     } // start
-    
+    public void moveNames(ImageView i){
+        EventHandler<ActionEvent> handler = event -> {
+            if((i.getX()<=300)&&getMoveRight()){
+                i.setX(i.getX()+2);
+                 if(i.getX()>300){
+                     setMoveRight(false);
+                     
+                 }
+            }
+            else{
+                if((i.getX()>0)&(!getMoveRight())){
+                    i.setX(i.getX()-2);
+                 if(i.getX()<=0){
+                     setMoveRight(true);
+                 }
+                }
+            }
+        };
+         KeyFrame keyFrame= new KeyFrame(Duration.seconds(0.1),handler);
+         Timeline timeline= new Timeline();
+         timeline.setCycleCount(Timeline.INDEFINITE);
+         timeline.getKeyFrames().add(keyFrame);
+         timeline.play();
+         
+    }
+    public boolean getMoveRight(){
+         return goRight;
+     }
+     public void setMoveRight(boolean status){
+         goRight=status;
+    }
+
 } // ArcadeApp

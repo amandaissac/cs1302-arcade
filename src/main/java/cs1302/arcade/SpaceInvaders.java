@@ -34,12 +34,20 @@ public class SpaceInvaders{
     ImageView gameOverPic;
     VBox v;
     ArrayList<Integer> listObstacleCount;
+    Button menuButton;
     /**
      *This method is the constructor for the spaceInvaders App
      */
     public SpaceInvaders(){
         //this is the constructor
     }
+    public void setMenuButton(Button button){
+        menuButton = button;
+    }
+    /**
+     *sets initial values of game
+     *@param g g is the group that the VBox is added to in the beginning of the game
+     */
     public void newGame(Group g){
 	listEnemy=new ArrayList<ImageView>();
 	listBullet=new ArrayList<ImageView>();
@@ -64,10 +72,10 @@ public class SpaceInvaders{
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
       for(int i=0;i<3;i++){
           heart=new ImageView(new Image("heart.jpg"));
-          heart.setFitWidth(30);
-          heart.setFitHeight(30);
-          heart.setX(120+(i*40));
-          heart.setY(5);
+          heart.setFitWidth(15);
+          heart.setFitHeight(15);
+          heart.setX(75+(i*40));
+          heart.setY(87);
           listHeart.add(heart);//so this list will have length of 3
 	  g.getChildren().add(heart);
       }
@@ -335,6 +343,11 @@ public class SpaceInvaders{
         }
 	destroyObstacle(bullet,g); //destroy obstacle if the bullet hits it
     }
+    /**
+     *moves ImageViews based on if the barriers are hit by bullets
+     *@param bullet bullet that is hitting the barrier
+     *@param g g is the group that the barrier ImageViews are being added to
+     */
     public void destroyObstacle(ImageView bullet,Group g){
 	for(int i=0;i<listObstacle.size();i++){
 	    ImageView obstacle=listObstacle.get(i);
@@ -388,6 +401,7 @@ public class SpaceInvaders{
     }
     /**
      *sets the score 
+     *@param value value is the value the score is being set to
      */
     public void setScore(int value){
         score=value;
@@ -465,10 +479,13 @@ public class SpaceInvaders{
     }
     
     //**********************************************
+    /**
+     *adds items to VBox
+     */
     public VBox addToVBox(){
         v.getChildren().clear();
-	Label empty= new Label("");
-	Label empty2=new Label("");
+        //Label empty= new Label("");
+        //Label empty2=new Label("");
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
         Label intro2 = new Label("left and right. Spacebar is to shoot!");
@@ -476,7 +493,7 @@ public class SpaceInvaders{
         System.out.println(scoreString);//test
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");
-        v.getChildren().addAll(empty,empty2,name,intro,intro2,score);
+        v.getChildren().addAll(/*empty,empty2,*/menuButton,name,intro,intro2,score);
         v.setAlignment(Pos.CENTER);
         return v;        
     }

@@ -108,16 +108,14 @@ public class App2048{
 	//only executes if it is given to be true
 	if(gameWon){
 	    //creating gameOver image
-	    ImageView youWin= new ImageView("https://i-h2.pinimg.com/564x/d8/be/5d/d8be5d3c73"+
-						   "2bee3b25448807c628d681.jpg");
+	    ImageView youWin= new ImageView("youwin.png");
 	    youWin.setFitHeight(200);
 	    youWin.setFitWidth(200);
 	    b.setCenter(youWin);
 	}
 	//bascailly if board is full (true) && there are no more moves, it will return you lost 
 	else if(boardIsFull()&&(!hasMoves())){
-	    ImageView youLose= new ImageView("https://i.pinimg.com/564x/df/f7/83/dff783d00d3d2"+
-					     "bb93c37c9204b951b71.jpg");
+	    ImageView youLose= new ImageView("gameover.jpg");
 	    youLose.setFitHeight(200);
 	    youLose.setFitWidth(200);
 	    b.setCenter(youLose);
