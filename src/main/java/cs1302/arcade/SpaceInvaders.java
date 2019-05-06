@@ -44,6 +44,63 @@ public class SpaceInvaders{
     public void setMenuButton(Button button){
         menuButton = button;
     }
+    public void  changeLevel(Group g){
+        int prevScore=0;
+//changing to level 2
+        if(getScore()==1200&&listEnemyStatus.get(60).equals("al"+
+            "ive")||(getScore()==1260&&listEnemyStatus.get(60).equals("dead"))){
+            prevScore = getScore();
+            listEnemy=new ArrayList<ImageView>();
+            listBullet=new ArrayList<ImageView>();
+            listEnemyStatus= new ArrayList<String>();
+            //listObstacle= new ArrayList<ImageView>();
+            countX=0;
+            countY=0;
+            score=getScore();
+            goRight=true;
+            numLives=0;
+            listHeart=new ArrayList<ImageView>();
+            gameOver=false;
+            createHearts(g);
+            v=new VBox();
+            g.getChildren().add(addToVBox());
+            listObstacleCount=new ArrayList<Integer>();
+            for(int i=0;i<3;i++){
+                listObstacleCount.add(0);
+            }
+            level=2;
+            levelString= "Level 2";
+        
+        
+        }
+        
+        if(getScore()==2400){
+            
+            listEnemy=new ArrayList<ImageView>();
+            listBullet=new ArrayList<ImageView>();
+            listEnemyStatus= new ArrayList<String>();
+            //listObstacle= new ArrayList<ImageView>();
+            countX=0;
+            countY=0;
+            score=getScore();
+            goRight=true;
+            numLives=0;
+            listHeart=new ArrayList<ImageView>();
+            gameOver=false;
+            createHearts(g);
+            v=new VBox();
+            g.getChildren().add(addToVBox());
+            listObstacleCount=new ArrayList<Integer>();
+            for(int i=0;i<3;i++){
+                listObstacleCount.add(0);
+            }
+            level=3;
+            levelString= "Level 3";
+        
+        
+        }
+    }
+    
     /**
      *sets initial values of game
      *@param g g is the group that the VBox is added to in the beginning of the game
@@ -94,7 +151,8 @@ public class SpaceInvaders{
      *This method is to set the format of the 12X5 enemies
      */
     public void createEnemy(Group g){
-	newGame(g);
+        
+        newGame(g);
 	for(int i=0;i<60;i++){
 	    listEnemyStatus.add("alive");
 	}
