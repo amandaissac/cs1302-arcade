@@ -66,13 +66,18 @@ public class SpaceInvaders{
 	    listObstacleCount.add(0);
 	}
     }
+    public void changeLevels(Group g){
+        changeLevel1(g);
+        changeLevel2(g);
+        changeLevel3(g);
+    }
     public void  changeLevel1(Group g){
 	//changing to level 2
         if(((getScore()==1200)&&(listEnemyStatus.get(60).equals("al"+
 	"ive")))||((getScore()==1260)&&(listEnemyStatus.get(60).equals("dead")))){
             prevScore = getScore();
 	    //resetting the level
-	    resetLevel();
+	    resetLevel(g);
             level=2;
             levelString= "Level 2";
         }
@@ -82,7 +87,7 @@ public class SpaceInvaders{
 	    if(((getScore()==2560)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==2460)&&(listEnemyStatus.get(60).equals("alive")))){
 		prevScore=getScore();
 		//resetting the level
-		resetLevel();
+		resetLevel(g);
 		level=3;
 		levelString= "level 3";
 	       }
@@ -91,7 +96,7 @@ public class SpaceInvaders{
 	    if(((getScore()==2460)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==2400)&&(listEnemyStatus.get(60).equals("alive")))){
 		prevScore=getScore();
 		//resetting the level
-		resetLevel();
+		resetLevel(g);
 		level=3;
 		levelString="level 3";
 	    }
@@ -101,30 +106,31 @@ public class SpaceInvaders{
 	if(prevScore==2520){
 	    if(((getScore()==3780)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3720)&&(listEnemyStatus.get(60).equals("alive")))){
 		//need to display you win
-		youWinCreate();
+		youWinCreate(g);
 	    }
 	}
 	if(prevScore==2460){
 	    if(((getScore()==3720)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3660)&&(listEnemyStatus.get(60).equals("alive")))){
 		//need to display you win
-		youWinCreate();
+		youWinCreate(g);
 	    }
 	}
 	if(prevScore==2400){
 	    if(((getScore()==3660)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3600)&&(listEnemyStatus.get(60).equals("alive")))){
 		//need to display you win
-		youWinCreate();
+		youWinCreate(g);
 	    }
 	}
     }
-    public void youWinCreate(){
+    public void youWinCreate(Group g){
 	ImageView youWin=new ImageView(new Image("youWin.jpg"));
 	youWin.setFitHeight(250);
 	youWin.setFitWidth(250);
 	youWin.setX(0);
 	youWin.setY(100);
 	g.getChildren().add(youWin);
-    /**
+    }
+/**
      *sets initial values of game
      *@param g g is the group that the VBox is added to in the beginning of the game
      */
@@ -151,6 +157,7 @@ public class SpaceInvaders{
 	levelString="Level 1";
 	prevScore=0;
     }
+    
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
       for(int i=0;i<3;i++){
@@ -495,7 +502,7 @@ public class SpaceInvaders{
      *If it does intersect, then the status of the enemy changes to dead. 
      */
     public void enemyDeath(ImageView bullet,Group group){
-        //Runnable r = () -> {
+        Runnable r = () -> {
             for(int i=0;i<listEnemy.size();i++){
                 ImageView enemy=listEnemy.get(i);
                 String aliveString= listEnemyStatus.get(i);
@@ -515,32 +522,35 @@ public class SpaceInvaders{
                     if(i==60){
                         setScore(getScore()+60);
 			group.getChildren().remove(v);
-                        group.getChildren().add(addToVBox());
+            group.getChildren().add(addToVBox());
                         System.out.println(getScore());
+                        changeLevels(group);
                     }
                     if(i>36){
                         setScore(getScore()+10);
 			group.getChildren().remove(v);
-                        group.getChildren().add(addToVBox());
+            group.getChildren().add(addToVBox());
                         System.out.println(getScore());
+                        changeLevels(group);
                     }
                     else if(i>12){
                         setScore(getScore()+20);
 			group.getChildren().remove(v);
-                        group.getChildren().add(addToVBox());
+            group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                     }
                     else{
                         //the first row is worth 40
                         setScore(getScore()+40);
 			group.getChildren().remove(v);
-                        group.getChildren().add(addToVBox());
+            group.getChildren().add(addToVBox());
                         System.out.println(getScore());
+                        changeLevels(group);
                     }
                 }
             }
-            //};
-            //Platform.runLater(r);
+            };
+            Platform.runLater(r);
             //addToVBox(menuButton);
     }
     
@@ -568,7 +578,7 @@ public class SpaceInvaders{
      */
     public VBox addToVBox(){
         v.getChildren().clear();
-        //Label empty= new Label("");
+        Label levelLabel= new Label(levelString);
         //Label empty2=new Label("");
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
@@ -577,7 +587,7 @@ public class SpaceInvaders{
         System.out.println(scoreString);//test
         Label score =new Label(scoreString);
         //Label name =new Label("Space Invaders");
-        v.getChildren().addAll(/*empty,empty2,*/menuButton,name,intro,intro2,score);
+        v.getChildren().addAll(/*empty,empty2,*/menuButton,name,intro,intro2,score,levelLabel);
         v.setAlignment(Pos.CENTER);
         return v;        
     }
