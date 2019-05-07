@@ -49,7 +49,7 @@ public class SpaceInvaders{
         menuButton = button;
     }
 
-    /*
+    
     public void resetLevel(Group g){
 	g.getChildren().remove(v);
 	listEnemy=new ArrayList<ImageView>();
@@ -74,8 +74,17 @@ public class SpaceInvaders{
 	alienMovementX();
 	alienMovementY(g);	
     }
+    /*
+    public void checkGameOver(Group g){
+        if(listEnemy.get(59).getY()>=290){
+            gameOver=true;
+        }
+        System.out.println("y pos" + listEnemy.get(59).getY());
+    }
+    */
     public void changeLevels(Group g){
-        if((getScore()==1240)||(getScore()==1300)){
+        //checkGameOver(g);
+        if(((getScore()==1240)||(getScore()==1300))/*&&countDown==10*/){
 	    changeLevel1(g);
 	    level1NotDone=true;
 	    System.out.println("tried to chnage into level1");
@@ -178,7 +187,7 @@ public class SpaceInvaders{
 	youWin.setY(100);
 	g.getChildren().add(youWin);
     }
-    */
+    ////////////////////////////
 /**
      *sets initial values of game
      *@param g g is the group that the VBox is added to in the beginning of the game
@@ -577,20 +586,20 @@ public class SpaceInvaders{
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        //changeLevels(group);
+                        changeLevels(group);
                     }
                     if(i>36){
                         setScore(getScore()+10);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        //changeLevels(group);
+                        changeLevels(group);
                     }
                     else if(i>12){
                         setScore(getScore()+20);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-			//changeLevels(group);
+			changeLevels(group);
                         //System.out.println(getScore());
                     }
                     else{
@@ -599,7 +608,7 @@ public class SpaceInvaders{
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        //changeLevels(group);
+                        changeLevels(group);
                     }
                 }
             }
