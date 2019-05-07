@@ -21,7 +21,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
+/**
+ *This class has methods for the 2048 game.
+ */
 public class App2048{
     Random rgn = new Random();// random number generator
     private int score = 0;
@@ -37,11 +39,13 @@ public class App2048{
         //this is initializing a board every time a new game is being created
         board=new int[4][4];
      }
+    /**
+     *This clears the board.
+     */
     public void clearBoard(){
 	board=new int[4][4];
     }
-    public void makeFrame(TilePane t, BorderPane b){
-	 
+    public void makeFrame(TilePane t, BorderPane b){	 
 	t.getChildren().clear();
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
@@ -89,10 +93,7 @@ public class App2048{
                 
                 //adding the tile late into the img Gallery
              
-                //t.getChildren().clear();//clears the tile before adding new tiles
                 t.getChildren().add(tile);
-                                  
-                    
                     // add Platform.runLater when making threads
                 t.setPrefRows(4);
                 t.setHgap(2);
@@ -376,9 +377,17 @@ public class App2048{
          }
          addNewRandom();
      }
+    /**
+     *This sets the score.
+     *@param x x is the number the score must be set to.
+     */
     public void setScore(int x){
 	score=x;
     }
+    /**
+     *This adds the score label and score to a borderPane.
+     *@param b b is a BorderPane that is being changed.
+     */
     public void score(BorderPane b)
     {
         VBox topVBox= new VBox();
@@ -386,19 +395,7 @@ public class App2048{
         Label rules = new Label("Use arrow keys to move tiles");
         String scoreString= "Score: " +score;
         Label score = new Label(scoreString);
-	/*
-	Button menuButton= new Button("Main Menu");
-	menuButton.setOnAction(new EventHandler<ActionEvent>() {
-                   @Override public void handle(ActionEvent e) {
 	
-       
-                       //Scene  = new Scene(b, 640, 480);
-                       //scene2048.setOnKeyPressed(createKeyHandler());
-                       stage.setScene(start);
-                   }//handle
-	    });//setOnAction
-	*/
-
         Label emptyLine= new Label(""); 
         topVBox.getChildren().addAll(title,rules,score,emptyLine);
         topVBox.setAlignment(Pos.BASELINE_CENTER); //centering the title labels
@@ -425,55 +422,6 @@ public class App2048{
      *This method is only used if the board is full. It checks to see if there can be any more moves.
      *@return true if the board still can have moves.
      */
-    /*
-    public boolean hasMoves(){
-	boolean left=true;
-	boolean right=true;
-	boolean up=true;
-	boolean down=true;
-	for(int x=0;x<4;x++){
-	    for(int y=0;y<4;y++){
-		//looking at tile to the left
-		if(x!=0){
-		    if(board[x][y]==board[x-1][y]){
-			left=true;
-		    }
-		    else{
-			left=false;
-		    }
-		}
-		if(x!=4){
-		    if(board[x][y]==board[x+1][y]){
-			right=true;
-		    }
-		    else{
-			right=false;
-		    }
-		}
-		if(y!=0){
-		    if(board[x][y]==board[x][y-1]){
-			up=true;
-		    }
-		    else{
-			up=false;
-		    }
-		}
-		if(y!=4){
-		    if(board[x][y]==board[x][y+1]){
-			down=true;
-		    }
-		    else{
-			down=false;
-		    }
-		}
-	    }
-	}
-	if((!right)&&(!left)&&(!up)&&(!down)){
-	    return false;
-	}
-	return true;
-    }
-   */
     public boolean hasMoves(){
 	for(int row=0;row<4;row++){
 	    for(int col=0;col<4;col++){
