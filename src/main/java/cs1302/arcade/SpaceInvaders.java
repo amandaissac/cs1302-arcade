@@ -16,8 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+
+/**
+ *This class holds all the methods that deals with the space invaders game.
+ */
 public class SpaceInvaders{
-    
     ArrayList<ImageView> listEnemy; //creating an array to store enemies
     ArrayList<ImageView> listBullet; //creating arrayList for bullets
     ArrayList<String> listEnemyStatus; 
@@ -42,161 +45,25 @@ public class SpaceInvaders{
     ImageView player;
     Double movementXTime;
     Double movementYTime;
+    
     /**
      *This method is the constructor for the spaceInvaders App
      */
     public SpaceInvaders(){
         //this is the constructor
     }
+    /**This method is used to create the menu Button.
+     */
     public void setMenuButton(Button button){
         menuButton = button;
     }
+    /**
+     *This method is used to identify the player and create player.
+     */
     public void setPlayer(ImageView r){
 	player = r;
     }
-
-    /*
-	public void resetLevel(Group g){
-	g.getChildren().remove(v);
-	listEnemy=new ArrayList<ImageView>();
-	listBullet=new ArrayList<ImageView>();
-	listEnemyStatus= new ArrayList<String>();
-	//listObstacle= new ArrayList<ImageView>();
-	countX=0;
-	countY=0;
-	score=getScore();
-	gameOver=false;
-	goRight=true;
-	numLives=0;
-	listHeart=new ArrayList<ImageView>();
-	createHearts(g);
-	v=new VBox();
-	g.getChildren().add(addToVBox());
-	listObstacleCount=new ArrayList<Integer>();
-	for(int i=0;i<3;i++){
-	    listObstacleCount.add(0);
-	}
-	createEnemy(g);
-	alienMovementX();
-	alienMovementY(g);	
-    }
-    /*
-    public void checkGameOver(Group g){
-        if(listEnemy.get(59).getY()>=290){
-            gameOver=true;
-        }
-        System.out.println("y pos" + listEnemy.get(59).getY());
-    }
-    */
-    /*
-	public void changeLevels(Group g){
-        //checkGameOver(g);
-        if(((getScore()==1240)||(getScore()==1300))&&countDown==10){
-	    changeLevel1(g);
-	    level1NotDone=true;
-	    System.out.println("tried to chnage into level1");
-	}
-	if(countDown==20){
-	    changeLevel2(g);
-	}
-	if(countDown==30){
-	    changeLevel3(g);
-	}
-	if(gameOver){
-	    //the you lose picture shows up
-	    gameOverPic= new ImageView(new Image("gameover.jpg"));
-	    gameOverPic.setFitHeight(250);
-	    gameOverPic.setFitWidth(250);
-	    gameOverPic.setX(0);
-	    gameOverPic.setY(100);
-	    g.getChildren().add(gameOverPic);
-	}
-    }
-    public void  changeLevel1(Group g){
-	//changing to level 2
-        if(((getScore()==1240)&&(listEnemyStatus.get(60).equals("al"+
-	"ive")))||((getScore()==1300)&&(listEnemyStatus.get(60).equals("dead")))){
-            prevScore = getScore();
-	    //resetting the level
-	    resetLevel(g);
-	    System.out.println("reset the level");
-            level=2;
-            levelString= "Level 2";
-        }
-	else{
-	    gameOver=true;
-	}
-    }
-    public void changeLevel2(Group g){
-	if(prevScore==1260){
-	    if(((getScore()==2560)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==2460)&&(listEnemyStatus.get(60).equals("alive")))){
-		prevScore=getScore();
-		//resetting the level
-		resetLevel(g);
-		level=3;
-		levelString= "level 3";
-		gameOver=false;
-	       }
-	    else{
-		gameOver=true;
-	    }
-	}
-	if(prevScore==1200){
-	    if(((getScore()==2460)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==2400)&&(listEnemyStatus.get(60).equals("alive")))){
-		prevScore=getScore();
-		//resetting the level
-		resetLevel(g);
-		level=3;
-		levelString="level 3";
-		gameOver=false;
-	    }
-	    else{
-		gameOver=true;
-	    }
-	}
-    }
-    public void changeLevel3(Group g){
-	if(prevScore==2520){
-	    if(((getScore()==3780)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3720)&&(listEnemyStatus.get(60).equals("alive")))){
-		//need to display you win
-		youWinCreate(g);
-	    }
-	    else{
-		gameOver=true;
-	    }
-	}
-	if(prevScore==2460){
-	    if(((getScore()==3720)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3660)&&(listEnemyStatus.get(60).equals("alive")))){
-		//need to display you win
-		youWinCreate(g);
-		gameOver=false;
-	    }
-	    else{
-		gameOver=true;
-	    }
-	}
-	if(prevScore==2400){
-	    if(((getScore()==3660)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3600)&&(listEnemyStatus.get(60).equals("alive")))){
-		//need to display you win
-		youWinCreate(g);
-		gameOver=false;
-	    }
-	    else{
-		gameOver=true;
-	    }
-	}
-    }
-    public void youWinCreate(Group g){
-	ImageView youWin=new ImageView(new Image("youWin.jpg"));
-	youWin.setFitHeight(250);
-	youWin.setFitWidth(250);
-	youWin.setX(0);
-	youWin.setY(100);
-	g.getChildren().add(youWin);
-    }
-    ////////////////////////////
-    */
-/**
+    /**
      *sets initial values of game
      *@param g g is the group that the VBox is added to in the beginning of the game
      */
@@ -227,6 +94,10 @@ public class SpaceInvaders{
 	movementXTime=2.5;
 	movementYTime=9.0;
     }
+    /**
+     *This method is used to check if all of the aliens are dead. 
+     *It is used for this purpose, and other methods use this method as well.
+     */
     public void checkAllDead(Group g){
 	listEnemyStatus=new ArrayList<String>();
 	listEnemy=new ArrayList<ImageView>();
@@ -237,7 +108,10 @@ public class SpaceInvaders{
 	alienMovementY(g);
 	randomEnemyShooting(g,player);
     }
-    
+    /**
+     *This method creates the hearts which are a representation of the number of lives 
+     *the player has. 
+     */
     public void createHearts(Group g){
       listHeart= new ArrayList<ImageView>(); //creating a new ArrayList each time
       for(int i=0;i<3;i++){
@@ -250,29 +124,34 @@ public class SpaceInvaders{
 	  g.getChildren().add(heart);
       }
     }
+    /**
+     *The setGamerOver is used to set the game over. 
+     */
      public void setGameOver(boolean value){
 	 gameOver=value;
      }
+    /**
+     *Get number of lives returns the number of lives the player has left. 
+     */
     public int getNumLives(){
 	return numLives;
     }
+    /**
+     *This method is used to set the number of lives to a certain amount. 
+     */
     public void setNumLives(int i){
 	numLives=i;
     }
-
     /**
      *This method is to set the format of the 12X5 enemies
      */
     public void createEnemy(Group g){
-        
-        //newGame(g);
 	for(int i=0;i<60;i++){
 	    listEnemyStatus.add("alive");
 	}
 	for(int x=0;x<5;x++){   
 	    for(int i=0;i<12;i++){
 		ImageView enemy= new ImageView(new Image("topRowAlien.jpg"));
-		
 		if((x==1)||(x==2)){
 		    //second a third row
 		    enemy= new ImageView(new Image("middleRowAlien.jpg"));
@@ -280,15 +159,14 @@ public class SpaceInvaders{
 		if((x==3)||(x==4)){
 		    enemy= new ImageView(new Image("bottomRowAlien.jpg"));
 		}
-		
-        enemy.setX(13+i*17);
-        enemy.setY(110+x*20);
-        enemy.setFitHeight(15);
-        enemy.setFitWidth(15);
-        g.getChildren().add(enemy);
-        listEnemy.add(enemy);
-        }
-    }
+		enemy.setX(13+i*17);
+		enemy.setY(110+x*20);
+		enemy.setFitHeight(15);
+		enemy.setFitWidth(15);
+		g.getChildren().add(enemy);
+		listEnemy.add(enemy);
+	    }
+	}
 	listEnemyStatus.add("alive"); //for the red extra point one
 	ImageView enemy=new ImageView(new Image("redAlien.jpg"));
 	enemy.setX(10);
@@ -297,19 +175,16 @@ public class SpaceInvaders{
 	enemy.setFitWidth(15);
 	g.getChildren().add(enemy);
 	listEnemy.add(enemy);
-    
 	for(int i=0;i<3;i++){
 	    ImageView obstacle= new ImageView(new Image("barrier.png"));
-        listObstacle.add(obstacle);
-        obstacle.setX(40+i*70);
-        obstacle.setY(290);
-        obstacle.setFitHeight(15);
-        obstacle.setFitWidth(25);
-        g.getChildren().add(obstacle);
+	    listObstacle.add(obstacle);
+	    obstacle.setX(40+i*70);
+	    obstacle.setY(290);
+	    obstacle.setFitHeight(15);
+	    obstacle.setFitWidth(25);
+	    g.getChildren().add(obstacle);
 	}
     }
-    // ***********************************************
-    
     /**
      *This method is used for the alienMovementX method. 
      */
@@ -349,29 +224,38 @@ public class SpaceInvaders{
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
     }
+    /**
+     *This method returns the goRight variable
+     *@return go right variable
+     */
     public boolean getGoRight(){
         return goRight;
     }
+    /**
+     *This method sets the goRight variable in the status
+     */
     public void setGoRight(boolean status){
         goRight=status;
     }
+    /**
+     *This method is used to move the red alien accross the page
+     */
     public void redAlienMovement(){
         ImageView redEnemy=listEnemy.get(60);
         EventHandler<ActionEvent> handler = event -> {
             if((redEnemy.getX()<=350)&&getGoRight()){
                 redEnemy.setX(redEnemy.getX()+2);
                 if(redEnemy.getX()>350){
-                    setGoRight(false);
-                
+                    setGoRight(false);    
                 }
             }
             else{
 		if((redEnemy.getX()>-100)&(!getGoRight())){
-                redEnemy.setX(redEnemy.getX()-2);
-                if(redEnemy.getX()<=-100){
-                    setGoRight(true);
-                }
-            }
+		    redEnemy.setX(redEnemy.getX()-2);
+		    if(redEnemy.getX()<=-100){
+			setGoRight(true);
+		    }
+		}
             }
         };
         KeyFrame keyFrame= new KeyFrame(Duration.seconds(0.1),handler);
@@ -393,10 +277,14 @@ public class SpaceInvaders{
 	else{
 	    //for left; only if it is 1
 	    for(int i=0;i<60;i++){
-            listEnemy.get(i).setX(listEnemy.get(i).getX()-7);
+		listEnemy.get(i).setX(listEnemy.get(i).getX()-7);
 	    }
 	}
     }
+    /**
+     *The method checks if the aliens are all dead. 
+     *@return true if all are dead
+     */
     public boolean allAlienDead(){
 	for(int i=0;i<60;i++){
 	    if(listEnemyStatus.get(i).equals("alive")){
@@ -452,8 +340,10 @@ public class SpaceInvaders{
           timeline.setCycleCount(10);
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
-	  //changeLevels(g);
     }
+    /**
+     *This method sets a game over picture over the group. 
+     */
     public void gameOverPic(Group g){
 	gameOverPic=new ImageView(new Image("gameover.jpg"));
 	gameOverPic.setFitHeight(250);
@@ -470,9 +360,7 @@ public class SpaceInvaders{
             listEnemy.get(i).setY(listEnemy.get(i).getY()+10);
 	 }
     }
-    
-    //FOR SPACE BAR ********************************************
-    /**
+     /**
      *returns the x coordinate
      *@return x coordiante
      */
@@ -606,6 +494,9 @@ public class SpaceInvaders{
 	    }
 	}
     }
+    /**
+     *This methods sets the format for the obstacle image.
+     */
     public void imageFormat(ImageView obstacle,ImageView newObstacle,Group g){
 	newObstacle.setX(obstacle.getX());
 	newObstacle.setY(obstacle.getY());
@@ -641,50 +532,40 @@ public class SpaceInvaders{
                     alive=true;
                 }
                 if((enemy.getBoundsInParent().intersects(bullet.getBoundsInParent()))&&alive){
-                    //group.getChildren().remove(i);
                     listEnemyStatus.set(i,"dead");//need to see that status array to dead
                     listEnemy.get(i).setX(-100);
                     listEnemy.get(i).setY(-100);
-                    //listEnemy.set(i,new ImageView(new Image("https://i.pinimg.com/564x/6f/ff/63/6"+
-                    //                                      "fff63515a436df1e0799bf823abc07d.jpg")));
                     bullet.setX(0);
                     bullet.setY(0);
                     if(i==60){
                         setScore(getScore()+60);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-                        System.out.println(getScore());
-                        //changeLevels(group);
                     }
                     if(i>36){
                         setScore(getScore()+10);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-                        System.out.println(getScore());
-                        //changeLevels(group);
                     }
                     else if(i>12){
                         setScore(getScore()+20);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-			//changeLevels(group);
-                        //System.out.println(getScore());
-                    }
+		    }
                     else{
-                        //the first row is worth 40
                         setScore(getScore()+40);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-                        System.out.println(getScore());
-                        //changeLevels(group);
                     }
 		    scoreCheckEnemyAllDead(group);
                 }
             }
-            };
-            Platform.runLater(r);
-            //addToVBox(menuButton);
+	};
+	Platform.runLater(r);
     }
+    /**This method checks if all are dead. This method is called every time a score is updated
+     * or changed.
+     */
     public void scoreCheckEnemyAllDead(Group g){
 	if(allAlienDead()){
 	    System.out.println("All alien dead: "+allAlienDead());
@@ -710,6 +591,9 @@ public class SpaceInvaders{
 	    }
 	}
     }
+    /**
+     *this formats the youWinImage
+     */
     public void youWinImage(Group g){
 	ImageView youWinImage=new ImageView(new Image("youwin.jpg"));
 	 youWinImage.setFitHeight(250);
@@ -718,6 +602,9 @@ public class SpaceInvaders{
 	 youWinImage.setY(100);
 	 g.getChildren().add(youWinImage);
     }
+    /**
+     *This method is used to set the overall frame of the group, etc. 
+     */
     public void makeSpace(Group group,ImageView r, Button menuButton){
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
@@ -729,16 +616,14 @@ public class SpaceInvaders{
         alienMovementY(group);
         randomEnemyShooting(group,r);
         r.setX(50);                                // 50px in the x direction (right)
-        r.setY(310);                               // 50ps in the y direction (down)
-        
+        r.setY(310);                               // 50ps in the y direction (down) 
         VBox vbox = new VBox(name,intro,intro2,score, menuButton);
         vbox.setAlignment(Pos.CENTER);
         group.getChildren().addAll(vbox,r);
     }
-    
-    //**********************************************
     /**
      *adds items to VBox
+     *@return vbox that is updated now
      */
     public VBox addToVBox(){
         v.getChildren().clear();
