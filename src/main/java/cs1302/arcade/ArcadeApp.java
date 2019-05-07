@@ -164,12 +164,7 @@ public class ArcadeApp extends Application {
         names.getChildren().addAll(welcome,teamName,ourNames);
         moveNames(ourNames);
         moveNames(teamName);
-        //bWelcome.setTop(welcome);
-        //bWelcome.setCenter(names);
-        //bWelcome.setBottom(h);
-        
         start = new Scene(/*bWelcome*/names,640,480, Color.DEEPSKYBLUE);
-
         stage.setScene(start);
         //calling button methods
         spaceInvadersButton(stage);
@@ -177,12 +172,9 @@ public class ArcadeApp extends Application {
         homeButton(stage);        
         menuButton.setFocusTraversable(false);
         stage.setTitle("cs1302-arcade!");
-        //stage.setScene(scene);
-        //stage.sizeToScene();
         stage.setWidth(250);
         stage.setHeight(340);
-        stage.show();
-        
+        stage.show();        
         // the group must request input focus to receive key events
         // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
         //group.requestFocus();
