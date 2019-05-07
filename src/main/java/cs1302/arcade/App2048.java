@@ -45,13 +45,14 @@ public class App2048{
     public void clearBoard(){
 	board=new int[4][4];
     }
+    /**
+     *This method is used to make the frame of game 2048
+     */
     public void makeFrame(TilePane t, BorderPane b){	 
 	t.getChildren().clear();
         for(int i = 0;i<4; i++){
             for(int j = 0; j<4; j++){
-		//setting it to blank tile initially when initalizing it
                 ImageView tile; 
-               
                 if(board[i][j]==2){
                     tile = new ImageView("tile2.png");
                 }
@@ -90,22 +91,22 @@ public class App2048{
                 else{
                     tile = new ImageView("tile0.png");
                 }
-                
-                //adding the tile late into the img Gallery
-             
                 t.getChildren().add(tile);
-                    // add Platform.runLater when making threads
-                t.setPrefRows(4);
+		t.setPrefRows(4);
                 t.setHgap(2);
                 t.setVgap(2);
                 tile.setFitWidth(60);
                 tile.setFitHeight(60);
                 tile.setPreserveRatio(false);
-                tile.setSmooth(true);    
-                
-            }
-            
+                tile.setSmooth(true);   
+            }            
         }
+        makeFrame2(b,t);
+    }
+    /**
+     *Method is used for the other makeFrame method
+     */
+    public void makeFrame2(BorderPane b,TilePane t){
 	//only executes if it is given to be true
 	if(gameWon){
 	    //creating gameOver image
@@ -114,7 +115,7 @@ public class App2048{
 	    youWin.setFitWidth(200);
 	    b.setCenter(youWin);
 	}
-	//bascailly if board is full (true) && there are no more moves, it will return you lost 
+	//bascailly if board is full (true) && there are no more moves, it will return you lost
 	else if(boardIsFull()&&(!hasMoves())){
 	    ImageView youLose= new ImageView("gameover.jpg");
 	    youLose.setFitHeight(200);
