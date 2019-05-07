@@ -134,7 +134,7 @@ public class ArcadeApp extends Application {
         r = new ImageView("player.jpg");
         r.setFitWidth(20);
         r.setFitHeight(20);
-        setPlayer(r);
+        s.setPlayer(r);
         //Testing the button from welcome page
         bWelcome = new BorderPane();
         HBox h = new HBox();
