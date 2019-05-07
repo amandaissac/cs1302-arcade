@@ -39,6 +39,9 @@ public class SpaceInvaders{
     int prevScore;
     int countDown;
     boolean level1NotDone;
+    ImageView player;
+    Double movementXTime;
+    Double movementYTime;
     /**
      *This method is the constructor for the spaceInvaders App
      */
@@ -47,6 +50,9 @@ public class SpaceInvaders{
     }
     public void setMenuButton(Button button){
         menuButton = button;
+    }
+    public void setPlayer(ImageView r){
+	player = r;
     }
 
     /*
@@ -382,14 +388,14 @@ public class SpaceInvaders{
 	}
     }
     public boolean allAlienDead(){
-	for(int i=0;i<60:i++){
+	for(int i=0;i<60;i++){
 	    if(listEnemy.get(i).equals("alive")){
 		return false;
 	    }
 	}
 	return true;
     }
-	       
+    
     //NOW FOR THE Y MOVEMENT
     /**
      *Used to make the aliens move up and down
@@ -698,6 +704,7 @@ public class SpaceInvaders{
 	 youWinImage.setX(0);
 	 youWinImage.setY(100);
 	 g.getChildren().add(youWinImage);
+    }
     public void makeSpace(Group group,ImageView r, Button menuButton){
         Label name =new Label("Space Invaders");
         Label intro = new Label("Use the arrow keys to move");
