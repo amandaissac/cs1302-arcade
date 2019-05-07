@@ -208,11 +208,12 @@ public class ArcadeApp extends Application {
                     //menuButton.setAlignment(Pos.CENTER);
                     //VBox vMenu = new VBox(menuButton);
                     //vMenu.setAlignment(Pos.CENTER);
+		    s.newGame(group);
                     s.createEnemy(group);
                     s.alienMovementX();
-                    s.alienMovementY();
+                    s.alienMovementY(group);
                     s.randomEnemyShooting(group,r);
-                    r.setX(50);                                // 50px in the x direction (right)
+                    r.setX(50);                              // 50px in the x direction (right)
                     r.setY(310);                               // 50ps in the y direction (down)
                     //s.addToVBox(vbox,menuButton);
                     //vbox.getChildren().addAll(name,intro,intro2,score, menuButton);

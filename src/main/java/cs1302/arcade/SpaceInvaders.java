@@ -37,6 +37,8 @@ public class SpaceInvaders{
     ArrayList<Integer> listObstacleCount;
     Button menuButton;
     int prevScore;
+    int countDown;
+    boolean level1NotDone;
     /**
      *This method is the constructor for the spaceInvaders App
      */
@@ -46,7 +48,10 @@ public class SpaceInvaders{
     public void setMenuButton(Button button){
         menuButton = button;
     }
+
+    /*
     public void resetLevel(Group g){
+	g.getChildren().remove(v);
 	listEnemy=new ArrayList<ImageView>();
 	listBullet=new ArrayList<ImageView>();
 	listEnemyStatus= new ArrayList<String>();
@@ -54,10 +59,10 @@ public class SpaceInvaders{
 	countX=0;
 	countY=0;
 	score=getScore();
+	gameOver=false;
 	goRight=true;
 	numLives=0;
 	listHeart=new ArrayList<ImageView>();
-	gameOver=false;
 	createHearts(g);
 	v=new VBox();
 	g.getChildren().add(addToVBox());
@@ -65,22 +70,46 @@ public class SpaceInvaders{
 	for(int i=0;i<3;i++){
 	    listObstacleCount.add(0);
 	}
+	createEnemy(g);
+	alienMovementX();
+	alienMovementY(g);	
     }
     public void changeLevels(Group g){
-        changeLevel1(g);
-        changeLevel2(g);
-        changeLevel3(g);
+        if((getScore()==1240)||(getScore()==1300)){
+	    changeLevel1(g);
+	    level1NotDone=true;
+	    System.out.println("tried to chnage into level1");
+	}
+	if(countDown==20){
+	    changeLevel2(g);
+	}
+	if(countDown==30){
+	    changeLevel3(g);
+	}
+	if(gameOver){
+	    //the you lose picture shows up
+	    gameOverPic= new ImageView(new Image("gameover.jpg"));
+	    gameOverPic.setFitHeight(250);
+	    gameOverPic.setFitWidth(250);
+	    gameOverPic.setX(0);
+	    gameOverPic.setY(100);
+	    g.getChildren().add(gameOverPic);
+	}
     }
     public void  changeLevel1(Group g){
 	//changing to level 2
-        if(((getScore()==1200)&&(listEnemyStatus.get(60).equals("al"+
-	"ive")))||((getScore()==1260)&&(listEnemyStatus.get(60).equals("dead")))){
+        if(((getScore()==1240)&&(listEnemyStatus.get(60).equals("al"+
+	"ive")))||((getScore()==1300)&&(listEnemyStatus.get(60).equals("dead")))){
             prevScore = getScore();
 	    //resetting the level
 	    resetLevel(g);
+	    System.out.println("reset the level");
             level=2;
             levelString= "Level 2";
         }
+	else{
+	    gameOver=true;
+	}
     }
     public void changeLevel2(Group g){
 	if(prevScore==1260){
@@ -90,7 +119,11 @@ public class SpaceInvaders{
 		resetLevel(g);
 		level=3;
 		levelString= "level 3";
+		gameOver=false;
 	       }
+	    else{
+		gameOver=true;
+	    }
 	}
 	if(prevScore==1200){
 	    if(((getScore()==2460)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==2400)&&(listEnemyStatus.get(60).equals("alive")))){
@@ -99,6 +132,10 @@ public class SpaceInvaders{
 		resetLevel(g);
 		level=3;
 		levelString="level 3";
+		gameOver=false;
+	    }
+	    else{
+		gameOver=true;
 	    }
 	}
     }
@@ -108,17 +145,28 @@ public class SpaceInvaders{
 		//need to display you win
 		youWinCreate(g);
 	    }
+	    else{
+		gameOver=true;
+	    }
 	}
 	if(prevScore==2460){
 	    if(((getScore()==3720)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3660)&&(listEnemyStatus.get(60).equals("alive")))){
 		//need to display you win
 		youWinCreate(g);
+		gameOver=false;
+	    }
+	    else{
+		gameOver=true;
 	    }
 	}
 	if(prevScore==2400){
 	    if(((getScore()==3660)&&(listEnemyStatus.get(60).equals("dead")))||((getScore()==3600)&&(listEnemyStatus.get(60).equals("alive")))){
 		//need to display you win
 		youWinCreate(g);
+		gameOver=false;
+	    }
+	    else{
+		gameOver=true;
 	    }
 	}
     }
@@ -130,6 +178,7 @@ public class SpaceInvaders{
 	youWin.setY(100);
 	g.getChildren().add(youWin);
     }
+    */
 /**
      *sets initial values of game
      *@param g g is the group that the VBox is added to in the beginning of the game
@@ -156,6 +205,8 @@ public class SpaceInvaders{
 	level=1;
 	levelString="Level 1";
 	prevScore=0;
+	countDown=0;
+	level1NotDone=true;
     }
     
     public void createHearts(Group g){
@@ -185,7 +236,7 @@ public class SpaceInvaders{
      */
     public void createEnemy(Group g){
         
-        newGame(g);
+        //newGame(g);
 	for(int i=0;i<60;i++){
 	    listEnemyStatus.add("alive");
 	}
@@ -263,7 +314,7 @@ public class SpaceInvaders{
                 }
             }
         };
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), handler);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(2), handler);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(39);
         timeline.getKeyFrames().add(keyFrame);
@@ -322,15 +373,17 @@ public class SpaceInvaders{
     /**
      *Used to make the aliens move up and down
      */
-    public void alienMovementY(){
+    public void alienMovementY(Group g){
         EventHandler<ActionEvent> handler = event -> {
             updateY(); //will go down
         };
-          KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.6), handler);
+          KeyFrame keyFrame = new KeyFrame(Duration.seconds(7.2), handler);
           Timeline timeline = new Timeline();
           timeline.setCycleCount(10);
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
+	  countDown=countDown+1;
+	  changeLevels(g);
     }
     /**
      *updates the y location of the enemy
@@ -368,7 +421,7 @@ public class SpaceInvaders{
             //calling the bulletAnim method
             bulletAnim(listEnemy.get(i),g,"enemy",mainPlayer);
         };
-        KeyFrame keyFrame= new KeyFrame(Duration.seconds(1),handler1);
+        KeyFrame keyFrame= new KeyFrame(Duration.seconds(0),handler1);
         Timeline timeline= new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(keyFrame);
@@ -522,28 +575,29 @@ public class SpaceInvaders{
                     if(i==60){
                         setScore(getScore()+60);
 			group.getChildren().remove(v);
-            group.getChildren().add(addToVBox());
+			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                         changeLevels(group);
                     }
                     if(i>36){
                         setScore(getScore()+10);
 			group.getChildren().remove(v);
-            group.getChildren().add(addToVBox());
+			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                         changeLevels(group);
                     }
                     else if(i>12){
                         setScore(getScore()+20);
 			group.getChildren().remove(v);
-            group.getChildren().add(addToVBox());
+			group.getChildren().add(addToVBox());
+			changeLevels(group);
                         System.out.println(getScore());
                     }
                     else{
                         //the first row is worth 40
                         setScore(getScore()+40);
 			group.getChildren().remove(v);
-            group.getChildren().add(addToVBox());
+			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
                         changeLevels(group);
                     }
@@ -562,7 +616,7 @@ public class SpaceInvaders{
         Label score =new Label(scoreString);
         createEnemy(group);
         alienMovementX();
-        alienMovementY();
+        alienMovementY(group);
         randomEnemyShooting(group,r);
         r.setX(50);                                // 50px in the x direction (right)
         r.setY(310);                               // 50ps in the y direction (down)
