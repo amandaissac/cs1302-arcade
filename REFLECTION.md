@@ -52,4 +52,36 @@ Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
        - it was hard switching between the scenes
     - There was confusion on setting actions on the keyboard keys
     - there was a lot of confusion between the classes and its method.
-      - problems with a class's scope and figuring out a way not to use static variables. 
+      - problems with a class's scope and figuring out a way not to use static variables.
+
+    ## TUES 2019-30-04 @ 11:55 PM EST
+
+ 1. **DONE:** Downloaded the skeleton code.
+    -SUMMARY: We decided to do Space Invaders instead of Tetris.
+	- created a Sprite class to assign different attributes to each sprite based on if they are a enemy or player
+    - created a Space Invaders Class
+    - fixed 2048 so when you press menu button, the game restarts
+2. **TODO:** Finish Space Invaders
+   	- Space Invaders
+	  - make player shoot bullets
+      - make enemies shoot bullets
+      - add lives to player in space Invaders
+	- General
+	  - fix bug that prevents players from return to either 2048 or Space Invaders after they hace gone to home page	  
+3. **PROB:** We had difficulty getting the buttons to work for both 2048 and SpaceInvaders
+    - We had trouble trying to make the Sprite object move, so we ended up just using an ImagView instead of aSprite object
+    - We had trouble organizing our SpaceInvaders game because there were so many differet aspects of the game interacting
+## TUES 2019-07-05 @ 11:55 PM EST
+ 1. **DONE:** Downloaded the skeleton code.
+    -SUMMARY: The Space Invaders Game is completed
+    - The player and enemies can shoot
+    - The player can lose lives
+    - The score updates unlike before
+    - The enemies and player can move
+    - There are levels that increase the speed of the enemies based on each level
+2. **TODO:** This is the last submission.	  
+3. **PROB:** It was difficult trying to fix the issue with the score not updating because we did not know where to add the score label to the VBox.
+    - We had difficulty trying to find when to change the levels and how much we should change the speed of the enemies each time.
+    - The ImageViews for the enemies and player would not be removed after a level change.x
+    - There was an issue with the BorderPane when trying to complete the animation extra credit because the ImageView would not move
+    
