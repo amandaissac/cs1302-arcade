@@ -1,6 +1,4 @@
-/*
 
- */
 package cs1302.arcade;
 import java.util.Random;
 import java.util.ArrayList;
@@ -35,7 +33,9 @@ import javafx.util.Duration;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.ToolBar;
-
+/**
+ *This is the class that starts the application.
+ */
 public class ArcadeApp extends Application {
 
     Group group;// = new Group();           // main container
@@ -152,13 +152,18 @@ public class ArcadeApp extends Application {
         Group names = new Group();
         //m.getChildren().addAll(app2048,space);
         ImageView ourNames = new ImageView("ourNames.png");
+        ImageView teamName = new ImageView("teamname.png");
+        ourNames.setY(290);
+        teamName.setY(270);
         welcome.setY(50);
         ourNames.setFitHeight(12.0);
         ourNames.setFitWidth(100.0);
+        teamName.setFitHeight(16.0);
+        teamName.setFitWidth(100.0);
         names.getChildren().add(m);
-        names.getChildren().addAll(welcome,ourNames);
+        names.getChildren().addAll(welcome,teamName,ourNames);
         moveNames(ourNames);
-        
+        moveNames(teamName);
         //bWelcome.setTop(welcome);
         //bWelcome.setCenter(names);
         //bWelcome.setBottom(h);
@@ -182,8 +187,12 @@ public class ArcadeApp extends Application {
         // @see https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html#requestFocus--
         //group.requestFocus();
     } // start
+    /**
+     *This move the image view between two points.
+     *@param i i is the ImageView that is moving.
+     */
     public void moveNames(ImageView i){
-        i.setY(290);
+        
         EventHandler<ActionEvent> handler = event -> {
             if((i.getX()<=100)&&getMoveRight()){
                 i.setX(i.getX()+2);
@@ -208,12 +217,24 @@ public class ArcadeApp extends Application {
         timeline.play();
         
     }
+    /**
+     *This checks if the image is able to move further right and returns true if it can.
+     *@return goRight goRight is true if image can move right.
+     */
     public boolean getMoveRight(){
         return goRight;
     }
+    /**
+     *This sets the goRight variable
+     *@param status status is the variable goRight is being set to.
+     */
     public void setMoveRight(boolean status){
          goRight=status;
     }
+    /**
+     *This sets the action to the Space Invader Button.
+     *@param stage stage is the stage that the scene is being set to.
+     */
     public void spaceInvadersButton(Stage stage){
         space.setFocusTraversable(false);
         
@@ -234,6 +255,10 @@ public class ArcadeApp extends Application {
                 }//handle
             });//setOnAction
     }
+    /**
+     *This sets the action for the app2048 button.
+     *@param stage stage is the stage the scene is being set to.
+     */
     public void app2048Button(Stage stage){
         app2048.setFocusTraversable(false);    
         //Making the action for the 2048 button
@@ -258,6 +283,10 @@ public class ArcadeApp extends Application {
                 }//handle
             });//setOnAction
     }
+    /**
+     *This sets the action for the button that returns to the main menu
+     *@param stage is the stage the scene is being set to. 
+     */
     public void homeButton(Stage stage){
         
         s.setMenuButton(menuButton);//testing this
