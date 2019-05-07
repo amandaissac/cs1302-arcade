@@ -27,7 +27,7 @@ import javafx.event.EventHandler;
 public class App2048{
     Random rgn = new Random();// random number generator
     private int score = 0;
-    private int[][] board;
+    private int[][] board;//board
     boolean gameWon=false; 
     //ImageView tile;
     ArrayList<ImageView> images = new ArrayList<>();
