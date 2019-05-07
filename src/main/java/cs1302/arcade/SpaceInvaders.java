@@ -383,7 +383,7 @@ public class SpaceInvaders{
           timeline.getKeyFrames().add(keyFrame);
           timeline.play();
 	  countDown=countDown+1;
-	  changeLevels(g);
+	  //changeLevels(g);
     }
     /**
      *updates the y location of the enemy
@@ -577,21 +577,21 @@ public class SpaceInvaders{
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        changeLevels(group);
+                        //changeLevels(group);
                     }
                     if(i>36){
                         setScore(getScore()+10);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        changeLevels(group);
+                        //changeLevels(group);
                     }
                     else if(i>12){
                         setScore(getScore()+20);
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
-			changeLevels(group);
-                        System.out.println(getScore());
+			//changeLevels(group);
+                        //System.out.println(getScore());
                     }
                     else{
                         //the first row is worth 40
@@ -599,7 +599,7 @@ public class SpaceInvaders{
 			group.getChildren().remove(v);
 			group.getChildren().add(addToVBox());
                         System.out.println(getScore());
-                        changeLevels(group);
+                        //changeLevels(group);
                     }
                 }
             }
