@@ -224,8 +224,18 @@ public class SpaceInvaders{
 	prevScore=0;
 	countDown=0;
 	level1NotDone=true;
-	movementXTime=2;
-	movementYTime=7.2;
+	movementXTime=2.5;
+	movementYTime=9.0;
+    }
+    public void checkAllDead(Group g){
+	listEnemyStatus=new ArrayList<String>();
+	listEnemy=new ArrayList<ImageView>();
+	listObstacle=new ArrayList<ImageView>();
+	createHearts(g);
+	createEnemy(g);
+	alienMovementX();
+	alienMovementY(g);
+	randomEnemyShooting(g,player);
     }
     
     public void createHearts(Group g){
@@ -389,7 +399,7 @@ public class SpaceInvaders{
     }
     public boolean allAlienDead(){
 	for(int i=0;i<60;i++){
-	    if(listEnemy.get(i).equals("alive")){
+	    if(listEnemyStatus.get(i).equals("alive")){
 		return false;
 	    }
 	}
@@ -408,9 +418,9 @@ public class SpaceInvaders{
 		if(allAlienDead()){
 		    levelString="Level 2";
 		    level=2;
-		    movementXTime=1.5;
-		    movementYTime=5.4;
-		    checkAllDead();
+		    movementXTime=2.0;
+		    movementYTime=7.2;
+		    checkAllDead(g);
 		}
 		else{
 		    gameOverPic(g);
@@ -420,9 +430,9 @@ public class SpaceInvaders{
 		if(allAlienDead()){
 		    levelString="Level 3";
 		    level=3;
-		    movementXTime=1;
-		    movementYTime=3.6;
-		    checkAllDead();
+		    movementXTime=1.5;
+		    movementYTime=5.4;
+		    checkAllDead(g);
 		}
 		else{
 		    gameOverPic(g);
@@ -488,7 +498,7 @@ public class SpaceInvaders{
             //calling the bulletAnim method
             bulletAnim(listEnemy.get(i),g,"enemy",mainPlayer);
         };
-        KeyFrame keyFrame= new KeyFrame(Duration.seconds(0),handler1);
+        KeyFrame keyFrame= new KeyFrame(Duration.seconds(2),handler1);
         Timeline timeline= new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(keyFrame);
@@ -677,19 +687,22 @@ public class SpaceInvaders{
     }
     public void scoreCheckEnemyAllDead(Group g){
 	if(allAlienDead()){
+	    System.out.println("All alien dead: "+allAlienDead());
 	    if(countDown<=10){
 		levelString="Level 2";
 		level=2;
-		movementXTime=1.5;
-		movementYTime=5.4;
-		checkAllDead();
+		movementXTime=2.0;
+		movementYTime=7.2;
+		countDown=10;
+		checkAllDead(g);
 	    }
 	    else if(countDown<=20){
 		levelString="Level 3";
 		level=3;
-		movementXTime=1;
-		movementYTime=3.6;
-		checkAllDead();
+		movementXTime=1.5;
+		movementYTime=5.4;
+		countDown=20;
+		checkAllDead(g);
 	    }
 	    else{
 		//you win image pops up
